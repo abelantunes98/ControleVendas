@@ -34,5 +34,10 @@ public class ControleMesas {
 			throw e;
 		}
 	}
+	
+	public boolean mesaExiste(String codigoMesa) {
+		
+		return base.existeMesa(codigoMesa);
+	}
 
 }

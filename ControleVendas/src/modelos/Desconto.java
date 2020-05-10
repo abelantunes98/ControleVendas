@@ -5,15 +5,15 @@ public class Desconto {
 	private String codigoDesconto;
 	private String nomeDesconto;
 	private String descricaoDesconto;
-	private double valorDesconto;
+	private String tipoDesconto;
 	
-	
-	public Desconto(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double valorDesconto) {
+
+	public Desconto(String codigoDesconto, String nomeDesconto, String descricaoDesconto, String tipoDesconto) {
 		super();
 		this.codigoDesconto = codigoDesconto;
 		this.nomeDesconto = nomeDesconto;
 		this.descricaoDesconto = descricaoDesconto;
-		this.valorDesconto = valorDesconto;
+		this.tipoDesconto = tipoDesconto;
 	}
 
 
@@ -46,21 +46,21 @@ public class Desconto {
 		this.descricaoDesconto = descricaoDesconto;
 	}
 
-
-	public double getValorDesconto() {
-		return valorDesconto;
+	
+	public String getTipoDesconto() {
+		return tipoDesconto;
 	}
 
 
-	public void setValorDesconto(double valorDesconto) {
-		this.valorDesconto = valorDesconto;
+	public void setTipoDesconto(String tipoDesconto) {
+		this.tipoDesconto = tipoDesconto;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Desconto: \ncodigoDesconto: " + codigoDesconto + "\nnomeDesconto: " + nomeDesconto + "\ndescricaoDesconto: "
-				+ descricaoDesconto + "\nvalorDesconto: " + valorDesconto + "\n";
+				+ descricaoDesconto + "\n";
 	}
 	
 	

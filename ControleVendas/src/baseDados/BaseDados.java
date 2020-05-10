@@ -10,19 +10,14 @@ import modelos.Faturamento;
 
 public class BaseDados {
 
-	private HashMap<String, Funcionario> funcionarios;
-	private HashMap<String, Produto> produtos;
-	private HashMap<String, Desconto> descontos;
-	private HashMap<String, Mesa> mesas;
-	private HashMap<String, Faturamento> faturamentos;
+	private static HashMap<String, Funcionario> funcionarios = new HashMap<String, Funcionario>();
+	private static HashMap<String, Produto> produtos = new HashMap<String, Produto>();
+	private static HashMap<String, Desconto> descontos = new HashMap<String, Desconto>();
+	private static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();
+	private static HashMap<String, Faturamento> faturamentos = new HashMap<String, Faturamento>();
 
 
 	public BaseDados() {
-		this.funcionarios = new HashMap<String, Funcionario>();
-		this.produtos = new HashMap<String, Produto>();
-		this.descontos = new HashMap<String, Desconto>();
-		this.mesas = new HashMap<String, Mesa>();
-		this.faturamentos = new HashMap<String, Faturamento>();
 	}
 
 	public void inserirFuncionario(String codigoFuncionario, Funcionario funcionario) {

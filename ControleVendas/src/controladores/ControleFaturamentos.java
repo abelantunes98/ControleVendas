@@ -132,4 +132,24 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	/*
+	 * Calcula a porcentagem que o funcionario deve receber em cima de suas vendas.
+	 * Eh necessario passar a porcentagem adotada.
+	 */
+	public double retornaPorcentagemFuncionario(String codigoFaturamento, String codigoFuncionario, double porcentagem) {
+		
+		double valorRetorno = 0;
+		
+		try {
+			double valorTotal = this.retornaValorFaturamentoPorFuncionario(codigoFaturamento, codigoFuncionario);
+			valorRetorno = valorTotal * (porcentagem / 100);
+			
+			return valorRetorno; 
+		} 
+		catch (Exception e) {
+			throw e;
+		}
+		
+	}
 }

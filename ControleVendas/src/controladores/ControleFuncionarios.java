@@ -33,4 +33,9 @@ public class ControleFuncionarios {
 			throw e;
 		}
 	}
+	
+	public boolean funcionarioExiste(String codigoFuncionario) {
+		
+		return base.existeFuncionario(codigoFuncionario);
+	}
 }

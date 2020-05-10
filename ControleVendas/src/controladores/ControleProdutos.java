@@ -33,6 +33,22 @@ public class ControleProdutos {
 			throw e;
 		}
 	}
+	
+	public double retornaValorProduto(String codigoProduto) {
+		
+		if (base.existeProduto(codigoProduto)) {
+			Produto produto = base.retornaProduto(codigoProduto);
+			return produto.getPrecoProduto();
+		}
+		else {
+			throw new IllegalArgumentException("Produto inexistente.");
+		}
+	}
+	
+	public boolean produtoExiste(String codigoProduto) {
+		
+		return base.existeProduto(codigoProduto);
+	}
 }
 
 
