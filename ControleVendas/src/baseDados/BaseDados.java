@@ -6,6 +6,7 @@ import modelos.Funcionario;
 import modelos.Produto;
 import modelos.Desconto;
 import modelos.Mesa;
+import modelos.Faturamento;
 
 public class BaseDados {
 
@@ -13,6 +14,7 @@ public class BaseDados {
 	private HashMap<String, Produto> produtos;
 	private HashMap<String, Desconto> descontos;
 	private HashMap<String, Mesa> mesas;
+	private HashMap<String, Faturamento> faturamentos;
 
 
 	public BaseDados() {
@@ -20,6 +22,7 @@ public class BaseDados {
 		this.produtos = new HashMap<String, Produto>();
 		this.descontos = new HashMap<String, Desconto>();
 		this.mesas = new HashMap<String, Mesa>();
+		this.faturamentos = new HashMap<String, Faturamento>();
 	}
 
 	public void inserirFuncionario(String codigoFuncionario, Funcionario funcionario) {
@@ -85,6 +88,22 @@ public class BaseDados {
 		}
 
 	}
+	
+	public void inserirFaturamento(String codigoFaturamento, Faturamento faturamento) {
+
+		if (codigoFaturamento != null && faturamento != null) {
+			if (!faturamentos.containsKey(codigoFaturamento)) {
+				this.faturamentos.put(codigoFaturamento, faturamento);
+			}
+			else {
+				throw new IllegalArgumentException("Faturamento ja cadastrado no sistema.");
+			}
+		}
+		else {
+			throw new IllegalArgumentException("Valores invalidos.");
+		}
+
+	}
 
 	public void removerFuncionario(String codigoFuncionario) {
 
@@ -126,6 +145,16 @@ public class BaseDados {
 		}
 	}
 	
+	public void removerFaturamento(String codigoFaturamento) {
+
+		if (faturamentos.containsKey(codigoFaturamento)) {
+			faturamentos.remove(codigoFaturamento);
+		}
+		else {
+			throw new IllegalArgumentException("Faturamento nao cadastrado.");
+		}
+	}
+	
 	public Funcionario retornaFuncionario(String codigoFuncionario) {
 		if (funcionarios.containsKey(codigoFuncionario)) {
 			Funcionario funcionario = funcionarios.get(codigoFuncionario);
@@ -163,6 +192,16 @@ public class BaseDados {
 		}
 		else {
 			throw new IllegalArgumentException("Mesa inexistente.");
+		}
+	}
+	
+	public Faturamento retornaFaturamento(String codigoFaturamento) {
+		if (faturamentos.containsKey(codigoFaturamento)) {
+			Faturamento faturamento = faturamentos.get(codigoFaturamento);
+			return faturamento;
+		}
+		else {
+			throw new IllegalArgumentException("Faturamento inexistente.");
 		}
 	}
 	
@@ -219,6 +258,21 @@ public class BaseDados {
 			}
 			else {
 				throw new IllegalArgumentException("Mesa nao cadastrada no sistema.");
+			}
+		}
+		else {
+			throw new IllegalArgumentException("Valores invalidos.");
+		}
+	}
+	
+	public void alteraFaturamento(String codigoFaturamento, Faturamento faturamento) {
+		
+		if (codigoFaturamento != null && faturamento != null) {
+			if (faturamentos.containsKey(codigoFaturamento)) {
+				this.faturamentos.replace(codigoFaturamento, faturamento);
+			}
+			else {
+				throw new IllegalArgumentException("Faturamento nao cadastrado no sistema.");
 			}
 		}
 		else {
