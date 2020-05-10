@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import modelos.Venda;
+
 public class Faturamento {
 	
 	private String codigoFaturamento;
