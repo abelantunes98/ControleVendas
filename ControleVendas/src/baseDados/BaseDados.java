@@ -279,4 +279,24 @@ public class BaseDados {
 			throw new IllegalArgumentException("Valores invalidos.");
 		}
 	}
+	
+	public boolean existeFuncionario(String codigoFuncionario) {
+		return funcionarios.containsKey(codigoFuncionario);
+	}
+	
+	public boolean existeProduto(String codigoProduto) {
+		return produtos.containsKey(codigoProduto);
+	}
+	
+	public boolean existeDesconto(String codigoDesconto) {
+		return descontos.containsKey(codigoDesconto);
+	}
+	
+	public boolean existeMesa(String codigoMesa) {
+		return mesas.containsKey(codigoMesa);
+	}
+	
+	public boolean existeFaturamento(String codigoFaturamento) {
+		return faturamentos.containsKey(codigoFaturamento);
+	}
 }
