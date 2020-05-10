@@ -29,7 +29,9 @@ public class Principal {
 	}
 	
 	/*
-	 * 
+	 * Adiciona uma Venda após verificar a existência de todos os dados.
+	 * Caso o codigo de desconto não seja null, verifica o tipo de desconto
+	 * e o aplica no valor da Venda.
 	 */
 	public void adicionarVenda(String codigoFuncionario, String codigoProduto, String codigoMesa, int quantProdutos, String codigoDesconto) {
 		

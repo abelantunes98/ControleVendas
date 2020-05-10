@@ -1,5 +1,6 @@
 package modelos;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,14 +10,19 @@ import modelos.Venda;
 public class Faturamento {
 	
 	private String codigoFaturamento;
-	private Date dataFaturamento;
+	private String dataFaturamento;
 	private double valorApurado;
 	
 	private List<Venda> vendas;
 	
 	public Faturamento(String codigoFaturamento) {
-		vendas = new ArrayList<Venda>();
-		dataFaturamento = new Date();
+		this.vendas = new ArrayList<Venda>();
+		
+		Date data = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false);
+        
+		this.dataFaturamento = formato.format(data);
 		
 		this.codigoFaturamento = codigoFaturamento;
 	}
@@ -29,11 +35,11 @@ public class Faturamento {
 		this.codigoFaturamento = codigoFaturamento;
 	}
 
-	public Date getDataFaturamento() {
+	public String getDataFaturamento() {
 		return dataFaturamento;
 	}
 
-	public void setDataFaturamento(Date dataFaturamento) {
+	public void setDataFaturamento(String dataFaturamento) {
 		this.dataFaturamento = dataFaturamento;
 	}
 

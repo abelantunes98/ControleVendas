@@ -1,10 +1,13 @@
 package controladores;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import baseDados.BaseDados;
 import modelos.Faturamento;
 import modelos.Venda;
+import utils.Util;
 
 public class ControleFaturamentos {
 	
@@ -151,5 +154,44 @@ public class ControleFaturamentos {
 			throw e;
 		}
 		
+	}
+	
+	/*
+	 * Retorna, caso exista, o código do faturamento na data passada.
+	 * Converte a data passada e a data armazenada em cada Faturamento
+	 * para Date. Pois com Date a comparação é mais exata.
+	 * 
+	 */
+	public String retornaCodigoFaturamentoPorData(String data) {
+		
+		try {
+			Date dataFormatada = Util.stringToDate(data);
+			
+			String codigoFaturamento;
+			String retorno = null;
+			List<String> keys = base.retornaCodigosFaturamento();
+			int indice = 0;
+			int tamanhoSet = keys.size();
+			while (indice < tamanhoSet && retorno == null) {
+				String key = keys.get(indice);
+				Faturamento faturamentoKey = base.retornaFaturamento(key);
+				String dataFaturamentoKey = faturamentoKey.getDataFaturamento();
+				Date dataFaturamentoKeyDate = Util.stringToDate(dataFaturamentoKey);
+				
+				if (dataFormatada.getTime() == dataFaturamentoKeyDate.getTime()) {
+					retorno = key;
+				}
+			}
+			
+			if (retorno != null) {
+				return retorno;
+			}
+			else {
+				throw new IllegalArgumentException("Sem Faturamento na data passada.");
+			}	
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 }

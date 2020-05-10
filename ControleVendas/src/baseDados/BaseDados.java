@@ -1,6 +1,9 @@
 package baseDados;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import modelos.Funcionario;
 import modelos.Produto;
@@ -24,7 +27,7 @@ public class BaseDados {
 
 		if (codigoFuncionario != null && funcionario != null) {
 			if (!funcionarios.containsKey(codigoFuncionario)) {
-				this.funcionarios.put(codigoFuncionario, funcionario);
+				BaseDados.funcionarios.put(codigoFuncionario, funcionario);
 			}
 			else {
 				throw new IllegalArgumentException("Funcionario ja cadastrado no sistema.");
@@ -40,7 +43,7 @@ public class BaseDados {
 
 		if (codigoProduto != null && produto != null) {
 			if (!produtos.containsKey(codigoProduto)) {
-				this.produtos.put(codigoProduto, produto);
+				BaseDados.produtos.put(codigoProduto, produto);
 			}
 			else {
 				throw new IllegalArgumentException("Produto ja cadastrado no sistema.");
@@ -56,7 +59,7 @@ public class BaseDados {
 
 		if (codigoDesconto != null && desconto != null) {
 			if (!descontos.containsKey(codigoDesconto)) {
-				this.descontos.put(codigoDesconto, desconto);
+				BaseDados.descontos.put(codigoDesconto, desconto);
 			}
 			else {
 				throw new IllegalArgumentException("Desconto ja cadastrado no sistema.");
@@ -72,7 +75,7 @@ public class BaseDados {
 
 		if (codigoMesa != null && mesa != null) {
 			if (!mesas.containsKey(codigoMesa)) {
-				this.mesas.put(codigoMesa, mesa);
+				BaseDados.mesas.put(codigoMesa, mesa);
 			}
 			else {
 				throw new IllegalArgumentException("Mesa ja cadastrado no sistema.");
@@ -88,7 +91,7 @@ public class BaseDados {
 
 		if (codigoFaturamento != null && faturamento != null) {
 			if (!faturamentos.containsKey(codigoFaturamento)) {
-				this.faturamentos.put(codigoFaturamento, faturamento);
+				BaseDados.faturamentos.put(codigoFaturamento, faturamento);
 			}
 			else {
 				throw new IllegalArgumentException("Faturamento ja cadastrado no sistema.");
@@ -204,7 +207,7 @@ public class BaseDados {
 		
 		if (codigoFuncionario != null && funcionario != null) {
 			if (funcionarios.containsKey(codigoFuncionario)) {
-				this.funcionarios.replace(codigoFuncionario, funcionario);
+				BaseDados.funcionarios.replace(codigoFuncionario, funcionario);
 			}
 			else {
 				throw new IllegalArgumentException("Funcionario nao cadastrado no sistema.");
@@ -219,7 +222,7 @@ public class BaseDados {
 		
 		if (codigoProduto != null && produto != null) {
 			if (produtos.containsKey(codigoProduto)) {
-				this.produtos.replace(codigoProduto, produto);
+				BaseDados.produtos.replace(codigoProduto, produto);
 			}
 			else {
 				throw new IllegalArgumentException("Produto nao cadastrado no sistema.");
@@ -234,7 +237,7 @@ public class BaseDados {
 		
 		if (codigoDesconto != null && desconto != null) {
 			if (descontos.containsKey(codigoDesconto)) {
-				this.descontos.replace(codigoDesconto, desconto);
+				BaseDados.descontos.replace(codigoDesconto, desconto);
 			}
 			else {
 				throw new IllegalArgumentException("Desconto nao cadastrado no sistema.");
@@ -249,7 +252,7 @@ public class BaseDados {
 		
 		if (codigoMesa != null && mesa != null) {
 			if (mesas.containsKey(codigoMesa)) {
-				this.mesas.replace(codigoMesa, mesa);
+				BaseDados.mesas.replace(codigoMesa, mesa);
 			}
 			else {
 				throw new IllegalArgumentException("Mesa nao cadastrada no sistema.");
@@ -264,7 +267,7 @@ public class BaseDados {
 		
 		if (codigoFaturamento != null && faturamento != null) {
 			if (faturamentos.containsKey(codigoFaturamento)) {
-				this.faturamentos.replace(codigoFaturamento, faturamento);
+				BaseDados.faturamentos.replace(codigoFaturamento, faturamento);
 			}
 			else {
 				throw new IllegalArgumentException("Faturamento nao cadastrado no sistema.");
@@ -293,5 +296,12 @@ public class BaseDados {
 	
 	public boolean existeFaturamento(String codigoFaturamento) {
 		return faturamentos.containsKey(codigoFaturamento);
+	}
+	
+	public List<String> retornaCodigosFaturamento() {
+		List<String> retorno = new ArrayList<String>();
+		retorno.addAll(BaseDados.faturamentos.keySet());
+		
+		return retorno;
 	}
 }
