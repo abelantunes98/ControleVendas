@@ -23,5 +23,15 @@ public class ControleDescontos {
 			throw e;
 		}
 	}
+	
+	public void removerDesconto(String codigoDesconto) {
+		
+		try {
+			base.removerDesconto(codigoDesconto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 
 }

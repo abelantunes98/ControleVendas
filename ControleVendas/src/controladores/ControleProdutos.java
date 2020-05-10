@@ -23,6 +23,16 @@ public class ControleProdutos {
 			throw e;
 		}
 	}
+	
+	public void removerProduto(String codigoProduto) {
+		
+		try {
+			base.removerProduto(codigoProduto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }
 
 

@@ -23,4 +23,14 @@ public class ControleFuncionarios {
 			throw e;
 		}
 	}
+	
+	public void removerFuncionario(String codigoFuncionario) {
+		
+		try {
+			base.removerFuncionario(codigoFuncionario);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }

@@ -64,4 +64,34 @@ public class BaseDados {
 		}
 
 	}
+
+	public void removerFuncionario(String codigoFuncionario) {
+
+		if (funcionarios.containsKey(codigoFuncionario)) {
+			funcionarios.remove(codigoFuncionario);
+		}
+		else {
+			throw new IllegalArgumentException("Funcionario nao cadastrado.");
+		}
+	}
+
+	public void removerProduto(String codigoProduto) {
+
+		if (produtos.containsKey(codigoProduto)) {
+			produtos.remove(codigoProduto);
+		}
+		else {
+			throw new IllegalArgumentException("Produto nao cadastrado.");
+		}
+	}
+
+	public void removerDesconto(String codigoDesconto) {
+
+		if (descontos.containsKey(codigoDesconto)) {
+			descontos.remove(codigoDesconto);
+		}
+		else {
+			throw new IllegalArgumentException("Desconto nao cadastrado.");
+		}
+	}
 }
