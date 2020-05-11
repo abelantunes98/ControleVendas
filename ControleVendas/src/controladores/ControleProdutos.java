@@ -16,6 +16,10 @@ public class ControleProdutos {
 	public void adicionarProduto(String codigoProduto, String nomeProduto, double precoProduto, String descricaoProduto) {
 
 		try {
+			
+			if ( codigoProduto.equals("") || nomeProduto.equals("") || descricaoProduto.equals("")) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
 			Produto produto = new Produto(codigoProduto, nomeProduto, precoProduto, descricaoProduto);
 			base.inserirProduto(codigoProduto, produto);
 		}

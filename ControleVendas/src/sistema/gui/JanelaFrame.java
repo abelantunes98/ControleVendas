@@ -20,6 +20,7 @@ public class JanelaFrame extends JFrame {
 	
 	private PrincipalPanel principalPanel;
 	private AdicionarFuncionarioPanel adicionarFuncionarioPanel;
+	private AdicionarProdutoPanel adicionarProdutoPanel;
 	
 	private JTabbedPane tabbedPane;
 
@@ -37,8 +38,9 @@ public class JanelaFrame extends JFrame {
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.contentPane.setLayout(new BorderLayout(0, 0));
 
-		this.principalPanel = new PrincipalPanel(principal);
-		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(principal, this);
+		this.principalPanel = new PrincipalPanel(this.principal);
+		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(this.principal, this);
+		this.adicionarProdutoPanel = new AdicionarProdutoPanel(this.principal, this);
 
 		setContentPane(contentPane);
 
@@ -50,6 +52,7 @@ public class JanelaFrame extends JFrame {
 
 		this.tabbedPane.addTab("Principal", this.principalPanel);
 		this.tabbedPane.addTab("Cadastrar funcionário", this.adicionarFuncionarioPanel);
+		this.tabbedPane.addTab("Adicionar produto", this.adicionarProdutoPanel);
 
 		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
 
