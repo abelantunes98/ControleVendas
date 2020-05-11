@@ -3,6 +3,7 @@ package modelos;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import modelos.Venda;
@@ -13,10 +14,10 @@ public class Faturamento {
 	private String dataFaturamento;
 	private double valorApurado;
 	
-	private List<Venda> vendas;
+	private HashMap<Integer, Venda> vendas;
 	
 	public Faturamento(String codigoFaturamento) {
-		this.vendas = new ArrayList<Venda>();
+		this.vendas = new HashMap<Integer, Venda>();
 		
 		Date data = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -51,12 +52,16 @@ public class Faturamento {
 		this.valorApurado = valorApurado;
 	}
 
-	public List<Venda> getVendas() {
+	public HashMap<Integer, Venda> getVendas() {
 		return vendas;
 	}
 
-	public void setVendas(List<Venda> vendas) {
+	public void setVendas(HashMap<Integer, Venda> vendas) {
 		this.vendas = vendas;
+	}
+	
+	public int getNewKey() {
+		return this.vendas.size();
 	}
 
 	@Override

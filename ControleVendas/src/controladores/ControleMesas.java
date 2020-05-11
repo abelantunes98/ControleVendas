@@ -1,5 +1,8 @@
 package controladores;
 
+import java.util.List;
+import java.util.Vector;
+
 import baseDados.BaseDados;
 import modelos.Mesa;
 
@@ -42,5 +45,14 @@ public class ControleMesas {
 	
 	public int retornaNumeroMesas() {
 		return base.retornaNumeroMesas();
+	}
+	
+	public List<Mesa> retornaMesas() {
+		try {
+			return this.base.retornaMesas();
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 }

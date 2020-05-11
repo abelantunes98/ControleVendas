@@ -134,14 +134,15 @@ public class AdicionarFuncionarioPanel extends JPanel {
 	}
 
 	private void cadastrarFuncionario() {
-
-		String nomeFuncionario = valNomeFuncionario.getText();
-		String cpfFuncionario = valCpfFuncionario.getText();
-		String emailFuncionario = valEmailFuncionario.getText();
-		String telefoneFuncionario = valTelefoneFuncionario.getText();
-		String codigoFuncionario = valCodigoFuncionario.getText();
-
+		
 		try {
+			
+			String nomeFuncionario = valNomeFuncionario.getText();
+			String cpfFuncionario = valCpfFuncionario.getText();
+			String emailFuncionario = valEmailFuncionario.getText();
+			String telefoneFuncionario = valTelefoneFuncionario.getText();
+			String codigoFuncionario = valCodigoFuncionario.getText();
+
 			this.principal.adicionarFuncionario(nomeFuncionario, cpfFuncionario, telefoneFuncionario, 
 					emailFuncionario, codigoFuncionario);
 			// Mensagem de sucesso.

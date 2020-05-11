@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import baseDados.BaseDados;
@@ -49,8 +50,9 @@ public class ControleFaturamentos {
 		
 		try {
 			Faturamento faturamentoDia = base.retornaFaturamento(codigoFaturamento);
-			List<Venda> vendasDia = faturamentoDia.getVendas();
-			vendasDia.add(venda);
+			HashMap<Integer, Venda> vendasDia = faturamentoDia.getVendas();
+			int key = faturamentoDia.getNewKey();
+			vendasDia.put(key, venda);
 			
 			double novoApurado = faturamentoDia.getValorApurado();
 			novoApurado += venda.getValorVenda();
@@ -81,8 +83,8 @@ public class ControleFaturamentos {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeFuncionario(codigoFuncionario)) {
 				double valorRetorno = 0;
-				List<Venda> vendasFaturamento = faturamentoPassado.getVendas();
-				for (Venda venda : vendasFaturamento) {
+				HashMap<Integer, Venda> vendasFaturamento = faturamentoPassado.getVendas();
+				for (Venda venda : vendasFaturamento.values()) {
 					if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {
 						valorRetorno += venda.getValorVenda();
 					}
@@ -104,8 +106,7 @@ public class ControleFaturamentos {
 		
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
-			List<Venda> vendas = faturamentoPassado.getVendas();
-			return vendas.size();
+			return faturamentoPassado.getNewKey();
 		}
 		catch(Exception e){
 			throw e;
@@ -118,8 +119,8 @@ public class ControleFaturamentos {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeFuncionario(codigoFuncionario)) {
 				int valorRetorno = 0;
-				List<Venda> vendasFaturamento = faturamentoPassado.getVendas();
-				for (Venda venda : vendasFaturamento) {
+				HashMap<Integer, Venda> vendasFaturamento = faturamentoPassado.getVendas();
+				for (Venda venda : vendasFaturamento.values()) {
 					if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {
 						valorRetorno++;
 					}

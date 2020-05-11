@@ -1,9 +1,13 @@
 package principal;
 
 import controladores.*;
+
+import java.util.List;
+
 import baseDados.BaseDados;
 
 import modelos.Faturamento;
+import modelos.Mesa;
 import modelos.Venda;
 
 public class Principal {
@@ -149,6 +153,19 @@ public class Principal {
 
 	public void setCodigoFaturamentoAtual(int codigoFaturamentoAtual) {
 		this.codigoFaturamentoAtual = codigoFaturamentoAtual;
+	}
+	
+	public String [][] retornaVetorToStringMesas() {
+		
+		String [][] retorno = new String [this.retornaNumeroMesas()][];
+		int indice = 0;
+		List<Mesa> mesas = this.controleMesas.retornaMesas();
+		for (Mesa mesa : mesas) {
+			String [] linha = {mesa.toString()}; 
+			retorno[indice++] = linha;
+		}
+		
+		return retorno;
 	}
 	
 	

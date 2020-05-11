@@ -70,7 +70,7 @@ public class BaseDados {
 		}
 
 	}
-	
+
 	public void inserirMesa(String codigoMesa, Mesa mesa) {
 
 		if (codigoMesa != null && mesa != null) {
@@ -86,7 +86,7 @@ public class BaseDados {
 		}
 
 	}
-	
+
 	public void inserirFaturamento(String codigoFaturamento, Faturamento faturamento) {
 
 		if (codigoFaturamento != null && faturamento != null) {
@@ -132,7 +132,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Desconto nao cadastrado.");
 		}
 	}
-	
+
 	public void removerMesa(String codigoMesa) {
 
 		if (mesas.containsKey(codigoMesa)) {
@@ -142,7 +142,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Mesa nao cadastrada.");
 		}
 	}
-	
+
 	public void removerFaturamento(String codigoFaturamento) {
 
 		if (faturamentos.containsKey(codigoFaturamento)) {
@@ -152,7 +152,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Faturamento nao cadastrado.");
 		}
 	}
-	
+
 	public Funcionario retornaFuncionario(String codigoFuncionario) {
 		if (funcionarios.containsKey(codigoFuncionario)) {
 			Funcionario funcionario = funcionarios.get(codigoFuncionario);
@@ -162,7 +162,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Funcionario inexistente.");
 		}
 	}
-	
+
 	public Produto retornaProduto(String codigoProduto) {
 		if (produtos.containsKey(codigoProduto)) {
 			Produto produto = produtos.get(codigoProduto);
@@ -172,7 +172,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Produto inexistente.");
 		}
 	}
-	
+
 	public Desconto retornaDesconto(String codigoDesconto) {
 		if (descontos.containsKey(codigoDesconto)) {
 			Desconto desconto = descontos.get(codigoDesconto);
@@ -182,7 +182,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Desconto inexistente.");
 		}
 	}
-	
+
 	public Mesa retornaMesa(String codigoMesa) {
 		if (mesas.containsKey(codigoMesa)) {
 			Mesa mesa = mesas.get(codigoMesa);
@@ -192,7 +192,7 @@ public class BaseDados {
 			throw new IllegalArgumentException("Mesa inexistente.");
 		}
 	}
-	
+
 	public Faturamento retornaFaturamento(String codigoFaturamento) {
 		if (faturamentos.containsKey(codigoFaturamento)) {
 			Faturamento faturamento = faturamentos.get(codigoFaturamento);
@@ -202,9 +202,9 @@ public class BaseDados {
 			throw new IllegalArgumentException("Faturamento inexistente.");
 		}
 	}
-	
+
 	public void alteraFuncionario(String codigoFuncionario, Funcionario funcionario) {
-		
+
 		if (codigoFuncionario != null && funcionario != null) {
 			if (funcionarios.containsKey(codigoFuncionario)) {
 				BaseDados.funcionarios.replace(codigoFuncionario, funcionario);
@@ -217,9 +217,9 @@ public class BaseDados {
 			throw new IllegalArgumentException("Valores invalidos.");
 		}
 	}
-	
+
 	public void alteraProduto(String codigoProduto, Produto produto) {
-		
+
 		if (codigoProduto != null && produto != null) {
 			if (produtos.containsKey(codigoProduto)) {
 				BaseDados.produtos.replace(codigoProduto, produto);
@@ -232,9 +232,9 @@ public class BaseDados {
 			throw new IllegalArgumentException("Valores invalidos.");
 		}
 	}
-	
+
 	public void alteraDesconto(String codigoDesconto, Desconto desconto) {
-		
+
 		if (codigoDesconto != null && desconto != null) {
 			if (descontos.containsKey(codigoDesconto)) {
 				BaseDados.descontos.replace(codigoDesconto, desconto);
@@ -247,9 +247,9 @@ public class BaseDados {
 			throw new IllegalArgumentException("Valores invalidos.");
 		}
 	}
-	
+
 	public void alteraMesa(String codigoMesa, Mesa mesa) {
-		
+
 		if (codigoMesa != null && mesa != null) {
 			if (mesas.containsKey(codigoMesa)) {
 				BaseDados.mesas.replace(codigoMesa, mesa);
@@ -262,9 +262,9 @@ public class BaseDados {
 			throw new IllegalArgumentException("Valores invalidos.");
 		}
 	}
-	
+
 	public void alteraFaturamento(String codigoFaturamento, Faturamento faturamento) {
-		
+
 		if (codigoFaturamento != null && faturamento != null) {
 			if (faturamentos.containsKey(codigoFaturamento)) {
 				BaseDados.faturamentos.replace(codigoFaturamento, faturamento);
@@ -277,47 +277,56 @@ public class BaseDados {
 			throw new IllegalArgumentException("Valores invalidos.");
 		}
 	}
-	
+
 	public boolean existeFuncionario(String codigoFuncionario) {
 		return funcionarios.containsKey(codigoFuncionario);
 	}
-	
+
 	public boolean existeProduto(String codigoProduto) {
 		return produtos.containsKey(codigoProduto);
 	}
-	
+
 	public boolean existeDesconto(String codigoDesconto) {
 		return descontos.containsKey(codigoDesconto);
 	}
-	
+
 	public boolean existeMesa(String codigoMesa) {
 		return mesas.containsKey(codigoMesa);
 	}
-	
+
 	public boolean existeFaturamento(String codigoFaturamento) {
 		return faturamentos.containsKey(codigoFaturamento);
 	}
-	
+
 	public List<String> retornaCodigosFaturamento() {
 		List<String> retorno = new ArrayList<String>();
 		retorno.addAll(BaseDados.faturamentos.keySet());
-		
+
 		return retorno;
 	}
-	
+
 	public int retornaNumeroFuncionarios() {
 		return BaseDados.funcionarios.size();
 	}
-	
+
 	public int retornaNumeroProdutos() {
 		return BaseDados.produtos.size();
 	}
-	
+
 	public int retornaNumeroMesas() {
 		return BaseDados.mesas.size();
 	}
-	
+
 	public int retornaNumeroDescontos() {
 		return BaseDados.descontos.size();
 	}
+
+	public List<Mesa> retornaMesas() {
+		List<Mesa> retorno = new ArrayList<Mesa>();
+		retorno.addAll(this.mesas.values());
+
+		return retorno;	
+	}
+
+
 }

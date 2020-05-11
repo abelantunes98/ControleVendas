@@ -1,14 +1,19 @@
 package modelos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mesa {
 	
 	private String codigoMesa;
 	private int lugaresMesa;
+	private List<Integer> vendasMesa;
 	
 	public Mesa(String codigoMesa, int lugaresMesa) {
 		super();
 		this.codigoMesa = codigoMesa;
 		this.lugaresMesa = lugaresMesa;
+		this.vendasMesa = new ArrayList<Integer>();
 	}
 
 	public String getCodigoMesa() {
@@ -27,9 +32,25 @@ public class Mesa {
 		this.lugaresMesa = lugaresMesa;
 	}
 
+	public List<Integer> getVendasMesa() {
+		return vendasMesa;
+	}
+
+	public void setVendasMesa(List<Integer> vendasMesa) {
+		this.vendasMesa = vendasMesa;
+	}
+	
+	public void adicionaVendaListaVendas(int keyVenda) {
+		this.vendasMesa.add(keyVenda);
+	}
+	
+	public void zerarListaVendas() {
+		this.vendasMesa = new ArrayList<Integer>();
+	}
+	
 	@Override
 	public String toString() {
-		return "Mesa: \ncodigoMesa: " + codigoMesa + "\nlugaresMesa: " + lugaresMesa + "\n";
+		return "Código da Mesa: " + codigoMesa + " Lugares na Mesa: " + lugaresMesa;
 	}
 	
 }
