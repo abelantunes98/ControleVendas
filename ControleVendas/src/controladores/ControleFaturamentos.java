@@ -1,13 +1,14 @@
 package controladores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import baseDados.BaseDados;
 import modelos.Faturamento;
 import modelos.Venda;
 import utils.Util;
+import utils.TuplaFaturamentoDataValor;
 
 public class ControleFaturamentos {
 	
@@ -167,7 +168,6 @@ public class ControleFaturamentos {
 		try {
 			Date dataFormatada = Util.stringToDate(data);
 			
-			String codigoFaturamento;
 			String retorno = null;
 			List<String> keys = base.retornaCodigosFaturamento();
 			int indice = 0;
@@ -188,6 +188,51 @@ public class ControleFaturamentos {
 			}
 			else {
 				throw new IllegalArgumentException("Sem Faturamento na data passada.");
+			}	
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Recebe duas datas, uma inicial e uma final.
+	 * Retorna uma lista de tuplas que contém o código de faturamento,
+	 * a data do faturamento e o valor do faturamento.
+	 * Isso para os faturamentos que foram criados entre as datas passadas.
+	 */
+	public List<TuplaFaturamentoDataValor> retornaFaturamentosPorIntervaloDatas(String dataInicio, String dataFinal) {
+		
+		try {
+			Date dataInicioFormatada = Util.stringToDate(dataInicio);
+			Date dataFinalFormatada = Util.stringToDate(dataFinal);
+			
+			double valorFaturamento;
+			List<TuplaFaturamentoDataValor> retorno = new ArrayList<TuplaFaturamentoDataValor>();
+			List<String> keys = base.retornaCodigosFaturamento();
+			int indice = 0;
+			int tamanhoSet = keys.size();
+			while (indice < tamanhoSet) {
+				String key = keys.get(indice);
+				Faturamento faturamentoKey = base.retornaFaturamento(key);
+				String dataFaturamentoKey = faturamentoKey.getDataFaturamento();
+				Date dataFaturamentoKeyDate = Util.stringToDate(dataFaturamentoKey);
+				
+				if (dataFaturamentoKeyDate.getTime() >= dataInicioFormatada.getTime() 
+						&& dataFaturamentoKeyDate.getTime() <= dataFinalFormatada.getTime()) {
+					
+					valorFaturamento = faturamentoKey.getValorApurado();
+					
+					TuplaFaturamentoDataValor elementoTupla = new TuplaFaturamentoDataValor(key, dataFaturamentoKey, valorFaturamento);
+					retorno.add(elementoTupla);
+				}
+			}
+			
+			if (retorno.size() > 0) {
+				return retorno;
+			}
+			else {
+				throw new IllegalArgumentException("Sem Faturamentos nas datas passadas.");
 			}	
 		}
 		catch (Exception e) {
