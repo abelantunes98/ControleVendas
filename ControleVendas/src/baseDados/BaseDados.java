@@ -304,4 +304,20 @@ public class BaseDados {
 		
 		return retorno;
 	}
+	
+	public int retornaNumeroFuncionarios() {
+		return BaseDados.funcionarios.size();
+	}
+	
+	public int retornaNumeroProdutos() {
+		return BaseDados.produtos.size();
+	}
+	
+	public int retornaNumeroMesas() {
+		return BaseDados.mesas.size();
+	}
+	
+	public int retornaNumeroDescontos() {
+		return BaseDados.descontos.size();
+	}
 }

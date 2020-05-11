@@ -7,9 +7,9 @@ public class ControleProdutos {
 
 	BaseDados base;
 
-	public ControleProdutos() {
+	public ControleProdutos(BaseDados base) {
 
-		base = new BaseDados();
+		this.base = base;
 	}
 
 
@@ -48,6 +48,10 @@ public class ControleProdutos {
 	public boolean produtoExiste(String codigoProduto) {
 		
 		return base.existeProduto(codigoProduto);
+	}
+	
+	public int retornaNumeroProdutos() {
+		return base.retornaNumeroProdutos();
 	}
 }
 

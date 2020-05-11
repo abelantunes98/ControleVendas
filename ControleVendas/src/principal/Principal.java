@@ -1,6 +1,8 @@
 package principal;
 
 import controladores.*;
+import baseDados.BaseDados;
+
 import modelos.Faturamento;
 import modelos.Venda;
 
@@ -15,17 +17,66 @@ public class Principal {
 	private ControleFuncionarios controleFuncionarios;
 	private ControleDescontos controleDescontos;
 	
+	private BaseDados base;
+	
 	public Principal() {
-		this.controleFaturamentos = new ControleFaturamentos();
-		this.controleProdutos = new ControleProdutos();
-		this.controleMesas = new ControleMesas();
-		this.controleFuncionarios = new ControleFuncionarios();
-		this.controleDescontos = new ControleDescontos();
+		this.base = new BaseDados();
+		
+		this.controleFaturamentos = new ControleFaturamentos(base);
+		this.controleProdutos = new ControleProdutos(base);
+		this.controleMesas = new ControleMesas(base);
+		this.controleFuncionarios = new ControleFuncionarios(base);
+		this.controleDescontos = new ControleDescontos(base);
 	}
 	
 	public void iniciarFaturamento() {
 		
 		this.controleFaturamentos.adicionarFaturamento(Integer.toString(++codigoFaturamentoAtual));
+	}
+	
+	public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String codigo) {
+		try {
+			this.controleFuncionarios.adicionarFuncionario(nome, cpf, telefone, email, codigo);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void cadastrarProduto(String codigoProduto, String nomeProduto, double precoProduto, String descricaoProduto) {
+		try {
+			this.controleProdutos.adicionarProduto(codigoProduto, nomeProduto, precoProduto, descricaoProduto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void cadastrarMesa(String codigoMesa, int lugaresMesa) {
+		try {
+			this.controleMesas.adicionarMesa(codigoMesa, lugaresMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void cadastrarDescontoPorcentagem(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double porcentagemDesconto) {
+		try {
+			this.controleDescontos.adicionarDescontoPorcentagem(codigoDesconto, nomeDesconto, descricaoDesconto, porcentagemDesconto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void cadastrarDescontoValor(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double valorDesconto) {
+		try {
+			this.controleDescontos.adicionarDescontoValor(codigoDesconto, nomeDesconto, descricaoDesconto, valorDesconto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	/*
@@ -74,6 +125,22 @@ public class Principal {
 		
 		Venda venda = new Venda(codigoFuncionario, codigoProduto, codigoMesa, quantProdutos, valorProduto);
 		this.controleFaturamentos.adicionarVenda(Integer.toString(this.codigoFaturamentoAtual), venda);
+	}
+	
+	public int retornaNumeroFuncionarios() {
+		return controleFuncionarios.retornaNumeroFuncionarios();
+	}
+	
+	public int retornaNumeroProdutos() {
+		return controleProdutos.retornaNumeroProdutos();
+	}
+	
+	public int retornaNumeroMesas() {
+		return controleMesas.retornaNumeroMesas();
+	}
+	
+	public int retornaNumeroDescontos() {
+		return controleDescontos.retornaNumeroDescontos();
 	}
 
 	public int getCodigoFaturamentoAtual() {

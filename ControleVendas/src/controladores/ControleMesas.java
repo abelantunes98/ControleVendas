@@ -8,9 +8,9 @@ public class ControleMesas {
 	
 	BaseDados base;
 
-	public ControleMesas() {
+	public ControleMesas(BaseDados base) {
 
-		base = new BaseDados();
+		this.base = base;
 	}
 
 
@@ -39,5 +39,8 @@ public class ControleMesas {
 		
 		return base.existeMesa(codigoMesa);
 	}
-
+	
+	public int retornaNumeroMesas() {
+		return base.retornaNumeroMesas();
+	}
 }

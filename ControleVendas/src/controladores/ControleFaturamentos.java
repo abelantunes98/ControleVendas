@@ -14,9 +14,9 @@ public class ControleFaturamentos {
 	
 	BaseDados base;
 
-	public ControleFaturamentos() {
+	public ControleFaturamentos(BaseDados base) {
 
-		base = new BaseDados();
+		this.base = base;
 	}
 
 

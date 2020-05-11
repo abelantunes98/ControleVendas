@@ -10,9 +10,9 @@ public class ControleDescontos {
 
 	BaseDados base;
 
-	public ControleDescontos() {
-
-		base = new BaseDados();
+	public ControleDescontos(BaseDados base) {
+		
+		this.base = base;
 	}
 
 
@@ -96,6 +96,10 @@ public class ControleDescontos {
 		catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	public int retornaNumeroDescontos() {
+		return base.retornaNumeroDescontos();
 	}
 
 }

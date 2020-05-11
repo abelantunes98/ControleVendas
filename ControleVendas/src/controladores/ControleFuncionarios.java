@@ -7,15 +7,20 @@ public class ControleFuncionarios {
 	
 	BaseDados base;
 	
-	public ControleFuncionarios() {
+	public ControleFuncionarios(BaseDados base) {
 		
-		base = new BaseDados();
+		this.base = base;
 	}
 	
 	
 	public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String codigo) {
 		
 		try {
+			if (nome.equals("") || cpf.equals("") || telefone.equals("") || email.equals("") 
+					|| codigo.equals("")) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
+			
 			Funcionario funcionario = new Funcionario(nome, cpf, telefone, email, codigo);
 			base.inserirFuncionario(codigo, funcionario);
 		}
@@ -37,5 +42,9 @@ public class ControleFuncionarios {
 	public boolean funcionarioExiste(String codigoFuncionario) {
 		
 		return base.existeFuncionario(codigoFuncionario);
+	}
+	
+	public int retornaNumeroFuncionarios() {
+		return base.retornaNumeroFuncionarios();
 	}
 }
