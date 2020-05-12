@@ -4,13 +4,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
-import java.util.ArrayList;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
 import principal.Principal;
-import sistema.gui.JanelaFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -23,6 +26,8 @@ public class AdicionarMesaPanel extends JPanel {
 	private Principal principal;
 	private JanelaFrame frame;
 	private JTable tableMesas;
+	
+	JScrollPane scrollPane;
 	
 	/**
 	 * Create the panel.
@@ -74,16 +79,71 @@ public class AdicionarMesaPanel extends JPanel {
 		btnLimpar.setBounds(933, 787, 125, 43);
 		add(btnLimpar);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(977, 259, 556, 417);
 		add(scrollPane);
 		
+		this.reloadTabelaMesas();
+		
+		/*
+		 * Ações dos botões.
+		 */
+		btnSalvar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cadastrarMesa();
+			}
+		});
+
+		btnLimpar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				limparCampos();                       
+			}
+		});
+
+	}
+	
+	public void reloadTabelaMesas() {
 		
 		String [] colunas = {"Mesas cadastradas"};
 		String [][] dados = this.principal.retornaVetorToStringMesas();
+		
 		tableMesas = new JTable(dados, colunas);
+		
+		tableMesas.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+		tableMesas.setEnabled(false); // Evitando edição não desejada.
+		tableMesas.setBackground(SystemColor.info); // Cor da linha.
+		tableMesas.setRowHeight(30); // Aumentando altura das linhas.
+		
 		scrollPane.setViewportView(tableMesas);
+	}
+	
+	
+	private void limparCampos() {
+		
+		valCodigoMesa.setText("");
+		valLugaresMesa.setText("");		
+	}
+	
+	private void cadastrarMesa() {
+		
+		try {
+			String codigoMesa = valCodigoMesa.getText();
+			Integer lugaresMesa = Integer.parseInt(valLugaresMesa.getText());
+			
+			this.principal.cadastrarMesa(codigoMesa, lugaresMesa);
+			// Mensagem de sucesso.
+			JOptionPane.showMessageDialog(null, "Mesa Cadastrada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			limparCampos();
+			this.frame.reload();
+			this.reloadTabelaMesas();
 
+		}
+		// Mostrando erro.
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 }

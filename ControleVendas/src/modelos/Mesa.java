@@ -50,7 +50,7 @@ public class Mesa {
 	
 	@Override
 	public String toString() {
-		return "Código da Mesa: " + codigoMesa + " Lugares na Mesa: " + lugaresMesa;
+		return "Código da Mesa: " + codigoMesa + "     Lugares na Mesa: " + lugaresMesa;
 	}
 	
 }

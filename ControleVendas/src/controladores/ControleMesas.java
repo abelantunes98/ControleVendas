@@ -1,7 +1,6 @@
 package controladores;
 
 import java.util.List;
-import java.util.Vector;
 
 import baseDados.BaseDados;
 import modelos.Mesa;
@@ -20,6 +19,9 @@ public class ControleMesas {
 	public void adicionarMesa(String codigoMesa, int lugaresMesa) {
 
 		try {
+			if ( codigoMesa.equals("")) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
 			Mesa mesa = new Mesa(codigoMesa, lugaresMesa);
 			base.inserirMesa(codigoMesa, mesa);
 		}
