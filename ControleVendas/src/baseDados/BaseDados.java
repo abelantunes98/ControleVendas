@@ -1,9 +1,9 @@
 package baseDados;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import modelos.Funcionario;
 import modelos.Produto;
@@ -11,8 +11,13 @@ import modelos.Desconto;
 import modelos.Mesa;
 import modelos.Faturamento;
 
-public class BaseDados {
+public class BaseDados implements Serializable {
 
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -5652801087683821171L;
+	
 	private static HashMap<String, Funcionario> funcionarios = new HashMap<String, Funcionario>();
 	private static HashMap<String, Produto> produtos = new HashMap<String, Produto>();
 	private static HashMap<String, Desconto> descontos = new HashMap<String, Desconto>();
@@ -325,7 +330,7 @@ public class BaseDados {
 		
 		try {
 			List<Mesa> retorno = new ArrayList<Mesa>();
-			retorno.addAll(this.mesas.values());
+			retorno.addAll(mesas.values());
 
 			return retorno;
 		}
@@ -338,7 +343,7 @@ public class BaseDados {
 		
 		try {
 			List<Desconto> retorno = new ArrayList<Desconto>();
-			retorno.addAll(this.descontos.values());
+			retorno.addAll(descontos.values());
 
 			return retorno;
 		}
@@ -351,7 +356,7 @@ public class BaseDados {
 			
 		try {
 			List<Produto> retorno = new ArrayList<Produto>();
-			retorno.addAll(this.produtos.values());
+			retorno.addAll(produtos.values());
 
 			return retorno;
 		}

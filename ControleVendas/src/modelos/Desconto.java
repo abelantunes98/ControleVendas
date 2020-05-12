@@ -1,7 +1,13 @@
 package modelos;
 
-public class Desconto {
+import java.io.Serializable;
+
+public class Desconto implements Serializable {
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 396397961638702298L;
 	private String codigoDesconto;
 	private String nomeDesconto;
 	private String descricaoDesconto;

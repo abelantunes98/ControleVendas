@@ -1,10 +1,15 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-public class Mesa {
+public class Mesa implements Serializable {
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 4751170594807362672L;
 	private String codigoMesa;
 	private int lugaresMesa;
 	private List<Integer> vendasMesa;

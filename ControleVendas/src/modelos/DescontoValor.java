@@ -2,8 +2,14 @@ package modelos;
 
 import modelos.Desconto;
 
-public class DescontoValor extends Desconto{
+import java.io.Serializable;
+
+public class DescontoValor extends Desconto implements Serializable{
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 7814155484356631225L;
 	private double valorDesconto;
 	
 	public DescontoValor(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double valorDesconto) {

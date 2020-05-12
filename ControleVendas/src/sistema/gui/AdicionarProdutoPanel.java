@@ -15,17 +15,18 @@ import principal.Principal;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.SystemColor;
+import javax.swing.JTextPane;
 
 public class AdicionarProdutoPanel extends JPanel {
 	
 	private JTextField valNomeProduto;
-	private JTextField valDescricao;
 	private JTextField valCodigoProduto;
 	
 	private Principal principal;
 	private JanelaFrame frame;
 	private JTextField valPrecoProduto;
 	private JTable tableProdutos;
+	private JTextPane valDescricao;
 	
 	private JScrollPane scrollPane;
 	
@@ -49,28 +50,27 @@ public class AdicionarProdutoPanel extends JPanel {
 		nomeProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		nomeProduto.setBounds(73, 290, 178, 43);
 		add(nomeProduto);
-
-		JLabel descricaoProduto = new JLabel("Descri\u00E7\u00E3o:");
-		descricaoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		descricaoProduto.setBounds(73, 349, 178, 45);
-		add(descricaoProduto);
-
-		JLabel codigoProduto = new JLabel("C\u00F3digo:");
-		codigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		codigoProduto.setBounds(73, 599, 178, 43);
-		add(codigoProduto);
-
+		
 		valNomeProduto = new JTextField();
 		valNomeProduto.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		valNomeProduto.setBounds(206, 291, 612, 43);
 		add(valNomeProduto);
 		valNomeProduto.setColumns(10);
 
-		valDescricao = new JTextField();
-		valDescricao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		valDescricao.setColumns(10);
-		valDescricao.setBounds(206, 351, 612, 45);
+		JLabel descricaoProduto = new JLabel("Descri\u00E7\u00E3o:");
+		descricaoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		descricaoProduto.setBounds(73, 349, 178, 45);
+		add(descricaoProduto);
+
+		valDescricao = new JTextPane();
+		valDescricao.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		valDescricao.setBounds(206, 363, 612, 134);
 		add(valDescricao);
+		
+		JLabel codigoProduto = new JLabel("C\u00F3digo:");
+		codigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		codigoProduto.setBounds(73, 599, 178, 43);
+		add(codigoProduto);
 
 		valCodigoProduto = new JTextField();
 		valCodigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 23));
@@ -78,6 +78,17 @@ public class AdicionarProdutoPanel extends JPanel {
 		valCodigoProduto.setBounds(206, 600, 178, 43);
 		add(valCodigoProduto);
 
+		JLabel precoProduto = new JLabel("Pre\u00E7o:");
+		precoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		precoProduto.setBounds(73, 523, 125, 43);
+		add(precoProduto);
+		
+		valPrecoProduto = new JTextField();
+		valPrecoProduto.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		valPrecoProduto.setBounds(206, 524, 103, 43);
+		add(valPrecoProduto);
+		valPrecoProduto.setColumns(10);
+		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnSalvar.setBounds(600, 703, 125, 43);
@@ -88,20 +99,10 @@ public class AdicionarProdutoPanel extends JPanel {
 		btnLimpar.setBounds(845, 703, 125, 43);
 		add(btnLimpar);
 		
-		JLabel precoProduto = new JLabel("Pre\u00E7o:");
-		precoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		precoProduto.setBounds(73, 411, 125, 43);
-		add(precoProduto);
-		
-		valPrecoProduto = new JTextField();
-		valPrecoProduto.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		valPrecoProduto.setBounds(206, 412, 103, 43);
-		add(valPrecoProduto);
-		valPrecoProduto.setColumns(10);
-		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(1158, 226, 527, 413);
 		add(scrollPane);
+	
 		
 		reloadTabelaProdutos();
 		

@@ -1,15 +1,20 @@
 package modelos;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.io.Serializable;
+
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+import java.io.Serializable;
 
 import modelos.Venda;
 
-public class Faturamento {
+public class Faturamento implements Serializable{
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 1153012768297252642L;
 	private String codigoFaturamento;
 	private String dataFaturamento;
 	private double valorApurado;

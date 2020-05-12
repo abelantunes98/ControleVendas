@@ -1,9 +1,14 @@
 package modelos;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Venda {
+public class Venda implements Serializable{
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 8462348413260624595L;
 	private String codigoFuncionario;
 	private String codigoProduto;
 	private String codigoMesa;

@@ -1,7 +1,13 @@
 package modelos;
 
-public class Funcionario {
+import java.io.Serializable;
 
+public class Funcionario implements Serializable {
+
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 8094291427553585846L;
 	private String nomeFuncionario;
 	private String cpfFuncionario;
 	private String telefoneFuncionario;
