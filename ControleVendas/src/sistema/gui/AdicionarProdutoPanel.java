@@ -12,7 +12,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import principal.Principal;
-import javax.swing.DropMode;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.SystemColor;
 
 public class AdicionarProdutoPanel extends JPanel {
 	
@@ -23,6 +25,9 @@ public class AdicionarProdutoPanel extends JPanel {
 	private Principal principal;
 	private JanelaFrame frame;
 	private JTextField valPrecoProduto;
+	private JTable tableProdutos;
+	
+	private JScrollPane scrollPane;
 	
 	/**
 	 * Create the panel.
@@ -94,6 +99,12 @@ public class AdicionarProdutoPanel extends JPanel {
 		add(valPrecoProduto);
 		valPrecoProduto.setColumns(10);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(1158, 226, 527, 413);
+		add(scrollPane);
+		
+		reloadTabelaProdutos();
+		
 		/*
 		 * Ações dos botões.
 		 */
@@ -120,6 +131,26 @@ public class AdicionarProdutoPanel extends JPanel {
 		valPrecoProduto.setText("");
 		valCodigoProduto.setText("");
 	}
+	
+	private void reloadTabelaProdutos() {
+		
+		try {
+			String [] colunas = {"Produtos cadastrados"};
+			String [][] dados = this.principal.retornaVetorToStringProdutos();
+			
+			tableProdutos = new JTable(dados, colunas);
+			
+			tableProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableProdutos.setEnabled(false); // Evitando edição não desejada.
+			tableProdutos.setBackground(SystemColor.info); // Cor da linha.
+			tableProdutos.setRowHeight(30); // Aumentando altura das linhas.
+			
+			scrollPane.setViewportView(tableProdutos);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 	private void cadastrarProduto() {
 		
@@ -134,6 +165,7 @@ public class AdicionarProdutoPanel extends JPanel {
 			JOptionPane.showMessageDialog(null, "Produto Cadastrado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			limparCampos();
 			this.frame.reload();
+			this.reloadTabelaProdutos();
 
 		}
 		// Mostrando erro.

@@ -1,6 +1,9 @@
 package controladores;
 
 import modelos.Produto;
+
+import java.util.List;
+
 import baseDados.BaseDados;
 
 public class ControleProdutos {
@@ -56,6 +59,24 @@ public class ControleProdutos {
 	
 	public int retornaNumeroProdutos() {
 		return base.retornaNumeroProdutos();
+	}
+	
+	public String [][] retornaVetorToStringProdutos() {
+		
+		try {
+			String [][] retorno = new String [this.retornaNumeroProdutos()][];
+			int indice = 0;
+			List<Produto> produtos = this.base.retornaProdutos();
+			for (Produto produto : produtos) {
+				String [] linha = {produto.toString()}; 
+				retorno[indice++] = linha;
+			}
+			
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 }
 

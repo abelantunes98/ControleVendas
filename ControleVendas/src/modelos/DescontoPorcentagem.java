@@ -21,7 +21,7 @@ public class DescontoPorcentagem extends Desconto {
 
 	@Override
 	public String toString() {
-		return super.toString() + "porcentagemDesconto: " + porcentagemDesconto + "\n";
+		return super.toString() + "  " + porcentagemDesconto + "%";
 	}
 
 }

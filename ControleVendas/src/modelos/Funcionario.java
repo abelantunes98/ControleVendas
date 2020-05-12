@@ -70,9 +70,7 @@ public class Funcionario {
 
 	@Override
 	public String toString() {
-		return "Funcionario \nnomeFuncionario: " + nomeFuncionario + "\ncpfFuncionario: " + cpfFuncionario
-				+ "\ntelefoneFuncionario: " + telefoneFuncionario + "\nemailFuncionario: " + emailFuncionario
-				+ "\ncodigoFuncionario: " + codigoFuncionario + "\n";
+		return  "Código: " + codigoFuncionario + "   Nome: " + nomeFuncionario;
 	}
 	
 	

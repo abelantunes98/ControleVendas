@@ -21,7 +21,7 @@ public class DescontoValor extends Desconto{
 
 	@Override
 	public String toString() {
-		return super.toString() + "valorDesconto: " + valorDesconto + "\n";
+		return super.toString() + "  " + valorDesconto + " R$";
 	}
 	
 	

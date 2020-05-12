@@ -59,7 +59,7 @@ public class Desconto {
 
 	@Override
 	public String toString() {
-		return "Código do desconto: " + codigoDesconto + "     Nome do Desconto: " + nomeDesconto + "    Tipo de desconto: "
+		return "Código: " + codigoDesconto + " | Nome: " + nomeDesconto + " | Tipo: "
 				+ this.tipoDesconto;
 	}
 	

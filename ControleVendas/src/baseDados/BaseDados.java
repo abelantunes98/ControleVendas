@@ -322,17 +322,42 @@ public class BaseDados {
 	}
 
 	public List<Mesa> retornaMesas() {
-		List<Mesa> retorno = new ArrayList<Mesa>();
-		retorno.addAll(this.mesas.values());
+		
+		try {
+			List<Mesa> retorno = new ArrayList<Mesa>();
+			retorno.addAll(this.mesas.values());
 
-		return retorno;	
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	public List<Desconto> retornaDescontos() {
-		List<Desconto> retorno = new ArrayList<Desconto>();
-		retorno.addAll(this.descontos.values());
+		
+		try {
+			List<Desconto> retorno = new ArrayList<Desconto>();
+			retorno.addAll(this.descontos.values());
 
-		return retorno;	
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public List<Produto> retornaProdutos() {
+			
+		try {
+			List<Produto> retorno = new ArrayList<Produto>();
+			retorno.addAll(this.produtos.values());
+
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 
 

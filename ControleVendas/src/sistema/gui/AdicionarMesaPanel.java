@@ -104,19 +104,24 @@ public class AdicionarMesaPanel extends JPanel {
 
 	}
 	
-	public void reloadTabelaMesas() {
+	private void reloadTabelaMesas() {
 		
-		String [] colunas = {"Mesas cadastradas"};
-		String [][] dados = this.principal.retornaVetorToStringMesas();
-		
-		tableMesas = new JTable(dados, colunas);
-		
-		tableMesas.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
-		tableMesas.setEnabled(false); // Evitando edição não desejada.
-		tableMesas.setBackground(SystemColor.info); // Cor da linha.
-		tableMesas.setRowHeight(30); // Aumentando altura das linhas.
-		
-		scrollPane.setViewportView(tableMesas);
+		try {
+			String [] colunas = {"Mesas cadastradas"};
+			String [][] dados = this.principal.retornaVetorToStringMesas();
+			
+			tableMesas = new JTable(dados, colunas);
+			
+			tableMesas.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableMesas.setEnabled(false); // Evitando edição não desejada.
+			tableMesas.setBackground(SystemColor.info); // Cor da linha.
+			tableMesas.setRowHeight(30); // Aumentando altura das linhas.
+			
+			scrollPane.setViewportView(tableMesas);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	

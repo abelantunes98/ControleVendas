@@ -49,9 +49,18 @@ public class ControleMesas {
 		return base.retornaNumeroMesas();
 	}
 	
-	public List<Mesa> retornaMesas() {
+	public String [][] retornaVetorToStringMesas() {
+		
 		try {
-			return this.base.retornaMesas();
+			String [][] retorno = new String [this.retornaNumeroMesas()][];
+			int indice = 0;
+			List<Mesa> mesas = this.base.retornaMesas();
+			for (Mesa mesa : mesas) {
+				String [] linha = {mesa.toString()}; 
+				retorno[indice++] = linha;
+			}
+			
+			return retorno;
 		}
 		catch (Exception e) {
 			throw e;

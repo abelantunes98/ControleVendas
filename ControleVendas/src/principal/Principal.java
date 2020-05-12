@@ -2,12 +2,8 @@ package principal;
 
 import controladores.*;
 
-import java.util.List;
-
 import baseDados.BaseDados;
-import modelos.Desconto;
 import modelos.Faturamento;
-import modelos.Mesa;
 import modelos.Venda;
 
 public class Principal {
@@ -157,29 +153,35 @@ public class Principal {
 	
 	public String [][] retornaVetorToStringMesas() {
 		
-		String [][] retorno = new String [this.retornaNumeroMesas()][];
-		int indice = 0;
-		List<Mesa> mesas = this.controleMesas.retornaMesas();
-		for (Mesa mesa : mesas) {
-			String [] linha = {mesa.toString()}; 
-			retorno[indice++] = linha;
+		try {
+			String [][] retorno = this.controleMesas.retornaVetorToStringMesas();
+			return retorno;
 		}
-		
-		return retorno;
+		catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	public String [][] retornaVetorToStringDescontos() {
 		
-		String [][] retorno = new String [this.retornaNumeroDescontos()][];
-		int indice = 0;
-		List<Desconto> descontos = this.controleDescontos.retornaDescontos();
-		for (Desconto desconto : descontos) {
-			String [] linha = {desconto.toString()}; 
-			retorno[indice++] = linha;
+		try {
+			String [][] retorno = this.controleDescontos.retornaVetorToStringDescontos();
+			return retorno;
 		}
-		
-		return retorno;
+		catch (Exception e) {
+			throw e;
+		}
 	}
 	
-	
+	public String [][] retornaVetorToStringProdutos() {
+		
+		try {
+			String [][] retorno = this.controleProdutos.retornaVetorToStringProdutos();
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+		
+	}
 }

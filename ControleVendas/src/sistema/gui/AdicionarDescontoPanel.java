@@ -9,9 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import principal.Principal;
-import sistema.gui.JanelaFrame;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -34,7 +32,7 @@ public class AdicionarDescontoPanel extends JPanel {
 	private JTextField valNomeDesconto;
 	private JTextPane valDescricaoDesconto;
 	private JRadioButton rdbBotaoPorcentagem;
-	private JRadioButton rdbtnNewRadioButton;
+	private JRadioButton rdbBotaoValor;
 	private JScrollPane scrollPane;
 
 	private final ButtonGroup buttonDescontoGroup = new ButtonGroup();
@@ -104,11 +102,11 @@ public class AdicionarDescontoPanel extends JPanel {
 		rdbBotaoPorcentagem.setBounds(396, 731, 178, 42);
 		add(rdbBotaoPorcentagem);
 
-		rdbtnNewRadioButton = new JRadioButton("Valor");
-		buttonDescontoGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		rdbtnNewRadioButton.setBounds(655, 731, 177, 42);
-		add(rdbtnNewRadioButton);
+		rdbBotaoValor = new JRadioButton("Valor");
+		buttonDescontoGroup.add(rdbBotaoValor);
+		rdbBotaoValor.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		rdbBotaoValor.setBounds(655, 731, 177, 42);
+		add(rdbBotaoValor);
 
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 23));
@@ -124,8 +122,18 @@ public class AdicionarDescontoPanel extends JPanel {
 		scrollPane.setBounds(941, 182, 622, 622);
 		add(scrollPane);
 
-		reloadTabelaMesas();
-
+		reloadTabelaDescontos();
+		
+		/*
+		 * Ações dos botões.
+		 */
+		btnSalvar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cadastrarDesconto();
+			}
+		});
+		
 		btnLimpar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -137,19 +145,24 @@ public class AdicionarDescontoPanel extends JPanel {
 
 	}
 
-	public void reloadTabelaMesas() {
-
-		String [] colunas = {"Descontos cadastrados"};
-		String [][] dados = this.principal.retornaVetorToStringDescontos();
-
-		tableDescontos = new JTable(dados, colunas);
-
-		tableDescontos.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
-		tableDescontos.setEnabled(false); // Evitando edição não desejada.
-		tableDescontos.setBackground(SystemColor.info); // Cor da linha.
-		tableDescontos.setRowHeight(30); // Aumentando altura das linhas.
-
-		scrollPane.setViewportView(tableDescontos);
+	private void reloadTabelaDescontos() {
+		
+		try {
+			String [] colunas = {"Descontos cadastrados"};
+			String [][] dados = this.principal.retornaVetorToStringDescontos();
+	
+			tableDescontos = new JTable(dados, colunas);
+	
+			tableDescontos.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableDescontos.setEnabled(false); // Evitando edição não desejada.
+			tableDescontos.setBackground(SystemColor.info); // Cor da linha.
+			tableDescontos.setRowHeight(30); // Aumentando altura das linhas.
+	
+			scrollPane.setViewportView(tableDescontos);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 
@@ -161,23 +174,35 @@ public class AdicionarDescontoPanel extends JPanel {
 		valDescricaoDesconto.setText("");
 	}
 
-	//	private void cadastrarMesa() {
-	//		
-	//		try {
-	//			String codigoMesa = valCodigoMesa.getText();
-	//			Integer lugaresMesa = Integer.parseInt(valLugaresMesa.getText());
-	//			
-	//			this.principal.cadastrarMesa(codigoMesa, lugaresMesa);
-	//			// Mensagem de sucesso.
-	//			JOptionPane.showMessageDialog(null, "Mesa Cadastrada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-	//			limparCampos();
-	//			this.frame.reload();
-	//			this.reloadTabelaMesas();
-	//
-	//		}
-	//		// Mostrando erro.
-	//		catch (Exception e) {
-	//			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-	//		}
-	//	}
+	private void cadastrarDesconto() {
+
+		try {
+			String codigoDesconto = valCodigoDesconto.getText();
+			String nomeDesconto = valNomeDesconto.getText();
+			double valorDesconto = Double.parseDouble(valValorDesconto.getText());
+			String descricaoDesconto = valDescricaoDesconto.getText();
+			
+			// Verificando se botão de porcentagem foi selecionado.
+			if (rdbBotaoPorcentagem.isSelected()) {
+				this.principal.cadastrarDescontoPorcentagem(codigoDesconto, nomeDesconto, descricaoDesconto, valorDesconto);
+			}
+			else if (rdbBotaoValor.isSelected()) {
+				this.principal.cadastrarDescontoValor(codigoDesconto, nomeDesconto, descricaoDesconto, valorDesconto);
+			}
+			else {
+				throw new IllegalArgumentException("Tipo de desconto não selecionado.");
+			}
+
+			// Mensagem de sucesso.
+			JOptionPane.showMessageDialog(null, "Desconto Cadastrado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			limparCampos();
+			this.frame.reload();
+			this.reloadTabelaDescontos();
+
+		}
+		// Mostrando erro.
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }

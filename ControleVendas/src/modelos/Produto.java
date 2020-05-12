@@ -59,8 +59,8 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto: \ncodigoProduto: " + codigoProduto + "\nnomeProduto: " + nomeProduto + "\nprecoProduto: "
-				+ precoProduto + "\ndescricaoProduto: " + descricaoProduto + "\n";
+		return "Código: " + codigoProduto + " | Nome: " + nomeProduto + " | Preço: "
+				+ precoProduto + " R$";
 	}
 	
 	

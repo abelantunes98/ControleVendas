@@ -21,6 +21,9 @@ public class ControleDescontos {
 	public void adicionarDescontoValor(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double valorDesconto) {
 
 		try {
+			if ( codigoDesconto.equals("") || nomeDesconto.equals("") || descricaoDesconto.equals("")) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
 			DescontoValor desconto = new DescontoValor(codigoDesconto, nomeDesconto, descricaoDesconto, valorDesconto);
 			base.inserirDesconto(codigoDesconto, desconto);
 		}
@@ -32,6 +35,9 @@ public class ControleDescontos {
 	public void adicionarDescontoPorcentagem(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double porcentagemDesconto) {
 
 		try {
+			if ( codigoDesconto.equals("") || nomeDesconto.equals("") || descricaoDesconto.equals("")) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
 			DescontoPorcentagem desconto = new DescontoPorcentagem(codigoDesconto, nomeDesconto, descricaoDesconto, porcentagemDesconto);
 			base.inserirDesconto(codigoDesconto, desconto);
 		}
@@ -104,9 +110,18 @@ public class ControleDescontos {
 		return base.retornaNumeroDescontos();
 	}
 	
-	public List<Desconto> retornaDescontos() {
+	public String [][] retornaVetorToStringDescontos() {
+		
 		try {
-			return this.base.retornaDescontos();
+			String [][] retorno = new String [this.retornaNumeroDescontos()][];
+			int indice = 0;
+			List<Desconto> descontos = this.base.retornaDescontos();
+			for (Desconto desconto : descontos) {
+				String [] linha = {desconto.toString()}; 
+				retorno[indice++] = linha;
+			}
+			
+			return retorno;
 		}
 		catch (Exception e) {
 			throw e;
