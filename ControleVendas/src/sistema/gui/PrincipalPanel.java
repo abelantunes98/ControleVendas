@@ -1,22 +1,34 @@
 package sistema.gui;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.SwingConstants;
 
 import principal.Principal;
+import javax.swing.JButton;
 
 public class PrincipalPanel extends JPanel {
 
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 8973928196405138319L;
+	
+	private JanelaFrame frame;
 	Principal principal;	
 	
 	/**
 	 * Create the panel.
 	 */
-	public PrincipalPanel(Principal principal) {
+	public PrincipalPanel(Principal principal, JanelaFrame frame) {
 		
+		this.frame = frame;
 		this.principal = principal;
 		setLayout(null);
 		
@@ -66,7 +78,27 @@ public class PrincipalPanel extends JPanel {
 		valNumeroDescontos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valNumeroDescontos.setBounds(1480, 466, 109, 46);
 		add(valNumeroDescontos);
-
+		
+		JButton btnLimparBase = new JButton("Limpar base");
+		btnLimparBase.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnLimparBase.setBounds(1379, 810, 210, 49);
+		add(btnLimparBase);
+		
+		btnLimparBase.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				limparBase();                       
+			}
+		});
 	}
 	
+	private void limparBase() {
+		try {
+			this.principal.limparBase();
+			this.frame.reloadAll();
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }

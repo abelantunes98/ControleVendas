@@ -6,8 +6,6 @@ import baseDados.BaseDados;
 import modelos.Faturamento;
 import modelos.Venda;
 
-import serializacao.Empacotamento;
-
 public class Principal {
 	
 	private Faturamento faturamentoDia;
@@ -22,8 +20,7 @@ public class Principal {
 	private BaseDados base;
 	
 	public Principal() {
-		this.base = (BaseDados) Empacotamento.lerArquivoBinario("baseDeDados.txt");
-		
+		this.base = new BaseDados();
 		this.controleFaturamentos = new ControleFaturamentos(base);
 		this.controleProdutos = new ControleProdutos(base);
 		this.controleMesas = new ControleMesas(base);
@@ -48,7 +45,6 @@ public class Principal {
 	public void cadastrarProduto(String codigoProduto, String nomeProduto, double precoProduto, String descricaoProduto) {
 		try {
 			this.controleProdutos.adicionarProduto(codigoProduto, nomeProduto, precoProduto, descricaoProduto);
-			Empacotamento.gravarArquivoBinario(this.base, "baseDeDados.txt");
 		}
 		catch (Exception e) {
 			throw e;
@@ -184,7 +180,20 @@ public class Principal {
 		}
 		catch (Exception e) {
 			throw e;
-		}
+		}	
+	}
+	
+	public void limparBase() {
 		
+		try {
+			this.controleDescontos.limparDescontos();
+			this.controleFaturamentos.limparFaturamentos();
+			this.controleFuncionarios.limparFuncionarios();
+			this.controleMesas.limparMesas();
+			this.controleProdutos.limparProdutos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 }

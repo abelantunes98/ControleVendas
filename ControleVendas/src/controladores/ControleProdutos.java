@@ -78,6 +78,15 @@ public class ControleProdutos {
 			throw e;
 		}
 	}
+	
+	public void limparProdutos() {
+		try {
+			this.base.limparProdutos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }
 
 

@@ -11,6 +11,8 @@ import modelos.Desconto;
 import modelos.Mesa;
 import modelos.Faturamento;
 
+import serializacao.Empacotamento;
+
 public class BaseDados implements Serializable {
 
 	/**
@@ -18,14 +20,15 @@ public class BaseDados implements Serializable {
 	 */
 	private static final long serialVersionUID = -5652801087683821171L;
 	
-	private static HashMap<String, Funcionario> funcionarios = new HashMap<String, Funcionario>();
-	private static HashMap<String, Produto> produtos = new HashMap<String, Produto>();
-	private static HashMap<String, Desconto> descontos = new HashMap<String, Desconto>();
-	private static HashMap<String, Mesa> mesas = new HashMap<String, Mesa>();
-	private static HashMap<String, Faturamento> faturamentos = new HashMap<String, Faturamento>();
+	private static HashMap<String, Funcionario> funcionarios;
+	private static HashMap<String, Produto> produtos;
+	private static HashMap<String, Desconto> descontos;
+	private static HashMap<String, Mesa> mesas;
+	private static HashMap<String, Faturamento> faturamentos;
 
 
 	public BaseDados() {
+		carregarDados();
 	}
 
 	public void inserirFuncionario(String codigoFuncionario, Funcionario funcionario) {
@@ -33,6 +36,14 @@ public class BaseDados implements Serializable {
 		if (codigoFuncionario != null && funcionario != null) {
 			if (!funcionarios.containsKey(codigoFuncionario)) {
 				BaseDados.funcionarios.put(codigoFuncionario, funcionario);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Funcionario ja cadastrado no sistema.");
@@ -49,6 +60,14 @@ public class BaseDados implements Serializable {
 		if (codigoProduto != null && produto != null) {
 			if (!produtos.containsKey(codigoProduto)) {
 				BaseDados.produtos.put(codigoProduto, produto);
+				
+				// Serializando.
+				try  {
+					Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Produto ja cadastrado no sistema.");
@@ -65,6 +84,14 @@ public class BaseDados implements Serializable {
 		if (codigoDesconto != null && desconto != null) {
 			if (!descontos.containsKey(codigoDesconto)) {
 				BaseDados.descontos.put(codigoDesconto, desconto);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Desconto ja cadastrado no sistema.");
@@ -81,6 +108,14 @@ public class BaseDados implements Serializable {
 		if (codigoMesa != null && mesa != null) {
 			if (!mesas.containsKey(codigoMesa)) {
 				BaseDados.mesas.put(codigoMesa, mesa);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Mesa ja cadastrado no sistema.");
@@ -97,6 +132,14 @@ public class BaseDados implements Serializable {
 		if (codigoFaturamento != null && faturamento != null) {
 			if (!faturamentos.containsKey(codigoFaturamento)) {
 				BaseDados.faturamentos.put(codigoFaturamento, faturamento);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Faturamento ja cadastrado no sistema.");
@@ -112,6 +155,14 @@ public class BaseDados implements Serializable {
 
 		if (funcionarios.containsKey(codigoFuncionario)) {
 			funcionarios.remove(codigoFuncionario);
+			
+			// Serializando.
+			try {
+				Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+			}
+			catch (Exception e) {
+				throw e;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("Funcionario nao cadastrado.");
@@ -122,6 +173,14 @@ public class BaseDados implements Serializable {
 
 		if (produtos.containsKey(codigoProduto)) {
 			produtos.remove(codigoProduto);
+			
+			// Serializando.
+			try  {
+				Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+			}
+			catch (Exception e) {
+				throw e;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("Produto nao cadastrado.");
@@ -132,6 +191,14 @@ public class BaseDados implements Serializable {
 
 		if (descontos.containsKey(codigoDesconto)) {
 			descontos.remove(codigoDesconto);
+			
+			// Serializando.
+			try {
+				Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+			}
+			catch (Exception e) {
+				throw e;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("Desconto nao cadastrado.");
@@ -142,6 +209,14 @@ public class BaseDados implements Serializable {
 
 		if (mesas.containsKey(codigoMesa)) {
 			mesas.remove(codigoMesa);
+			
+			// Serializando.
+			try {
+				Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+			}
+			catch (Exception e) {
+				throw e;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("Mesa nao cadastrada.");
@@ -152,6 +227,14 @@ public class BaseDados implements Serializable {
 
 		if (faturamentos.containsKey(codigoFaturamento)) {
 			faturamentos.remove(codigoFaturamento);
+			
+			// Serializando.
+			try {
+				Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+			}
+			catch (Exception e) {
+				throw e;
+			}
 		}
 		else {
 			throw new IllegalArgumentException("Faturamento nao cadastrado.");
@@ -213,6 +296,14 @@ public class BaseDados implements Serializable {
 		if (codigoFuncionario != null && funcionario != null) {
 			if (funcionarios.containsKey(codigoFuncionario)) {
 				BaseDados.funcionarios.replace(codigoFuncionario, funcionario);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Funcionario nao cadastrado no sistema.");
@@ -228,6 +319,14 @@ public class BaseDados implements Serializable {
 		if (codigoProduto != null && produto != null) {
 			if (produtos.containsKey(codigoProduto)) {
 				BaseDados.produtos.replace(codigoProduto, produto);
+				
+				// Serializando.
+				try  {
+					Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Produto nao cadastrado no sistema.");
@@ -243,6 +342,14 @@ public class BaseDados implements Serializable {
 		if (codigoDesconto != null && desconto != null) {
 			if (descontos.containsKey(codigoDesconto)) {
 				BaseDados.descontos.replace(codigoDesconto, desconto);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Desconto nao cadastrado no sistema.");
@@ -258,6 +365,14 @@ public class BaseDados implements Serializable {
 		if (codigoMesa != null && mesa != null) {
 			if (mesas.containsKey(codigoMesa)) {
 				BaseDados.mesas.replace(codigoMesa, mesa);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Mesa nao cadastrada no sistema.");
@@ -273,6 +388,14 @@ public class BaseDados implements Serializable {
 		if (codigoFaturamento != null && faturamento != null) {
 			if (faturamentos.containsKey(codigoFaturamento)) {
 				BaseDados.faturamentos.replace(codigoFaturamento, faturamento);
+				
+				// Serializando.
+				try {
+					Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+				}
+				catch (Exception e) {
+					throw e;
+				}
 			}
 			else {
 				throw new IllegalArgumentException("Faturamento nao cadastrado no sistema.");
@@ -364,6 +487,104 @@ public class BaseDados implements Serializable {
 			throw e;
 		}
 	}
-
+	
+	/*
+	 * Funções que podem ser usadas para apagar todas as informações de
+	 * uma entidade. Ou na função que zera o banco.
+	 */
+	
+	public void limparFuncionarios() {
+		funcionarios = new HashMap<String, Funcionario>();
+		
+		// Serializando.
+		try {
+			Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void limparProdutos() {
+		produtos = new HashMap<String, Produto>();
+		
+		// Serializando.
+		try  {
+			Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void limparDescontos() {
+		descontos = new HashMap<String, Desconto>();
+		
+		// Serializando.
+		try {
+			Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void limparMesas() {
+		mesas = new HashMap<String, Mesa>();
+		
+		// Serializando.
+		try {
+			Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void limparFaturamentos() {
+		faturamentos = new HashMap<String, Faturamento>();
+		
+		// Serializando.
+		try {
+			Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	private void carregarDados() {
+		
+		try {
+			funcionarios = (HashMap<String, Funcionario>) Empacotamento.lerArquivoBinario("data/func.ser");
+		}
+		catch (Exception e) {
+			funcionarios = new HashMap<String, Funcionario>();
+		}		
+		try {
+			produtos = (HashMap<String, Produto>) Empacotamento.lerArquivoBinario("data/prod.ser");
+		}
+		catch (Exception e) {
+			produtos = new HashMap<String, Produto>();
+		}
+		try {
+			descontos = (HashMap<String, Desconto>) Empacotamento.lerArquivoBinario("data/desc.ser");
+		}
+		catch (Exception e) {
+			descontos = new HashMap<String, Desconto>();
+		}
+		try {
+			mesas = (HashMap<String, Mesa>) Empacotamento.lerArquivoBinario("data/mesas.ser");
+		}
+		catch (Exception e) {
+			mesas = new HashMap<String, Mesa>();
+		}
+		try {
+			faturamentos = (HashMap<String, Faturamento>) Empacotamento.lerArquivoBinario("data/fatur.ser");
+		}
+		catch (Exception e) {
+			faturamentos = new HashMap<String, Faturamento>();
+		}		
+	}
 
 }

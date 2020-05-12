@@ -66,4 +66,13 @@ public class ControleMesas {
 			throw e;
 		}
 	}
+	
+	public void limparMesas() {
+		try {
+			this.base.limparMesas();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }

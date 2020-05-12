@@ -240,4 +240,13 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public void limparFaturamentos() {
+		try {
+			this.base.limparFaturamentos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }

@@ -2,7 +2,6 @@ package serializacao;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -21,13 +20,13 @@ public class Empacotamento {
       objOutput.writeObject(obj);
       objOutput.close();
   
-    } catch(IOException erro) {
-        System.out.printf("Erro: %s", erro.getMessage());
+    } catch(Exception erro) {
+        throw new IllegalArgumentException("Erro ao criar arquivo.");
     }
   }
   
-  // desserialização: recuperando os objetos gravados no arquivo binário "nomeArq"
-  public static Object lerArquivoBinario(String nomeArq) {
+  // Desserialização: recuperando os objetos gravados no arquivo binário "nomeArq"
+  public static Object lerArquivoBinario(String nomeArq) throws IOException, ClassNotFoundException {
     Object obj = new Object();
     try {
       File arq = new File(nomeArq);
@@ -37,9 +36,9 @@ public class Empacotamento {
          objInput.close();
       }
     } catch(IOException erro1) {
-        System.out.printf("Erro: %s", erro1.getMessage());
+        throw new IllegalArgumentException("Erro ao ler arquivo.");
     } catch(ClassNotFoundException erro2) {
-        System.out.printf("Erro: %s", erro2.getMessage());
+    	throw new IllegalArgumentException("Erro ao ler arquivo.");
     }
   
     return(obj);

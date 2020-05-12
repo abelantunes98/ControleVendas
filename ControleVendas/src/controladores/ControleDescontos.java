@@ -127,5 +127,14 @@ public class ControleDescontos {
 			throw e;
 		}
 	}
+	
+	public void limparDescontos() {
+		try {
+			this.base.limparDescontos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 
 }

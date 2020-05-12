@@ -47,4 +47,13 @@ public class ControleFuncionarios {
 	public int retornaNumeroFuncionarios() {
 		return base.retornaNumeroFuncionarios();
 	}
+	
+	public void limparFuncionarios() {
+		try {
+			this.base.limparFuncionarios();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }
