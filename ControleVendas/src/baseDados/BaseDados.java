@@ -327,6 +327,13 @@ public class BaseDados {
 
 		return retorno;	
 	}
+	
+	public List<Desconto> retornaDescontos() {
+		List<Desconto> retorno = new ArrayList<Desconto>();
+		retorno.addAll(this.descontos.values());
+
+		return retorno;	
+	}
 
 
 }

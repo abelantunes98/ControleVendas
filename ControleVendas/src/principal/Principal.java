@@ -5,7 +5,7 @@ import controladores.*;
 import java.util.List;
 
 import baseDados.BaseDados;
-
+import modelos.Desconto;
 import modelos.Faturamento;
 import modelos.Mesa;
 import modelos.Venda;
@@ -162,6 +162,19 @@ public class Principal {
 		List<Mesa> mesas = this.controleMesas.retornaMesas();
 		for (Mesa mesa : mesas) {
 			String [] linha = {mesa.toString()}; 
+			retorno[indice++] = linha;
+		}
+		
+		return retorno;
+	}
+	
+	public String [][] retornaVetorToStringDescontos() {
+		
+		String [][] retorno = new String [this.retornaNumeroDescontos()][];
+		int indice = 0;
+		List<Desconto> descontos = this.controleDescontos.retornaDescontos();
+		for (Desconto desconto : descontos) {
+			String [] linha = {desconto.toString()}; 
 			retorno[indice++] = linha;
 		}
 		

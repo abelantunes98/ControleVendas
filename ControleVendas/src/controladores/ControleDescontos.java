@@ -1,5 +1,7 @@
 package controladores;
 
+import java.util.List;
+
 import baseDados.BaseDados;
 
 import modelos.Desconto;
@@ -100,6 +102,15 @@ public class ControleDescontos {
 	
 	public int retornaNumeroDescontos() {
 		return base.retornaNumeroDescontos();
+	}
+	
+	public List<Desconto> retornaDescontos() {
+		try {
+			return this.base.retornaDescontos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

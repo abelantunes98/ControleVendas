@@ -59,8 +59,8 @@ public class Desconto {
 
 	@Override
 	public String toString() {
-		return "Desconto: \ncodigoDesconto: " + codigoDesconto + "\nnomeDesconto: " + nomeDesconto + "\ndescricaoDesconto: "
-				+ descricaoDesconto + "\n";
+		return "Código do desconto: " + codigoDesconto + "     Nome do Desconto: " + nomeDesconto + "    Tipo de desconto: "
+				+ this.tipoDesconto;
 	}
 	
 	
