@@ -12,12 +12,14 @@ public class Mesa implements Serializable {
 	private static final long serialVersionUID = 4751170594807362672L;
 	private String codigoMesa;
 	private int lugaresMesa;
+	private boolean mesaDisponivel;
 	private List<Integer> vendasMesa;
 	
 	public Mesa(String codigoMesa, int lugaresMesa) {
 		super();
 		this.codigoMesa = codigoMesa;
 		this.lugaresMesa = lugaresMesa;
+		this.mesaDisponivel = true;
 		this.vendasMesa = new ArrayList<Integer>();
 	}
 
@@ -45,6 +47,14 @@ public class Mesa implements Serializable {
 		this.vendasMesa = vendasMesa;
 	}
 	
+	public boolean MesaDisponivel() {
+		return mesaDisponivel;
+	}
+
+	public void setMesaDisponivel(boolean mesaDisponivel) {
+		this.mesaDisponivel = mesaDisponivel;
+	}
+
 	public void adicionaVendaListaVendas(int keyVenda) {
 		this.vendasMesa.add(keyVenda);
 	}

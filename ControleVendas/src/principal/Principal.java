@@ -175,6 +175,15 @@ public class Principal {
 			throw e;
 		}
 	}
+	
+	public int retornaMesasOcupadasFaturamentoAtual() {
+		try {
+			return this.controleFaturamentos.retornaNumeroMesasOcupadasFaturamento(Integer.toString(this.codigoFaturamentoAtual));
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 
 	public int retornaNumeroFuncionarios() {
 		return controleFuncionarios.retornaNumeroFuncionarios();

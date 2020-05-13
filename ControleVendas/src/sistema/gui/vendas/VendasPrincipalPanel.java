@@ -55,6 +55,26 @@ public class VendasPrincipalPanel extends JPanel {
 		valFaturadoDia.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valFaturadoDia.setBounds(570, 515, 166, 49);
 		add(valFaturadoDia);
+		
+		JLabel mesasDisponiveis = new JLabel("Mesas dispon\u00EDveis:");
+		mesasDisponiveis.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		mesasDisponiveis.setBounds(1246, 412, 227, 55);
+		add(mesasDisponiveis);
+		
+		JLabel valMesasDisponiveis = new JLabel(Integer.toString(this.principal.retornaNumeroMesas() - this.principal.retornaMesasOcupadasFaturamentoAtual()));
+		valMesasDisponiveis.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		valMesasDisponiveis.setBounds(1488, 415, 127, 48);
+		add(valMesasDisponiveis);
+		
+		JLabel mesasOcupadas = new JLabel("Mesas ocupadas:");
+		mesasOcupadas.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		mesasOcupadas.setBounds(1246, 508, 210, 49);
+		add(mesasOcupadas);
+		
+		JLabel valMesasOcupadas = new JLabel(Integer.toString(this.principal.retornaMesasOcupadasFaturamentoAtual()));
+		valMesasOcupadas.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		valMesasOcupadas.setBounds(1488, 508, 127, 49);
+		add(valMesasOcupadas);
 
 	}
 }
