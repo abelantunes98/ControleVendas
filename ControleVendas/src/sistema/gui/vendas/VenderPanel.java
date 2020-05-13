@@ -3,6 +3,9 @@ package sistema.gui.vendas;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -22,6 +25,8 @@ public class VenderPanel extends JPanel {
 	
 	private JRadioButton rdbtnVendaMesa;
 	private JRadioButton rdbtnVendaCaixa;
+	private JRadioButton rdbtnDescontoSim;
+	private JRadioButton rdbtnDescontoNao;
 
 	/**
 	 * Create the panel.
@@ -51,6 +56,7 @@ public class VenderPanel extends JPanel {
 		add(codigoProduto);
 		
 		valCodigoProduto = new JTextField();
+		valCodigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		valCodigoProduto.setBounds(462, 322, 190, 42);
 		add(valCodigoProduto);
 		valCodigoProduto.setColumns(10);
@@ -61,6 +67,7 @@ public class VenderPanel extends JPanel {
 		add(quantidadeProduto);
 		
 		valQuantidadeProduto = new JTextField();
+		valQuantidadeProduto.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		valQuantidadeProduto.setBounds(462, 391, 146, 42);
 		add(valQuantidadeProduto);
 		valQuantidadeProduto.setColumns(10);
@@ -71,6 +78,7 @@ public class VenderPanel extends JPanel {
 		add(codigoMesa);
 		
 		valCodigoMesa = new JTextField();
+		valCodigoMesa.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		valCodigoMesa.setBounds(462, 460, 190, 42);
 		add(valCodigoMesa);
 		valCodigoMesa.setColumns(10);
@@ -81,9 +89,15 @@ public class VenderPanel extends JPanel {
 		add(codigoDesconto);
 		
 		valCodigoDesconto = new JTextField();
+		valCodigoDesconto.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		valCodigoDesconto.setBounds(462, 526, 190, 42);
 		add(valCodigoDesconto);
 		valCodigoDesconto.setColumns(10);
+		
+		JLabel tipoVenda = new JLabel("Tipo de venda:");
+		tipoVenda.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		tipoVenda.setBounds(245, 621, 190, 42);
+		add(tipoVenda);
 		
 		rdbtnVendaMesa = new JRadioButton("Mesa");
 		buttonGroupTipoVenda.add(rdbtnVendaMesa);
@@ -97,27 +111,22 @@ public class VenderPanel extends JPanel {
 		rdbtnVendaCaixa.setBounds(354, 675, 115, 42);
 		add(rdbtnVendaCaixa);
 		
-		JRadioButton rdbtnDescontoSim = new JRadioButton("Sim");
+		JLabel usarDesconto = new JLabel("Aplicar desconto:");
+		usarDesconto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		usarDesconto.setBounds(845, 621, 203, 42);
+		add(usarDesconto);
+		
+		rdbtnDescontoSim = new JRadioButton("Sim");
 		buttonGroupDesconto.add(rdbtnDescontoSim);
 		rdbtnDescontoSim.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		rdbtnDescontoSim.setBounds(833, 675, 85, 42);
 		add(rdbtnDescontoSim);
 		
-		JRadioButton rdbtnDescontoNao = new JRadioButton("N\u00E3o");
+		rdbtnDescontoNao = new JRadioButton("N\u00E3o");
 		buttonGroupDesconto.add(rdbtnDescontoNao);
 		rdbtnDescontoNao.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		rdbtnDescontoNao.setBounds(969, 675, 79, 42);
 		add(rdbtnDescontoNao);
-		
-		JLabel tipoVenda = new JLabel("Tipo de venda:");
-		tipoVenda.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		tipoVenda.setBounds(245, 621, 190, 42);
-		add(tipoVenda);
-		
-		JLabel usarDesconto = new JLabel("Aplicar desconto:");
-		usarDesconto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		usarDesconto.setBounds(845, 621, 203, 42);
-		add(usarDesconto);
 		
 		JButton btnAdicionarVenda = new JButton("Adicionar");
 		btnAdicionarVenda.setFont(new Font("Tahoma", Font.PLAIN, 23));
@@ -135,6 +144,36 @@ public class VenderPanel extends JPanel {
 		
 		tableVendasDia = new JTable();
 		scrollPane.setViewportView(tableVendasDia);
+		
+		// Desativando campos a partir de rádio buttons.
+		rdbtnVendaMesa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				valCodigoMesa.setEnabled(true);                 
+			}
+		});
+		
+		rdbtnVendaCaixa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				valCodigoMesa.setEnabled(false);                 
+			}
+		});
+		
+		rdbtnDescontoNao.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				valCodigoDesconto.setEnabled(false);                 
+			}
+		});
+		
+		rdbtnDescontoSim.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				valCodigoDesconto.setEnabled(true);                 
+			}
+		});
+
 
 	}
 }
