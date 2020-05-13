@@ -448,6 +448,10 @@ public class BaseDados implements Serializable {
 	public int retornaNumeroDescontos() {
 		return BaseDados.descontos.size();
 	}
+	
+	public int retornaNumeroFaturamentos() {
+		return BaseDados.faturamentos.size();
+	}
 
 	public List<Mesa> retornaMesas() {
 		

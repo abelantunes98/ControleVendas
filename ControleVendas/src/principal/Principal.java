@@ -2,6 +2,9 @@ package principal;
 
 import controladores.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import baseDados.BaseDados;
 import modelos.Faturamento;
 import modelos.Venda;
@@ -25,11 +28,47 @@ public class Principal {
 		this.controleMesas = new ControleMesas(base);
 		this.controleFuncionarios = new ControleFuncionarios(base);
 		this.controleDescontos = new ControleDescontos(base);
+		this.codigoFaturamentoAtual = this.controleFaturamentos.retornaNumeroFaturamentos();
 	}
 	
+	/*
+	 * O código de faturamento atual é obtido a partir do número de faturamentos cadastrados.
+	 * Logo, se o código for 0 não existem faturamentos. Por isso um novo é criado.
+	 * Se for um valor maior que 0, olha se o faturamento cadastrado anteriormente não
+	 * pertence ao mesmo dia, já que pode-se fechar e abrir o programa no mesmo dia.
+	 * 
+	 * Caso seja a mesma data, o código atual passa a ser o do anterior. Caso não
+	 * seja a mesma data, um novo faturamento é adicionado com o código atual.
+	 * Esse código será usado para todas as funções relacionadas a faturamento.
+	 */
 	public void iniciarFaturamento() {
 		
-		this.controleFaturamentos.adicionarFaturamento(Integer.toString(++codigoFaturamentoAtual));
+		try {
+			if (this.codigoFaturamentoAtual == 0) {
+				this.controleFaturamentos.adicionarFaturamento(Integer.toString(codigoFaturamentoAtual));
+			}
+			else {
+				Date dataDia = new Date();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		        formato.setLenient(false);
+      
+				String dataDiaFormatada = formato.format(dataDia);
+				String dataFaturamentoAnterior = this.controleFaturamentos
+						.retornaDataFaturamento(Integer.toString(this.codigoFaturamentoAtual - 1));
+				
+				if (dataDiaFormatada.equals(dataFaturamentoAnterior)) {
+					this.codigoFaturamentoAtual--;
+				}
+				
+				else {
+					this.controleFaturamentos.adicionarFaturamento(Integer.toString(codigoFaturamentoAtual));
+				}
+			}
+		}
+		catch (Exception e) {
+			throw e;
+		}
+			
 	}
 	
 	public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String codigo) {
@@ -207,6 +246,17 @@ public class Principal {
 			return retorno;
 		}
 		catch (Exception e){
+			throw e;
+		}
+	}
+	
+	public double retornaValorApuradoFaturamentoAtual() {
+		try {
+			double retorno = this.controleFaturamentos.retornaValorFaturamento(
+					Integer.toString(this.codigoFaturamentoAtual));
+			return retorno;
+		}
+		catch (Exception e) {
 			throw e;
 		}
 	}

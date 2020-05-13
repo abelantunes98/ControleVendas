@@ -1,15 +1,29 @@
 package sistema.gui.vendas;
 
 import javax.swing.JPanel;
+
+import principal.Principal;
+import sistema.gui.JanelaFrame;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
 public class VendasPrincipalPanel extends JPanel {
-
+	
+	private Principal principal;
+	private JanelaFrame frame;
+	
 	/**
 	 * Create the panel.
 	 */
-	public VendasPrincipalPanel() {
+	public VendasPrincipalPanel(Principal principal, JanelaFrame frame) {
+		
+		this.principal = principal;
+		this.frame = frame;
+		
+		// Iniciando faturamento.
+		this.principal.iniciarFaturamento();
+		
 		setLayout(null);
 		
 		JLabel titulo = new JLabel("Central de vendas");
@@ -22,7 +36,7 @@ public class VendasPrincipalPanel extends JPanel {
 		numeroVendasDia.setBounds(223, 405, 317, 69);
 		add(numeroVendasDia);
 		
-		JLabel valNumeroVendasDia = new JLabel("New label");
+		JLabel valNumeroVendasDia = new JLabel(Integer.toString(this.principal.retornaNumeroDeVendasFaturamentoAtual()));
 		valNumeroVendasDia.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valNumeroVendasDia.setBounds(570, 412, 91, 55);
 		add(valNumeroVendasDia);
@@ -32,7 +46,7 @@ public class VendasPrincipalPanel extends JPanel {
 		faturadoDia.setBounds(223, 501, 317, 63);
 		add(faturadoDia);
 		
-		JLabel valFaturadoDia = new JLabel("New label");
+		JLabel valFaturadoDia = new JLabel(Double.toString(this.principal.retornaValorApuradoFaturamentoAtual()) + " R$");
 		valFaturadoDia.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valFaturadoDia.setBounds(570, 515, 91, 49);
 		add(valFaturadoDia);

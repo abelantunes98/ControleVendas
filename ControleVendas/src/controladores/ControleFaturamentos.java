@@ -258,4 +258,15 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public String retornaDataFaturamento(String codigoFaturamento) {
+		try {
+			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
+			String retorno = faturamento.getDataFaturamento();
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }
