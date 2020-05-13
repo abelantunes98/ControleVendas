@@ -22,6 +22,11 @@ import javax.swing.JTable;
 
 public class AdicionarMesaPanel extends JPanel {
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -8165311040337367940L;
+	
 	private JTextField valCodigoMesa;
 	private JTextField valLugaresMesa;
 	

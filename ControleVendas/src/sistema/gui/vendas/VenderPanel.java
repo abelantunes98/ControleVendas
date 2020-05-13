@@ -21,6 +21,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class VenderPanel extends JPanel {
+		
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 7595069762406358433L;
+	
 	private JTextField valCodigoFuncionario;
 	private JTextField valCodigoProduto;
 	private JTextField valQuantidadeProduto;
@@ -46,11 +52,6 @@ public class VenderPanel extends JPanel {
 		
 		this.principal = principal;
 		this.frame = frame;
-		
-		// Vai sair Depois
-		///////////////
-		//////////////
-		this.principal.iniciarFaturamento();
 			
 		setLayout(null);
 		
@@ -199,6 +200,13 @@ public class VenderPanel extends JPanel {
 				limparCampos();                       
 			}
 		});
+		
+		btnAdicionarVenda.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				adicionarVenda();                       
+			}
+		});
 
 	}
 	
@@ -230,5 +238,36 @@ public class VenderPanel extends JPanel {
 		valCodigoMesa.setText("");	
 		valCodigoDesconto.setText("");
 				
+	}
+	
+	private void adicionarVenda() {
+		
+		try {
+			String codigoFuncionario = valCodigoFuncionario.getText();
+			String codigoProduto = valCodigoProduto.getText();
+			int quantidadeProduto = Integer.parseInt(valQuantidadeProduto.getText());
+			String codigoMesa = valCodigoMesa.getText();
+			String codigoDesconto = valCodigoDesconto.getText();
+			
+			if (rdbtnDescontoNao.isSelected()) {
+				codigoDesconto = null;
+			}
+			
+			if (rdbtnVendaCaixa.isSelected()) {
+				codigoMesa = null;
+			}
+			
+			this.principal.adicionarVenda(codigoFuncionario, codigoProduto, codigoMesa, 
+					quantidadeProduto, codigoDesconto);
+			
+			JOptionPane.showMessageDialog(null, "Venda Cadastrada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			
+			reloadTabelaVendas();
+			limparCampos();
+			this.frame.reloadAllPrincipal();
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}	
 	}
 }

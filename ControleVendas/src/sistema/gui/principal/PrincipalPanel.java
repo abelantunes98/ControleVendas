@@ -103,7 +103,7 @@ public class PrincipalPanel extends JPanel {
 			
 			if (resposta == JOptionPane.YES_OPTION) {
 				this.principal.limparBase();
-				this.frame.reloadAll();
+				this.frame.reloadAllPrincipal();
 			}
 		}
 		catch (Exception e) {

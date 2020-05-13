@@ -34,7 +34,11 @@ public class Faturamento implements Serializable{
 		
 		this.codigoFaturamento = codigoFaturamento;
 	}
-
+	
+	public void adicionaVenda(Venda venda, int key) {
+		this.vendas.put(key, venda);
+	}
+	
 	public String getCodigoFaturamento() {
 		return codigoFaturamento;
 	}

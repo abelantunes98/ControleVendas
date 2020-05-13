@@ -21,12 +21,11 @@ public class Venda implements Serializable{
 	private Date dataVenda;
 
 	
-	public Venda(String codigoFuncionario, String codigoProduto, String codigoMesa, int quantProdutos,
+	public Venda(String codigoFuncionario, String codigoProduto, int quantProdutos,
 			double valorVenda) {
 		super();
 		this.codigoFuncionario = codigoFuncionario;
 		this.codigoProduto = codigoProduto;
-		this.codigoMesa = codigoMesa;
 		this.quantProdutos = quantProdutos;
 		this.valorVenda = valorVenda;
 		this.dataVenda = new Date();

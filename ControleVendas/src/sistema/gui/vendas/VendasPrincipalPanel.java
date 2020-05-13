@@ -10,6 +10,11 @@ import java.awt.Font;
 
 public class VendasPrincipalPanel extends JPanel {
 	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -3758417757889926383L;
+	
 	private Principal principal;
 	private JanelaFrame frame;
 	
@@ -48,7 +53,7 @@ public class VendasPrincipalPanel extends JPanel {
 		
 		JLabel valFaturadoDia = new JLabel(Double.toString(this.principal.retornaValorApuradoFaturamentoAtual()) + " R$");
 		valFaturadoDia.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		valFaturadoDia.setBounds(570, 515, 91, 49);
+		valFaturadoDia.setBounds(570, 515, 166, 49);
 		add(valFaturadoDia);
 
 	}

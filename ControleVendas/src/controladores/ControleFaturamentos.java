@@ -2,7 +2,6 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import baseDados.BaseDados;
@@ -45,24 +44,47 @@ public class ControleFaturamentos {
 	/*
 	 * Adiciona uma nova venda na lista de vendas do Faturamento em questao
 	 * e adiciona o valor da venda no valor do Faturamento.
+	 * Pega a chave da venda pelo método getNewKey da classe Faturamento.
 	 */
-	public void adicionarVenda(String codigoFaturamento, Venda venda) {
+	private void adicionarVenda(String codigoFaturamento, Venda venda) {
 		
 		try {
 			Faturamento faturamentoDia = base.retornaFaturamento(codigoFaturamento);
-			HashMap<Integer, Venda> vendasDia = faturamentoDia.getVendas();
 			int key = faturamentoDia.getNewKey();
-			vendasDia.put(key, venda);
+			faturamentoDia.adicionaVenda(venda, key);
 			
 			double novoApurado = faturamentoDia.getValorApurado();
 			novoApurado += venda.getValorVenda();
 			faturamentoDia.setValorApurado(novoApurado);
 			
-			faturamentoDia.setVendas(vendasDia);
 			base.alteraFaturamento(codigoFaturamento, faturamentoDia);
 		}
 		catch (Exception e) {
 			throw e;
+		}
+	}
+	
+	/*
+	 * Cria uma venda para adiciona-la.
+	 * O codigo da mesa é passado como null caso a venda seja
+	 * realizada pelo caixa.
+	 */
+	public void criaVenda(String codigoFaturamento, String codigoFuncionario, String codigoProduto, 
+			String codigoMesa, int quantProdutos, double valorVenda, String codigoDesconto) {
+		try {
+			Venda venda = new Venda(codigoFuncionario, codigoProduto, quantProdutos, valorVenda);
+			
+			if (codigoDesconto != null) {
+				venda.setCodigoDesconto(codigoDesconto);
+			}
+			if (codigoMesa != null) {
+				venda.setCodigoMesa(codigoMesa);
+			}
+			
+			this.adicionarVenda(codigoFaturamento, venda);
+		}
+		catch (Exception e) {
+			new IllegalArgumentException("Erro ao adicionar venda.");
 		}
 	}
 	
@@ -83,8 +105,8 @@ public class ControleFaturamentos {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeFuncionario(codigoFuncionario)) {
 				double valorRetorno = 0;
-				HashMap<Integer, Venda> vendasFaturamento = faturamentoPassado.getVendas();
-				for (Venda venda : vendasFaturamento.values()) {
+				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
+				for (Venda venda : vendasFaturamento) {
 					if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {
 						valorRetorno += venda.getValorVenda();
 					}
@@ -119,8 +141,8 @@ public class ControleFaturamentos {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeFuncionario(codigoFuncionario)) {
 				int valorRetorno = 0;
-				HashMap<Integer, Venda> vendasFaturamento = faturamentoPassado.getVendas();
-				for (Venda venda : vendasFaturamento.values()) {
+				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
+				for (Venda venda : vendasFaturamento) {
 					if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {
 						valorRetorno++;
 					}

@@ -38,6 +38,7 @@ public class JanelaFrame extends JFrame {
 	private AdicionarDescontoPanel adicionarDescontoPanel;
 	
 	// Panels de vendas
+	private VendasPrincipalPanel vendasPrincipalPaner;
 	private VenderPanel venderPanel;
 	
 	private JTabbedPane tabbedPane;
@@ -59,6 +60,7 @@ public class JanelaFrame extends JFrame {
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
 		this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
 		
+		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);
 		this.venderPanel = new VenderPanel(principal, this);
 		
 		iniciaContentPane();
@@ -73,7 +75,7 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.setComponentAt(0, this.principalPanel);
 	}
 	
-	public void reloadAll() {
+	public void reloadAllPrincipal() {
 		//Setando o container com valores atualizados.
 		this.principalPanel = new PrincipalPanel(this.principal, this);
 		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(this.principal, this);
@@ -86,6 +88,14 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.setComponentAt(2, this.adicionarProdutoPanel);
 		this.tabbedPane.setComponentAt(3, this.adicionarMesaPanel);
 		this.tabbedPane.setComponentAt(4, this.adicionarDescontoPanel);
+		
+		//Testes
+		///////////////////////
+		//////////////////////////////////////////
+		//////////////////////////////////////////////////
+		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);		
+		this.tabbedPane.setComponentAt(5, this.vendasPrincipalPaner);
+		
 	}
 	
 	public void iniciaContentPane() {
@@ -111,7 +121,8 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.addTab("Adicionar produto", this.adicionarProdutoPanel);
 		this.tabbedPane.addTab("Adicionar mesa", this.adicionarMesaPanel);
 		this.tabbedPane.addTab("Adicionar desconto", this.adicionarDescontoPanel);
-		this.tabbedPane.addTab("Test", this.venderPanel);
+		this.tabbedPane.addTab("Test", this.vendasPrincipalPaner);
+		this.tabbedPane.addTab("Test2", this.venderPanel);
 
 		
 		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
