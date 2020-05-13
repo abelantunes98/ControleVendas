@@ -2,11 +2,18 @@ package sistema.gui.vendas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+
+import principal.Principal;
+import sistema.gui.JanelaFrame;
+
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -21,17 +28,30 @@ public class VenderPanel extends JPanel {
 	private JTextField valCodigoDesconto;
 	private final ButtonGroup buttonGroupTipoVenda = new ButtonGroup();
 	private final ButtonGroup buttonGroupDesconto = new ButtonGroup();
-	private JTable tableVendasDia;
 	
 	private JRadioButton rdbtnVendaMesa;
 	private JRadioButton rdbtnVendaCaixa;
 	private JRadioButton rdbtnDescontoSim;
 	private JRadioButton rdbtnDescontoNao;
+	
+	private Principal principal;
+	private JanelaFrame frame;
+	private JTable tableVendasDia;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
 	 */
-	public VenderPanel() {
+	public VenderPanel(Principal principal, JanelaFrame frame) {
+		
+		this.principal = principal;
+		this.frame = frame;
+		
+		// Vai sair Depois
+		///////////////
+		//////////////
+		this.principal.iniciarFaturamento();
+			
 		setLayout(null);
 		
 		JLabel titulo = new JLabel("Cadastrar venda");
@@ -138,12 +158,11 @@ public class VenderPanel extends JPanel {
 		btnLimpar.setBounds(676, 787, 155, 56);
 		add(btnLimpar);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(1156, 158, 594, 583);
 		add(scrollPane);
 		
-		tableVendasDia = new JTable();
-		scrollPane.setViewportView(tableVendasDia);
+		reloadTabelaVendas();
 		
 		// Desativando campos a partir de rádio buttons.
 		rdbtnVendaMesa.addActionListener(new ActionListener() {
@@ -173,7 +192,43 @@ public class VenderPanel extends JPanel {
 				valCodigoDesconto.setEnabled(true);                 
 			}
 		});
+		
+		btnLimpar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				limparCampos();                       
+			}
+		});
 
-
+	}
+	
+	private void reloadTabelaVendas() {
+		
+		try {
+			String [] colunas = {"Vendas do dia"};
+			String [][] dados = this.principal.retornaVetorToStringVendasFaturamentoDia();
+			
+			tableVendasDia = new JTable(dados, colunas);
+			
+			tableVendasDia.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableVendasDia.setEnabled(false); // Evitando edição não desejada.
+			tableVendasDia.setBackground(SystemColor.info); // Cor da linha.
+			tableVendasDia.setRowHeight(30); // Aumentando altura das linhas.
+			
+			scrollPane.setViewportView(tableVendasDia);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void limparCampos() {
+		
+		valCodigoFuncionario.setText("");
+		valCodigoProduto.setText("");
+		valQuantidadeProduto.setText("");
+		valCodigoMesa.setText("");	
+		valCodigoDesconto.setText("");
+				
 	}
 }

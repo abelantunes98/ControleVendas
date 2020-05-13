@@ -105,9 +105,8 @@ public class Venda implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Venda: \ncodigoFuncionario: " + codigoFuncionario + "\ncodigoProduto: " + codigoProduto + "\ncodigoMesa: "
-				+ codigoMesa + "\ncodigoDesconto: " + codigoDesconto + "\nquantProdutos: " + quantProdutos
-				+ "\nvalorVenda: " + valorVenda + "\ndataVenda: " + dataVenda + "\n";
+		return "Funcionario: " + codigoFuncionario + " | Produto: " + codigoProduto + " | Quantidade: " + quantProdutos
+				+ " | Valor: " + valorVenda;
 	}
 	
 	

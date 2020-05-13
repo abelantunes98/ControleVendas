@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import baseDados.BaseDados;
-import modelos.Faturamento;
 import modelos.Venda;
 
 public class Principal {
@@ -219,6 +218,26 @@ public class Principal {
 		catch (Exception e) {
 			throw e;
 		}	
+	}
+	
+	public String [][] retornaVetorToStringVendasFaturamento(String codigoFaturamento) {
+		
+		try {
+			String [][] retorno = this.controleFaturamentos.retornaVetorToStringVendas(codigoFaturamento);
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}	
+	}
+	
+	public String [][] retornaVetorToStringVendasFaturamentoDia() {
+		try {
+			return retornaVetorToStringVendasFaturamento(Integer.toString(this.codigoFaturamentoAtual));
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	public void limparBase() {

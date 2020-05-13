@@ -2,9 +2,10 @@ package modelos;
 
 import java.text.SimpleDateFormat;
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.io.Serializable;
 
 import modelos.Venda;
@@ -15,6 +16,7 @@ public class Faturamento implements Serializable{
 	 * Serial
 	 */
 	private static final long serialVersionUID = 1153012768297252642L;
+	
 	private String codigoFaturamento;
 	private String dataFaturamento;
 	private double valorApurado;
@@ -67,6 +69,12 @@ public class Faturamento implements Serializable{
 	
 	public int getNewKey() {
 		return this.vendas.size();
+	}
+	
+	public List<Venda> getListVendas() {
+		List<Venda> retorno = new ArrayList<Venda>();
+		retorno.addAll(this.vendas.values());
+		return retorno;
 	}
 
 	@Override

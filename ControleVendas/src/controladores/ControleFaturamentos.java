@@ -269,4 +269,22 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public String [][] retornaVetorToStringVendas(String codigoFaturamento) {
+
+		try {
+			String [][] retorno = new String [this.retornaNumeroDeVendas(codigoFaturamento)][];
+			int indice = 0;
+			List<Venda> vendas = this.base.retornaFaturamento(codigoFaturamento).getListVendas();
+			for (Venda venda : vendas) {
+				String [] linha = {venda.toString()}; 
+				retorno[indice++] = linha;
+			}
+
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }
