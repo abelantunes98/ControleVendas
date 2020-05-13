@@ -2,7 +2,10 @@ package sistema.gui.vendas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -101,10 +104,11 @@ public class MesasPanel extends JPanel {
 		btnConfirmar.setBounds(283, 846, 169, 55);
 		add(btnConfirmar);
 		
-		JButton btnNewButton = new JButton("Limpar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnNewButton.setBounds(569, 846, 169, 55);
-		add(btnNewButton);
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnLimpar.setBounds(569, 846, 169, 55);
+		
+		add(btnLimpar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(1232, 243, 464, 386);
@@ -147,7 +151,40 @@ public class MesasPanel extends JPanel {
 				codigosMesas2.setEnabled(true);
 			}
 		});	
+		
+		btnLimpar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				limparCampos();                       
+			}
+		});
 
+	}
+	
+	private void reloadTabelaVendas() {
+		
+		try {
+			String [] colunas = {"Vendas do dia"};
+			String [][] dados = this.principal.retornaVetorToStringVendasFaturamentoDia();
+			
+			tableVendasDia = new JTable(dados, colunas);
+			
+			tableVendasDia.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableVendasDia.setEnabled(false); // Evitando edição não desejada.
+			tableVendasDia.setBackground(SystemColor.info); // Cor da linha.
+			tableVendasDia.setRowHeight(30); // Aumentando altura das linhas.
+			
+			scrollPane.setViewportView(tableVendasDia);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void limparCampos() {
+		
+		valCodigoMesa.setText("");
+		valCodigosMesas.setText("");
 	}
 
 }
