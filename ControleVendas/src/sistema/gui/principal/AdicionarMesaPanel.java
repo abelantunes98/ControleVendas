@@ -1,4 +1,4 @@
-package sistema.gui;
+package sistema.gui.principal;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
 import principal.Principal;
+import sistema.gui.JanelaFrame;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 

@@ -8,7 +8,6 @@ import modelos.Venda;
 
 public class Principal {
 	
-	private Faturamento faturamentoDia;
 	private int codigoFaturamentoAtual;
 	
 	private ControleFaturamentos controleFaturamentos;
@@ -193,6 +192,21 @@ public class Principal {
 			this.controleProdutos.limparProdutos();
 		}
 		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Funções relacionadas a vendas:
+	 */
+	
+	public int retornaNumeroDeVendasFaturamentoAtual() {
+		try {
+			int retorno = this.controleFaturamentos.retornaNumeroDeVendas(
+					Integer.toString(this.codigoFaturamentoAtual));
+			return retorno;
+		}
+		catch (Exception e){
 			throw e;
 		}
 	}

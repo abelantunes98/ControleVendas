@@ -1,4 +1,4 @@
-package sistema.gui;
+package sistema.gui.principal;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import principal.Principal;
+import sistema.gui.JanelaFrame;
 
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -21,6 +22,11 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
 public class AdicionarDescontoPanel extends JPanel {
+
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JTextField valCodigoDesconto;
 

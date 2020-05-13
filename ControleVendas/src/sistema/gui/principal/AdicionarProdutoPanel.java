@@ -1,4 +1,4 @@
-package sistema.gui;
+package sistema.gui.principal;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import principal.Principal;
+import sistema.gui.JanelaFrame;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.SystemColor;

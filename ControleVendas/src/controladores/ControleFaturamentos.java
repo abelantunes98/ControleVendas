@@ -249,4 +249,13 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public int retornaNumeroFaturamentos() {
+		try {
+			return this.base.retornaNumeroFaturamentos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 }

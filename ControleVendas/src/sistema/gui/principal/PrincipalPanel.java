@@ -1,4 +1,4 @@
-package sistema.gui;
+package sistema.gui.principal;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 
 import principal.Principal;
+import sistema.gui.JanelaFrame;
+
 import javax.swing.JButton;
 
 public class PrincipalPanel extends JPanel {
@@ -94,8 +96,15 @@ public class PrincipalPanel extends JPanel {
 	
 	private void limparBase() {
 		try {
-			this.principal.limparBase();
-			this.frame.reloadAll();
+			
+			// Perguntando ao usuário se ele tem certeza que deseja limpar a base.
+			int resposta = JOptionPane.showConfirmDialog(null, "Isso apagará toda a base de dados\nVocê tem certeza?", 
+					"Atenção!", JOptionPane.YES_OPTION);
+			
+			if (resposta == JOptionPane.YES_OPTION) {
+				this.principal.limparBase();
+				this.frame.reloadAll();
+			}
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
