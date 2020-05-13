@@ -49,6 +49,95 @@ public class ControleMesas {
 		return base.retornaNumeroMesas();
 	}
 	
+	public boolean retornaMesaDisponivel(String codigoMesa) {
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			return mesa.mesaDisponivel();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void ocuparMesa(String codigoMesa) {
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			if (!mesa.mesaDisponivel()) {
+				throw new IllegalArgumentException("A mesa já está ocupada.");
+			}
+			
+			mesa.setMesaDisponivel(false);
+			this.base.alteraMesa(codigoMesa, mesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void adicionaVendaEmMesa(String codigoMesa, int codigoVenda) {
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			mesa.adicionaVendaListaVendas(codigoVenda);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void removerVendaEmMesa(String codigoMesa, int codigoVenda) {
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			mesa.adicionaVendaListaVendas(codigoVenda);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void liberarMesa(String codigoMesa) {
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			if (mesa.mesaDisponivel()) {
+				throw new IllegalArgumentException("A mesa não está ocupada.");
+			}
+			
+			mesa.setMesaDisponivel(true);
+			this.base.alteraMesa(codigoMesa, mesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Olha a disponibilidade da mesa e gera uma String de saída para cada
+	 * mesa.
+	 */
+	public String [][] retornaDisponibilidadeMesas() {
+		try {
+			String [][] retorno = new String [this.retornaNumeroMesas()][];
+			List<Mesa> mesas = this.base.retornaMesas();
+			int indice = 0;
+			String status;
+			for (Mesa mesa : mesas) {
+				
+				if (mesa.mesaDisponivel()) {
+					status = "Disponível";
+				}
+				else {
+					status = "Ocupada";
+				}
+				String [] linha = {"Código: " + mesa.getCodigoMesa() + "  |  " + status}; 
+				retorno[indice++] = linha;
+			}
+			
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public String [][] retornaVetorToStringMesas() {
 		
 		try {

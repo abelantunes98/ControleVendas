@@ -176,6 +176,7 @@ public class Principal {
 		}
 	}
 	
+	// Funções de mesas:
 	public int retornaMesasOcupadasFaturamentoAtual() {
 		try {
 			return this.controleFaturamentos.retornaNumeroMesasOcupadasFaturamento(Integer.toString(this.codigoFaturamentoAtual));
@@ -184,7 +185,49 @@ public class Principal {
 			throw e;
 		}
 	}
+	
+	public boolean retornaMesaDisponivel(String codigoMesa) {
+		try {
+			return this.controleMesas.retornaMesaDisponivel(codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void ocuparMesa(String codigoMesa) {
+		try {
+			this.controleMesas.ocuparMesa(codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public void liberarMesa(String codigoMesa) {
+		try {
+			this.controleMesas.liberarMesa(codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Olha a disponibilidade da mesa e gera uma String de saída para cada
+	 * mesa.
+	 */
+	public String [][] retornaDisponibilidadeMesas() {
 
+		try {
+			String [][] retorno = this.controleMesas.retornaDisponibilidadeMesas();
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public int retornaNumeroFuncionarios() {
 		return controleFuncionarios.retornaNumeroFuncionarios();
 	}
@@ -208,7 +251,7 @@ public class Principal {
 	public void setCodigoFaturamentoAtual(int codigoFaturamentoAtual) {
 		this.codigoFaturamentoAtual = codigoFaturamentoAtual;
 	}
-
+	
 	public String [][] retornaVetorToStringMesas() {
 
 		try {

@@ -256,6 +256,21 @@ public class VenderPanel extends JPanel {
 			if (rdbtnVendaCaixa.isSelected()) {
 				codigoMesa = null;
 			}
+			else {
+				if (this.principal.retornaMesaDisponivel(codigoMesa)) {
+					int resposta = JOptionPane.showConfirmDialog(null, "A mesa não está iniciada.\nDeseja inicia-la?", 
+							"Atenção!", JOptionPane.YES_OPTION);
+					
+					if (resposta == JOptionPane.YES_OPTION) {
+						this.principal.ocuparMesa(codigoMesa);
+					}
+					else if (resposta == JOptionPane.NO_OPTION) {
+						JOptionPane.showMessageDialog(null, "Cadastrado como venda em caixa.", "Informação", JOptionPane.INFORMATION_MESSAGE);
+						rdbtnVendaCaixa.setSelected(true);
+						codigoMesa = null;
+					}
+				}
+			}
 			
 			this.principal.adicionarVenda(codigoFuncionario, codigoProduto, codigoMesa, 
 					quantidadeProduto, codigoDesconto);

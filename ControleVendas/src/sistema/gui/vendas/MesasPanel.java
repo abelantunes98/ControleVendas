@@ -32,6 +32,7 @@ public class MesasPanel extends JPanel {
 	private JRadioButton rdbtnOcuparMesa;
 	private JRadioButton rdbtnLiberarMesa ;
 	private JRadioButton rdbtnJuntarMesas;
+	private JScrollPane scrollPane;
 	
 	private Principal principal;
 	private JanelaFrame frame;
@@ -110,12 +111,12 @@ public class MesasPanel extends JPanel {
 		
 		add(btnLimpar);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(1232, 243, 464, 386);
 		add(scrollPane);
 		
-		tableMesas = new JTable();
-		scrollPane.setViewportView(tableMesas);
+		// Reload tabela de disponibilidade de mesas.
+		reloadTabelaMesas();
 		
 		// Ouvindo botões.
 		
@@ -161,20 +162,20 @@ public class MesasPanel extends JPanel {
 
 	}
 	
-	private void reloadTabelaVendas() {
+	private void reloadTabelaMesas() {
 		
 		try {
-			String [] colunas = {"Vendas do dia"};
-			String [][] dados = this.principal.retornaVetorToStringVendasFaturamentoDia();
+			String [] colunas = {"Status das mesas"};
+			String [][] dados = this.principal.retornaDisponibilidadeMesas();
 			
-			tableVendasDia = new JTable(dados, colunas);
+			tableMesas = new JTable(dados, colunas);
 			
-			tableVendasDia.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
-			tableVendasDia.setEnabled(false); // Evitando edição não desejada.
-			tableVendasDia.setBackground(SystemColor.info); // Cor da linha.
-			tableVendasDia.setRowHeight(30); // Aumentando altura das linhas.
+			tableMesas.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableMesas.setEnabled(false); // Evitando edição não desejada.
+			tableMesas.setBackground(SystemColor.info); // Cor da linha.
+			tableMesas.setRowHeight(30); // Aumentando altura das linhas.
 			
-			scrollPane.setViewportView(tableVendasDia);
+			scrollPane.setViewportView(tableMesas);
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -185,6 +186,23 @@ public class MesasPanel extends JPanel {
 		
 		valCodigoMesa.setText("");
 		valCodigosMesas.setText("");
+	}
+	
+	
+	private void confirmar() {
+		
+		try {
+			//String codigosMesas = valCodigosMesas.getText();
+			
+			if (rdbtnOcuparMesa.isSelected() || rdbtnLiberarMesa.isSelected()) {
+				
+				String codigoMesa = valCodigoMesa.getText();
+				if (rdbtnOcuparMesa.isSelected()) {
+					this.principal.ocuparMesa(codigoMesa);
+					JOptionPane.showMessageDialog(null, "Mesa Ocupada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
 	}
 
 }

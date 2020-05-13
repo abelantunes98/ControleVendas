@@ -47,8 +47,8 @@ public class Mesa implements Serializable {
 		this.vendasMesa = vendasMesa;
 	}
 	
-	public boolean MesaDisponivel() {
-		return mesaDisponivel;
+	public boolean mesaDisponivel() {
+		return this.mesaDisponivel;
 	}
 
 	public void setMesaDisponivel(boolean mesaDisponivel) {
@@ -57,6 +57,13 @@ public class Mesa implements Serializable {
 
 	public void adicionaVendaListaVendas(int keyVenda) {
 		this.vendasMesa.add(keyVenda);
+	}
+	
+	public void removerVendaListaVendas(int keyVenda) {
+		if (!this.vendasMesa.contains(keyVenda)) {
+			throw new IllegalArgumentException("Venda não existente na mesa.");
+		}
+		this.vendasMesa.remove(keyVenda);
 	}
 	
 	public void zerarListaVendas() {
