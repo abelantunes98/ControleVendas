@@ -38,6 +38,13 @@ public class MesasPanel extends JPanel {
 	private JRadioButton rdbtnOcuparMesa;
 	private JRadioButton rdbtnLiberarMesa ;
 	private JRadioButton rdbtnJuntarMesas;
+	private JButton btnConfirmar;
+	private JButton btnLimpar;
+	
+	private JLabel valorTotal;
+	private JLabel valValorTotal;
+	private JButton btnPago;
+	
 	private JScrollPane scrollPane;
 	
 	private Principal principal;
@@ -88,6 +95,18 @@ public class MesasPanel extends JPanel {
 		valCodigosMesas.setColumns(10);
 		valCodigosMesas.setEnabled(false);
 		
+		this.valorTotal = new JLabel("Valor total:");
+		valorTotal.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		valorTotal.setBounds(1188, 734, 169, 55);
+		valorTotal.setVisible(false);
+		add(valorTotal);
+		
+		this.valValorTotal = new JLabel("0");
+		valValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		valValorTotal.setBounds(1410, 734, 198, 55);
+		valValorTotal.setVisible(false);
+		add(valValorTotal);
+		
 		rdbtnOcuparMesa = new JRadioButton("Ocupar mesa");
 		buttonGroupOpcao.add(rdbtnOcuparMesa);
 		rdbtnOcuparMesa.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -106,19 +125,25 @@ public class MesasPanel extends JPanel {
 		rdbtnJuntarMesas.setBounds(717, 686, 169, 41);
 		add(rdbtnJuntarMesas);
 		
-		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnConfirmar.setBounds(283, 846, 169, 55);
 		add(btnConfirmar);
 		
-		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar = new JButton("Limpar");
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnLimpar.setBounds(569, 846, 169, 55);
-		
 		add(btnLimpar);
 		
+		this.btnPago = new JButton("Pago");
+		btnPago.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnPago.setBounds(1282, 846, 169, 51);
+		btnPago.setEnabled(false);
+		btnPago.setVisible(false);
+		add(btnPago);
+		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(1232, 243, 464, 386);
+		scrollPane.setBounds(979, 243, 783, 425);
 		add(scrollPane);
 		
 		// Reload tabela de disponibilidade de mesas.
@@ -195,6 +220,77 @@ public class MesasPanel extends JPanel {
 		}
 	}
 	
+	private void carregaTabelaVendasMesa(String codigoMesa) {
+		
+		try {
+			String [] colunas = {"Código", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário"};
+			String [][] dados = this.principal.retornaVendasDaMesa(codigoMesa);
+			
+			tableMesas = new JTable(dados, colunas);
+			
+			tableMesas.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tableMesas.setEnabled(false); // Evitando edição não desejada.
+			tableMesas.getColumnModel().getColumn(1).setPreferredWidth(250);
+			tableMesas.setBackground(SystemColor.info); // Cor da linha.
+			tableMesas.setRowHeight(30); // Aumentando altura das linhas.
+			
+			scrollPane.setViewportView(tableMesas);
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void carregaInformacoesPagamento(String codigoMesa) {
+		try {
+			this.codigoMesa.setEnabled(false);
+			this.codigosMesas.setEnabled(false);
+			this.valCodigoMesa.setEnabled(false);
+			this.valCodigosMesas.setEnabled(false);
+			this.rdbtnOcuparMesa.setEnabled(false);
+			this.rdbtnLiberarMesa.setEnabled(false);
+			this.rdbtnJuntarMesas.setEnabled(false);
+			this.btnConfirmar.setEnabled(false);
+			this.btnLimpar.setEnabled(false);
+			
+			this.valorTotal.setVisible(true);
+			this.valValorTotal.setVisible(true);
+			this.btnPago.setEnabled(true);
+			this.btnPago.setVisible(true);
+			
+			this.btnPago.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					liberaMesa(codigoMesa);
+					reload();
+					JOptionPane.showMessageDialog(null, "Mesa liberada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
+			
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	private void reload() {
+		try {
+			this.frame.reloadVendasMesas();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	private void liberaMesa(String codigoMesa) {
+		try {
+			this.principal.liberarMesa(codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	private void limparCampos() {
 		
 		valCodigoMesa.setText("");
@@ -209,23 +305,41 @@ public class MesasPanel extends JPanel {
 			
 			if (rdbtnOcuparMesa.isSelected() || rdbtnLiberarMesa.isSelected()) {
 				
-				String codigoMesa = valCodigoMesa.getText();
+				String codigoMesaStr = valCodigoMesa.getText();		
+				if ( codigoMesaStr.equals("") ) {
+					throw new IllegalArgumentException("Campos passados vazios!");
+				}
+				
 				if (rdbtnOcuparMesa.isSelected()) {
-					this.principal.ocuparMesa(codigoMesa);
-					JOptionPane.showMessageDialog(null, "Mesa Ocupada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					this.principal.ocuparMesa(codigoMesaStr);
+					JOptionPane.showMessageDialog(null, "Mesa ocupada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {
+					
+					if (!this.principal.retornaMesaExiste(codigoMesaStr)) {
+						throw new IllegalArgumentException("Mesa inexistente.");
+					}				
 					int resposta = JOptionPane.showConfirmDialog(null, "Deseja calcular os gastos da mesa?", 
 							"Faturamento", JOptionPane.YES_OPTION);
 					if (resposta == JOptionPane.NO_OPTION) {
-						this.principal.liberarMesa(codigoMesa);
+						this.liberaMesa(codigoMesaStr);
+						this.reload();
+						JOptionPane.showMessageDialog(null, "Mesa liberada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					}
+					/*
+					 * Caso o usuario deseje calcular a conta da mesa,
+					 * São chamadas as funções que mudam as informações na
+					 * tela.
+					 */
+					else if (resposta == JOptionPane.YES_OPTION){
+						this.carregaTabelaVendasMesa(codigoMesaStr);
+						this.carregaInformacoesPagamento(codigoMesaStr);
 					}
 				}
 			}
 		}
 		catch (Exception e) {
-			throw e;
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		}	
 	}
-
 }

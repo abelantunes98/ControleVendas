@@ -78,6 +78,24 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.setComponentAt(0, this.principalPanel);
 	}
 	
+	public void reloadVendas() {
+		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);	
+		this.venderPanel = new VenderPanel(principal, this);
+		this.mesasPanel = new MesasPanel(principal, this);
+		
+		this.tabbedPane.setComponentAt(5, this.vendasPrincipalPaner);
+		this.tabbedPane.setComponentAt(6, this.venderPanel);
+		this.tabbedPane.setComponentAt(7, this.mesasPanel);
+	}
+	
+	public void reloadVendasMesas() {
+		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);	
+		this.mesasPanel = new MesasPanel(principal, this);
+		
+		this.tabbedPane.setComponentAt(5, this.vendasPrincipalPaner);
+		this.tabbedPane.setComponentAt(7, this.mesasPanel);
+	}
+		
 	public void reloadAllPrincipal() {
 		//Setando o container com valores atualizados.
 		this.principalPanel = new PrincipalPanel(this.principal, this);
@@ -91,14 +109,6 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.setComponentAt(2, this.adicionarProdutoPanel);
 		this.tabbedPane.setComponentAt(3, this.adicionarMesaPanel);
 		this.tabbedPane.setComponentAt(4, this.adicionarDescontoPanel);
-		
-		//Testes
-		///////////////////////
-		//////////////////////////////////////////
-		//////////////////////////////////////////////////
-		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);		
-		this.tabbedPane.setComponentAt(5, this.vendasPrincipalPaner);
-		
 	}
 	
 	public void iniciaContentPane() {

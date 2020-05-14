@@ -74,10 +74,14 @@ public class ControleMesas {
 		}
 	}
 	
+	/*
+	 * É passado o código que representa a venda no faturamento.
+	 */
 	public void adicionaVendaEmMesa(String codigoMesa, int codigoVenda) {
 		try {
 			Mesa mesa = this.base.retornaMesa(codigoMesa);
 			mesa.adicionaVendaListaVendas(codigoVenda);
+			this.base.alteraMesa(codigoMesa, mesa);
 		}
 		catch (Exception e) {
 			throw e;
@@ -141,7 +145,7 @@ public class ControleMesas {
 				else {
 					status = "Ocupada";
 				}
-				String [] linha = {"Código: " + mesa.getCodigoMesa() + "  |  " + status}; 
+				String [] linha = {"Código:  " + mesa.getCodigoMesa() + "     |     Estado atual:  " + status}; 
 				retorno[indice++] = linha;
 			}
 			

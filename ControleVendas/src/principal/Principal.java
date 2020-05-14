@@ -125,12 +125,6 @@ public class Principal {
 	public void adicionarVenda(String codigoFuncionario, String codigoProduto, String codigoMesa, int quantProdutos, String codigoDesconto) {
 
 		try {
-			if ( codigoFuncionario.equals("") || codigoProduto.equals("") || 
-					(codigoMesa != null && codigoMesa.equals("")) || 
-					(codigoDesconto != null && codigoDesconto.equals("")) ) {
-				
-				throw new IllegalArgumentException("Campos passados vazios!");
-			}
 
 			if (!this.controleFuncionarios.funcionarioExiste(codigoFuncionario)) {
 				throw new IllegalArgumentException("Funcionario inexistente.");
@@ -169,16 +163,31 @@ public class Principal {
 					valorProduto = ((valorProduto * quantProdutos) - ((valorProduto * quantProdutos) * (porcentagemDesconto / 100)));
 				}
 			}
-
+			
+			/*
+			 * Vou precisar desse valor para adicionar o id da venda na mesa.
+			 * E esse valor é gerado a partir do número de vendas do faturamento.
+			 */
+			int codigoVenda = this.controleFaturamentos.retornaNumeroDeVendas(Integer.toString(this.codigoFaturamentoAtual));
+			
 			this.controleFaturamentos.criaVenda(Integer.toString(this.codigoFaturamentoAtual), codigoFuncionario, 
 					codigoProduto, nomeProduto, codigoMesa, quantProdutos, valorProduto, codigoDesconto);
+			
+			/*
+			 * Se a venda for no caixa, não adiciona em nenhuma mesa.
+			 */
+			if (codigoMesa != null) {
+				this.controleMesas.adicionaVendaEmMesa(codigoMesa, codigoVenda);
+			}
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
 	
-	// Funções de mesas:
+	/*
+	 * Funções relacionadas as mesas.
+	 */
 	public int retornaMesasOcupadasFaturamentoAtual() {
 		try {
 			return this.controleFaturamentos.retornaNumeroMesasOcupadasFaturamento(Integer.toString(this.codigoFaturamentoAtual));
@@ -198,8 +207,21 @@ public class Principal {
 	}
 	
 	public void ocuparMesa(String codigoMesa) {
+		
 		try {
+			if ( codigoMesa.equals("") ) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
 			this.controleMesas.ocuparMesa(codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public boolean retornaMesaExiste(String codigoMesa) {
+		try {
+			return this.controleMesas.mesaExiste(codigoMesa);
 		}
 		catch (Exception e) {
 			throw e;
@@ -208,6 +230,9 @@ public class Principal {
 	
 	public void liberarMesa(String codigoMesa) {
 		try {
+			if ( codigoMesa.equals("") ) {
+				throw new IllegalArgumentException("Campos passados vazios!");
+			}
 			this.controleMesas.liberarMesa(codigoMesa);
 		}
 		catch (Exception e) {

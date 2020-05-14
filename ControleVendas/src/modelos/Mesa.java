@@ -63,7 +63,7 @@ public class Mesa implements Serializable {
 	public void setMesaDisponivel(boolean mesaDisponivel) {
 		this.mesaDisponivel = mesaDisponivel;
 	}
-
+	
 	public void adicionaVendaListaVendas(int keyVenda) {
 		this.vendasMesa.add(keyVenda);
 	}
