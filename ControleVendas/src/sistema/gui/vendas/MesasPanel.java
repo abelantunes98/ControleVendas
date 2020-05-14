@@ -214,7 +214,7 @@ public class MesasPanel extends JPanel {
 			
 			this.valorTotal.setVisible(true);
 			this.valValorTotal.setVisible(true);
-			this.valValorTotal.setText(Double.toString(this.principal.retornaTotalGastoMesa(codigoMesa)));
+			this.valValorTotal.setText(Double.toString(this.principal.retornaTotalGastoMesa(codigoMesa)) + " R$");
 			
 			this.btnPago.setEnabled(true);
 			this.btnPago.setVisible(true);

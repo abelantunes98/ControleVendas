@@ -17,6 +17,7 @@ import sistema.gui.principal.PrincipalPanel;
 // Imports de vendas
 import sistema.gui.vendas.VendasPrincipalPanel;
 import sistema.gui.vendas.VenderPanel;
+import sistema.gui.vendas.CatalogoProdutos;
 import sistema.gui.vendas.MesasPanel;
 
 import java.awt.Font;
@@ -42,6 +43,7 @@ public class JanelaFrame extends JFrame {
 	private VendasPrincipalPanel vendasPrincipalPaner;
 	private VenderPanel venderPanel;
 	private MesasPanel mesasPanel;
+	private CatalogoProdutos catalogoProdutos;
 	
 	private JTabbedPane tabbedPane;
 
@@ -62,9 +64,10 @@ public class JanelaFrame extends JFrame {
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
 		this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
 		
-		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);
-		this.venderPanel = new VenderPanel(principal, this);
-		this.mesasPanel = new MesasPanel(principal, this);
+		this.vendasPrincipalPaner = new VendasPrincipalPanel(this.principal, this);
+		this.venderPanel = new VenderPanel(this.principal, this);
+		this.mesasPanel = new MesasPanel(this.principal, this);
+		this.catalogoProdutos = new CatalogoProdutos(this.principal);
 		
 		iniciaContentPane();
 		
@@ -139,7 +142,7 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.addTab("Test", this.vendasPrincipalPaner);
 		this.tabbedPane.addTab("Test2", this.venderPanel);
 		this.tabbedPane.addTab("Test3", this.mesasPanel);
-
+		this.tabbedPane.addTab("Test4", this.catalogoProdutos);
 		
 		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}

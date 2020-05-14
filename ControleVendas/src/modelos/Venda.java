@@ -116,7 +116,7 @@ public class Venda implements Serializable{
 	@Override
 	public String toString() {
 		return "Funcionario: " + codigoFuncionario + " | Produto: " + codigoProduto + " | Quantidade: " + quantProdutos
-				+ " | Valor: " + valorVenda;
+				+ " | Valor: " + valorVenda + " R$";
 	}
 	
 	

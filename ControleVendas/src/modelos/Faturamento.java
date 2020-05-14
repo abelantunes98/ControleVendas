@@ -59,7 +59,7 @@ public class Faturamento implements Serializable{
 			saida[0] = venda.getCodigoProduto();
 			saida[1] = venda.getNomeProduto();
 			saida[2] = Integer.toString(venda.getQuantProdutos());
-			saida[3] = Double.toString(venda.getValorVenda());
+			saida[3] = Double.toString(venda.getValorVenda()) + " R$";
 			saida[4] = venda.getCodigoDesconto();
 			saida[5] = venda.getCodigoFuncionario();
 			

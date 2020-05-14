@@ -280,6 +280,19 @@ public class Principal {
 		}
 	}
 	
+	/*
+	 * Funções relacionadas a catálogos.
+	 * 
+	 */	
+	public String [][] retornaCatalogoProdutos() {
+		try {
+			return this.controleProdutos.retornaDetalhesProdutos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public int retornaNumeroFuncionarios() {
 		return controleFuncionarios.retornaNumeroFuncionarios();
 	}

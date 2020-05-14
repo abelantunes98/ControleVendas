@@ -72,6 +72,31 @@ public class ControleProdutos {
 		return base.retornaNumeroProdutos();
 	}
 	
+	/*
+	 * Retornando dados de produtos para tabelas.
+	 */
+	public String [][] retornaDetalhesProdutos() {
+		
+		try {
+			String [][] retorno = new String [this.retornaNumeroProdutos()][4];
+			int indice = 0;
+			List<Produto> produtos = this.base.retornaProdutos();
+			for (Produto produto : produtos) {
+				String [] linha = new String[4];
+				linha[0] = produto.getCodigoProduto();
+				linha[1] = produto.getNomeProduto();
+				linha[2] = produto.getDescricaoProduto();
+				linha[3] = Double.toString(produto.getPrecoProduto()) + " R$";
+				retorno[indice++] = linha;
+			}
+			
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public String [][] retornaVetorToStringProdutos() {
 		
 		try {

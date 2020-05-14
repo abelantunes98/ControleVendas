@@ -132,6 +132,7 @@ public class ControleMesas {
 			// Deixa a mesa disponível e zera suas vendas.
 			mesa.setMesaDisponivel(true);
 			mesa.zerarListaVendas();
+			mesa.setTotalGastoMesa(0);
 			this.base.alteraMesa(codigoMesa, mesa);
 		}
 		catch (Exception e) {
