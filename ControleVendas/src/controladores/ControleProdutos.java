@@ -52,6 +52,17 @@ public class ControleProdutos {
 		}
 	}
 	
+	public String retornaNomeProduto(String codigoProduto) {
+		
+		try {
+			Produto produto = this.base.retornaProduto(codigoProduto);
+			return produto.getNomeProduto();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public boolean produtoExiste(String codigoProduto) {
 		
 		return base.existeProduto(codigoProduto);

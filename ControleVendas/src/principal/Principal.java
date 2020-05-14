@@ -4,6 +4,7 @@ import controladores.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import baseDados.BaseDados;
 
@@ -148,6 +149,7 @@ public class Principal {
 			}
 
 			double valorProduto = this.controleProdutos.retornaValorProduto(codigoProduto);
+			String nomeProduto = this.controleProdutos.retornaNomeProduto(codigoProduto);
 
 			if (codigoDesconto == null) {
 				valorProduto *= quantProdutos;
@@ -168,8 +170,8 @@ public class Principal {
 				}
 			}
 
-			this.controleFaturamentos.criaVenda(Integer.toString(this.codigoFaturamentoAtual), codigoFuncionario, codigoProduto, codigoMesa, 
-					quantProdutos, valorProduto, codigoDesconto);
+			this.controleFaturamentos.criaVenda(Integer.toString(this.codigoFaturamentoAtual), codigoFuncionario, 
+					codigoProduto, nomeProduto, codigoMesa, quantProdutos, valorProduto, codigoDesconto);
 		}
 		catch (Exception e) {
 			throw e;
@@ -211,6 +213,22 @@ public class Principal {
 		catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	public String [][] retornaVendasDaMesa(String codigoMesa) {
+		
+		try {
+			List<Integer> idsVendas = this.controleMesas.retornaIdsVendasMesa(codigoMesa);
+			if (idsVendas.isEmpty()) {
+				throw new IllegalArgumentException("Não há vendas na mesa.");
+			}
+			
+			return this.controleFaturamentos.retornaDadosVendasPorListaDeIds(Integer.toString(this.codigoFaturamentoAtual), idsVendas);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+
 	}
 	
 	/*

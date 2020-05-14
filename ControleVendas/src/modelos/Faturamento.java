@@ -40,6 +40,37 @@ public class Faturamento implements Serializable{
 		this.vendas.put(key, venda);
 	}
 	
+	public void removeVenda(int key) {
+		if (!this.vendas.containsKey(key)) {
+			throw new IllegalArgumentException("Venda não cadastrada.");
+		}
+		
+		this.vendas.remove(key);
+	}
+	
+	// Vai retornar um array separado por campos, que serão usados em tabelas.
+	public String[] retornaDetalhesVenda(int key) {
+		try {
+			if (!this.vendas.containsKey(key)) {
+				throw new IllegalArgumentException("Venda não cadastrada.");
+			}
+			
+			String [] saida = new String[6];
+			Venda venda = this.vendas.get(key);
+			saida[0] = venda.getCodigoProduto();
+			saida[1] = venda.getNomeProduto();
+			saida[2] = Integer.toString(venda.getQuantProdutos());
+			saida[3] = Double.toString(venda.getValorVenda());
+			saida[4] = venda.getCodigoDesconto();
+			saida[5] = venda.getCodigoFuncionario();
+			
+			return saida;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public void adicionaMesaEmUso() {
 		this.mesasEmUso++;
 	}

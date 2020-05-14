@@ -13,6 +13,7 @@ public class Mesa implements Serializable {
 	private String codigoMesa;
 	private int lugaresMesa;
 	private boolean mesaDisponivel;
+	private double totalGastoMesa;
 	private List<Integer> vendasMesa;
 	
 	public Mesa(String codigoMesa, int lugaresMesa) {
@@ -21,6 +22,14 @@ public class Mesa implements Serializable {
 		this.lugaresMesa = lugaresMesa;
 		this.mesaDisponivel = true;
 		this.vendasMesa = new ArrayList<Integer>();
+	}
+	
+	public double getTotalGastoMesa() {
+		return totalGastoMesa;
+	}
+
+	public void setTotalGastoMesa(double totalGastoMesa) {
+		this.totalGastoMesa = totalGastoMesa;
 	}
 
 	public String getCodigoMesa() {

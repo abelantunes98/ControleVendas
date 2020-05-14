@@ -94,6 +94,18 @@ public class ControleMesas {
 		}
 	}
 	
+	public List<Integer> retornaIdsVendasMesa(String codigoMesa) {
+		
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			List<Integer> retorno = mesa.getVendasMesa();
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public void liberarMesa(String codigoMesa) {
 		try {
 			Mesa mesa = this.base.retornaMesa(codigoMesa);
@@ -101,7 +113,9 @@ public class ControleMesas {
 				throw new IllegalArgumentException("A mesa não está ocupada.");
 			}
 			
+			// Deixa a mesa disponível e zera suas vendas.
 			mesa.setMesaDisponivel(true);
+			mesa.zerarListaVendas();
 			this.base.alteraMesa(codigoMesa, mesa);
 		}
 		catch (Exception e) {

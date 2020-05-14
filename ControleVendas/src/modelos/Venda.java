@@ -13,6 +13,7 @@ public class Venda implements Serializable{
 	private String codigoProduto;
 	private String codigoMesa;
 	private String codigoDesconto;
+	private String nomeProduto;
 	
 	private int quantProdutos;
 	
@@ -21,11 +22,13 @@ public class Venda implements Serializable{
 	private Date dataVenda;
 
 	
-	public Venda(String codigoFuncionario, String codigoProduto, int quantProdutos,
+	public Venda(String codigoFuncionario, String codigoProduto, String nomeProduto, int quantProdutos,
 			double valorVenda) {
 		super();
 		this.codigoFuncionario = codigoFuncionario;
 		this.codigoProduto = codigoProduto;
+		this.nomeProduto = nomeProduto;
+		this.codigoDesconto = "";
 		this.quantProdutos = quantProdutos;
 		this.valorVenda = valorVenda;
 		this.dataVenda = new Date();
@@ -50,7 +53,15 @@ public class Venda implements Serializable{
 	public void setCodigoProduto(String codigoProduto) {
 		this.codigoProduto = codigoProduto;
 	}
+	
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
 
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
 
 	public String getCodigoMesa() {
 		return codigoMesa;

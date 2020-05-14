@@ -21,6 +21,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class MesasPanel extends JPanel {
+	
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -2996858019062843508L;
+	
 	private JTextField valCodigoMesa;
 	private JTextField valCodigosMesas;
 	private final ButtonGroup buttonGroupOpcao = new ButtonGroup();
@@ -159,6 +165,13 @@ public class MesasPanel extends JPanel {
 				limparCampos();                       
 			}
 		});
+		
+		btnConfirmar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				confirmar();                       
+			}
+		});
 
 	}
 	
@@ -201,8 +214,18 @@ public class MesasPanel extends JPanel {
 					this.principal.ocuparMesa(codigoMesa);
 					JOptionPane.showMessageDialog(null, "Mesa Ocupada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 				}
+				else {
+					int resposta = JOptionPane.showConfirmDialog(null, "Deseja calcular os gastos da mesa?", 
+							"Faturamento", JOptionPane.YES_OPTION);
+					if (resposta == JOptionPane.NO_OPTION) {
+						this.principal.liberarMesa(codigoMesa);
+					}
+				}
 			}
 		}
+		catch (Exception e) {
+			throw e;
+		}	
 	}
 
 }

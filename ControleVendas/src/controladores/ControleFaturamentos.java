@@ -70,9 +70,9 @@ public class ControleFaturamentos {
 	 * realizada pelo caixa.
 	 */
 	public void criaVenda(String codigoFaturamento, String codigoFuncionario, String codigoProduto, 
-			String codigoMesa, int quantProdutos, double valorVenda, String codigoDesconto) {
+			String nomeProduto, String codigoMesa, int quantProdutos, double valorVenda, String codigoDesconto) {
 		try {
-			Venda venda = new Venda(codigoFuncionario, codigoProduto, quantProdutos, valorVenda);
+			Venda venda = new Venda(codigoFuncionario, codigoProduto, nomeProduto, quantProdutos, valorVenda);
 			
 			if (codigoDesconto != null) {
 				venda.setCodigoDesconto(codigoDesconto);
@@ -156,6 +156,29 @@ public class ControleFaturamentos {
 			}
 		}
 		catch(Exception e){
+			throw e;
+		}
+	}
+	
+	/*
+	 * Trás os detalhes de cada venda que tenha seu id contido na lista passada.
+	 * Claro que é necessário a venda está presente no faturamento.
+	 */
+	public String [][] retornaDadosVendasPorListaDeIds(String codigoFaturamento, List<Integer> lista) {
+		
+		try {
+			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
+			String [][] saida = new String[lista.size()][6];
+			
+			int indice = 0;
+			for (int id : lista) {
+				String [] detalhe = faturamento.retornaDetalhesVenda(id);
+				saida[indice++] = detalhe;
+			}
+			
+			return saida;
+		}
+		catch (Exception e) {
 			throw e;
 		}
 	}
