@@ -295,16 +295,6 @@ public class ControleFaturamentos {
 		}
 	}
 	
-	public int retornaNumeroMesasOcupadasFaturamento(String codigoFaturamento) {
-		try {
-			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
-			return faturamento.getMesasEmUso();
-		}
-		catch (Exception e) {
-			throw e;
-		}
-	}
-	
 	public int retornaNumeroFaturamentos() {
 		try {
 			return this.base.retornaNumeroFaturamentos();

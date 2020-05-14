@@ -214,6 +214,8 @@ public class MesasPanel extends JPanel {
 			
 			this.valorTotal.setVisible(true);
 			this.valValorTotal.setVisible(true);
+			this.valValorTotal.setText(Double.toString(this.principal.retornaTotalGastoMesa(codigoMesa)));
+			
 			this.btnPago.setEnabled(true);
 			this.btnPago.setVisible(true);
 			
@@ -276,6 +278,7 @@ public class MesasPanel extends JPanel {
 				
 				if (rdbtnOcuparMesa.isSelected()) {
 					this.principal.ocuparMesa(codigoMesaStr);
+					this.reload();
 					JOptionPane.showMessageDialog(null, "Mesa ocupada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else {

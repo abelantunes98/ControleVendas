@@ -20,6 +20,7 @@ public class Mesa implements Serializable {
 		super();
 		this.codigoMesa = codigoMesa;
 		this.lugaresMesa = lugaresMesa;
+		this.totalGastoMesa = 0;
 		this.mesaDisponivel = true;
 		this.vendasMesa = new ArrayList<Integer>();
 	}
@@ -30,6 +31,10 @@ public class Mesa implements Serializable {
 
 	public void setTotalGastoMesa(double totalGastoMesa) {
 		this.totalGastoMesa = totalGastoMesa;
+	}
+	
+	public void addGastoMesa(double valor) {
+		this.totalGastoMesa += valor;
 	}
 
 	public String getCodigoMesa() {

@@ -20,7 +20,6 @@ public class Faturamento implements Serializable{
 	private String codigoFaturamento;
 	private String dataFaturamento;
 	private double valorApurado;
-	private int mesasEmUso;
 	
 	private HashMap<Integer, Venda> vendas;
 	
@@ -69,27 +68,6 @@ public class Faturamento implements Serializable{
 		catch (Exception e) {
 			throw e;
 		}
-	}
-	
-	public void adicionaMesaEmUso() {
-		this.mesasEmUso++;
-	}
-	
-	public void retiraMesaEmUso() {
-		if (this.mesasEmUso > 0) {
-			this.mesasEmUso--;
-		}
-		else {
-			throw new IllegalArgumentException("Não há mesas em uso.");
-		}
-	}
-	
-	public int getMesasEmUso() {
-		return mesasEmUso;
-	}
-
-	public void setMesasEmUso(int mesasEmUso) {
-		this.mesasEmUso = mesasEmUso;
 	}
 
 	public String getCodigoFaturamento() {

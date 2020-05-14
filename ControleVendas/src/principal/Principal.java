@@ -177,7 +177,7 @@ public class Principal {
 			 * Se a venda for no caixa, não adiciona em nenhuma mesa.
 			 */
 			if (codigoMesa != null) {
-				this.controleMesas.adicionaVendaEmMesa(codigoMesa, codigoVenda);
+				this.controleMesas.adicionaVendaEmMesa(codigoMesa, codigoVenda, valorProduto);
 			}
 		}
 		catch (Exception e) {
@@ -188,9 +188,9 @@ public class Principal {
 	/*
 	 * Funções relacionadas as mesas.
 	 */
-	public int retornaMesasOcupadasFaturamentoAtual() {
+	public int retornaNumMesasDisponiveis() {
 		try {
-			return this.controleFaturamentos.retornaNumeroMesasOcupadasFaturamento(Integer.toString(this.codigoFaturamentoAtual));
+			return this.controleMesas.retornaNumMesasDisponiveis();
 		}
 		catch (Exception e) {
 			throw e;
@@ -200,6 +200,15 @@ public class Principal {
 	public boolean retornaMesaDisponivel(String codigoMesa) {
 		try {
 			return this.controleMesas.retornaMesaDisponivel(codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public double retornaTotalGastoMesa(String codigoMesa) {
+		try {
+			return this.controleMesas.retornaTotalGastoMesa(codigoMesa);
 		}
 		catch (Exception e) {
 			throw e;

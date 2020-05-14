@@ -56,7 +56,7 @@ public class VenderPanel extends JPanel {
 		setLayout(null);
 
 		JLabel titulo = new JLabel("Cadastrar venda");
-		titulo.setBounds(928, 63, 247, 96);
+		titulo.setBounds(845, 53, 247, 96);
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		add(titulo);
 

@@ -16,6 +16,11 @@ import principal.Principal;
 import sistema.gui.JanelaFrame;
 
 public class AdicionarFuncionarioPanel extends JPanel {
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -6852421328935019523L;
+	
 	private JTextField valNomeFuncionario;
 	private JTextField valCpfFuncionario;
 	private JTextField valEmailFuncionario;

@@ -73,14 +73,26 @@ public class ControleMesas {
 			throw e;
 		}
 	}
+
+	
+	public double retornaTotalGastoMesa(String codigoMesa) {
+		try {
+			Mesa mesa = this.base.retornaMesa(codigoMesa);
+			return mesa.getTotalGastoMesa();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 	
 	/*
 	 * É passado o código que representa a venda no faturamento.
 	 */
-	public void adicionaVendaEmMesa(String codigoMesa, int codigoVenda) {
+	public void adicionaVendaEmMesa(String codigoMesa, int codigoVenda, double valorVenda) {
 		try {
 			Mesa mesa = this.base.retornaMesa(codigoMesa);
 			mesa.adicionaVendaListaVendas(codigoVenda);
+			mesa.addGastoMesa(valorVenda);
 			this.base.alteraMesa(codigoMesa, mesa);
 		}
 		catch (Exception e) {
@@ -121,6 +133,26 @@ public class ControleMesas {
 			mesa.setMesaDisponivel(true);
 			mesa.zerarListaVendas();
 			this.base.alteraMesa(codigoMesa, mesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Esse método foi adotado para ver as mesas ocupadas mesmo
+	 * em um faturamento de outro dia.
+	 */
+	public int retornaNumMesasDisponiveis() {
+		try {
+			List<Mesa> mesas = this.base.retornaMesas();
+			int disponiveis = 0;
+			for (Mesa mesa : mesas) {
+				if (mesa.mesaDisponivel()) {
+					disponiveis++;
+				}
+			}
+			return disponiveis;
 		}
 		catch (Exception e) {
 			throw e;
