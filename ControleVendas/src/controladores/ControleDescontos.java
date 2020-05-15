@@ -1,5 +1,6 @@
 package controladores;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import baseDados.BaseDados;
@@ -108,6 +109,46 @@ public class ControleDescontos {
 	
 	public int retornaNumeroDescontos() {
 		return base.retornaNumeroDescontos();
+	}
+	
+	/*
+	 * Retornando dados de Descontos para tabelas.
+	 */
+	public String [][] retornaDetalhesDescontos() {
+		
+		try {
+			// Formatando saída Double.
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			
+			String [][] retorno = new String [this.retornaNumeroDescontos()][5];
+			int indice = 0;
+			List<Desconto> descontos = this.base.retornaDescontos();
+			for (Desconto desconto : descontos) {
+				String [] linha = new String[5];
+				linha[0] = desconto.getCodigoDesconto();
+				linha[1] = desconto.getNomeDesconto();
+				linha[2] = desconto.getDescricaoDesconto();
+				linha[3] = desconto.getTipoDesconto();
+				
+				if (linha[3].equals("Valor")) {
+					linha[4] = d.format(((DescontoValor) desconto).getValorDesconto());
+				}
+				else if (linha[3].equals("Porcentagem")) {
+					linha[4] = Double.toString(((DescontoPorcentagem) desconto).getPorcentagemDesconto()) + "%";
+				}
+				else {
+					// Não há novos tipos ainda.
+					linha[4] = "";
+				}
+				retorno[indice++] = linha;
+			}
+			
+			return retorno;
+		}
+		catch (Exception e) {
+			throw e;
+		}
 	}
 	
 	public String [][] retornaVetorToStringDescontos() {

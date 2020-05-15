@@ -293,6 +293,18 @@ public class Principal {
 		}
 	}
 	
+	public String [][] retornaCatalogoDescontos() {
+		try {
+			return this.controleDescontos.retornaDetalhesDescontos();
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retornos de números de entidades armazenadas.
+	 */
 	public int retornaNumeroFuncionarios() {
 		return controleFuncionarios.retornaNumeroFuncionarios();
 	}

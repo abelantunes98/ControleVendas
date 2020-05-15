@@ -38,9 +38,9 @@ public class CatalogoProdutos extends JPanel {
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		add(titulo);
 
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(129, 216, 1649, 710);
-		add(scrollPane);
+		this.scrollPane = new JScrollPane();
+		this.scrollPane.setBounds(129, 216, 1649, 710);
+		add(this.scrollPane);
 		
 		// Carregando catálogo de produtos.
 		carregaTabelaCatalogoProdutos();
@@ -53,18 +53,18 @@ public class CatalogoProdutos extends JPanel {
 			String [] colunas = {"Código", "Nome", "Descriçao", "Valor"};
 			String [][] dados = this.principal.retornaCatalogoProdutos();
 
-			tableCatalogoProdutos = new JTable(dados, colunas);
+			this.tableCatalogoProdutos = new JTable(dados, colunas);
 
-			tableCatalogoProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
-			tableCatalogoProdutos.setEnabled(false); // Evitando edição não desejada.
-			tableCatalogoProdutos.getColumnModel().getColumn(0).setPreferredWidth(10);
-			tableCatalogoProdutos.getColumnModel().getColumn(1).setPreferredWidth(300);
-			tableCatalogoProdutos.getColumnModel().getColumn(2).setPreferredWidth(900);
-			tableCatalogoProdutos.getColumnModel().getColumn(3).setPreferredWidth(10);
-			tableCatalogoProdutos.setBackground(SystemColor.info); // Cor da linha.
-			tableCatalogoProdutos.setRowHeight(30); // Aumentando altura das linhas.
+			this.tableCatalogoProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			this.tableCatalogoProdutos.setEnabled(false); // Evitando edição não desejada.
+			this.tableCatalogoProdutos.getColumnModel().getColumn(0).setPreferredWidth(10);
+			this.tableCatalogoProdutos.getColumnModel().getColumn(1).setPreferredWidth(300);
+			this.tableCatalogoProdutos.getColumnModel().getColumn(2).setPreferredWidth(900);
+			this.tableCatalogoProdutos.getColumnModel().getColumn(3).setPreferredWidth(10);
+			this.tableCatalogoProdutos.setBackground(SystemColor.info); // Cor da linha.
+			this.tableCatalogoProdutos.setRowHeight(30); // Aumentando altura das linhas.
 
-			scrollPane.setViewportView(tableCatalogoProdutos);
+			this.scrollPane.setViewportView(this.tableCatalogoProdutos);
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
