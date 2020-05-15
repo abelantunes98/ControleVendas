@@ -1,6 +1,7 @@
 package modelos;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class Produto implements Serializable {
 	
@@ -13,6 +14,8 @@ public class Produto implements Serializable {
 	private double precoProduto;
 	private String descricaoProduto;
 	
+	private String formato = "R$ #,##0.00";
+	private DecimalFormat d = new DecimalFormat(formato);
 	
 	public Produto(String codigoProduto, String nomeProduto, double precoProduto, String descricaoProduto) {
 		super();
@@ -66,7 +69,7 @@ public class Produto implements Serializable {
 	@Override
 	public String toString() {
 		return "Código: " + codigoProduto + " | Nome: " + nomeProduto + " | Preço: "
-				+ precoProduto + " R$";
+				+ d.format(precoProduto);
 	}
 	
 	

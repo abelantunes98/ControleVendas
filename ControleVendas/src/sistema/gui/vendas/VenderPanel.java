@@ -140,7 +140,7 @@ public class VenderPanel extends JPanel {
 		rdbtnDescontoSim = new JRadioButton("Sim");
 		buttonGroupDesconto.add(rdbtnDescontoSim);
 		rdbtnDescontoSim.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		rdbtnDescontoSim.setBounds(833, 675, 85, 42);
+		rdbtnDescontoSim.setBounds(839, 675, 85, 42);
 		add(rdbtnDescontoSim);
 
 		rdbtnDescontoNao = new JRadioButton("N\u00E3o");
@@ -276,6 +276,19 @@ public class VenderPanel extends JPanel {
 					(codigoDesconto != null && codigoDesconto.equals("")) ) {
 
 				throw new IllegalArgumentException("Campos passados vazios!");
+			}
+			
+			// Vendo se um desconto não custa mais que o produto.
+			// É enviado também a quantidade de produtos, necessário para os cálculos.
+			if (codigoDesconto != null && this.principal.retornaDescontoMaiorQueValorProduto
+					(codigoProduto, quantidadeProduto, codigoDesconto)) {
+				int resposta = JOptionPane.showConfirmDialog(null, "O desconto é maior que o valor do produto.\nDeseja inserir mesmo assim?", 
+						"Atenção!", JOptionPane.YES_OPTION);
+
+				if (resposta == JOptionPane.NO_OPTION) {
+					return;
+				}
+
 			}
 			
 			if (rdbtnVendaMesa.isSelected()){

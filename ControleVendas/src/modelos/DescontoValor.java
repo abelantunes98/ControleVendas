@@ -3,6 +3,7 @@ package modelos;
 import modelos.Desconto;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class DescontoValor extends Desconto implements Serializable{
 	
@@ -11,6 +12,9 @@ public class DescontoValor extends Desconto implements Serializable{
 	 */
 	private static final long serialVersionUID = 7814155484356631225L;
 	private double valorDesconto;
+	
+	private String formato = "R$ #,##0.00";
+	private DecimalFormat d = new DecimalFormat(formato);
 	
 	public DescontoValor(String codigoDesconto, String nomeDesconto, String descricaoDesconto, double valorDesconto) {
 		super(codigoDesconto, nomeDesconto, descricaoDesconto, "Valor");
@@ -27,7 +31,7 @@ public class DescontoValor extends Desconto implements Serializable{
 
 	@Override
 	public String toString() {
-		return super.toString() + "  " + valorDesconto + " R$";
+		return super.toString() + "  " + d.format(valorDesconto);
 	}
 	
 	

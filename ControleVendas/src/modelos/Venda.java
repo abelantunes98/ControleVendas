@@ -2,6 +2,7 @@ package modelos;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class Venda implements Serializable{
 	
@@ -20,6 +21,9 @@ public class Venda implements Serializable{
 	private double valorVenda;
 	
 	private Date dataVenda;
+	
+	private String formato = "R$ #,##0.00";
+	private DecimalFormat d = new DecimalFormat(formato);
 
 	
 	public Venda(String codigoFuncionario, String codigoProduto, String nomeProduto, int quantProdutos,
@@ -116,7 +120,7 @@ public class Venda implements Serializable{
 	@Override
 	public String toString() {
 		return "Funcionario: " + codigoFuncionario + " | Produto: " + codigoProduto + " | Quantidade: " + quantProdutos
-				+ " | Valor: " + valorVenda + " R$";
+				+ " | Valor: " + d.format(valorVenda);
 	}
 	
 	

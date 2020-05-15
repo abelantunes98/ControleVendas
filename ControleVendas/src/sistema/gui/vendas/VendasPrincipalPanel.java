@@ -7,6 +7,7 @@ import sistema.gui.JanelaFrame;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.text.DecimalFormat;
 
 public class VendasPrincipalPanel extends JPanel {
 	
@@ -22,6 +23,9 @@ public class VendasPrincipalPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public VendasPrincipalPanel(Principal principal, JanelaFrame frame) {
+		
+		String formato = "R$ #,##0.00";
+		DecimalFormat d = new DecimalFormat(formato);
 		
 		this.principal = principal;
 		this.frame = frame;
@@ -51,9 +55,9 @@ public class VendasPrincipalPanel extends JPanel {
 		faturadoDia.setBounds(223, 501, 317, 63);
 		add(faturadoDia);
 		
-		JLabel valFaturadoDia = new JLabel(Double.toString(this.principal.retornaValorApuradoFaturamentoAtual()) + " R$");
+		JLabel valFaturadoDia = new JLabel(d.format(this.principal.retornaValorApuradoFaturamentoAtual()));
 		valFaturadoDia.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		valFaturadoDia.setBounds(570, 515, 166, 49);
+		valFaturadoDia.setBounds(570, 515, 308, 49);
 		add(valFaturadoDia);
 		
 		JLabel mesasDisponiveis = new JLabel("Mesas dispon\u00EDveis:");

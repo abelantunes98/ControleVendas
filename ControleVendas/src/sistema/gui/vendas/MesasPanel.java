@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JTextField;
 
@@ -40,6 +41,7 @@ public class MesasPanel extends JPanel {
 	private JLabel valorTotal;
 	private JLabel valValorTotal;
 	private JButton btnPago;
+	private JButton btnVoltar;
 	
 	private JScrollPane scrollPane;
 	
@@ -114,10 +116,17 @@ public class MesasPanel extends JPanel {
 		
 		this.btnPago = new JButton("Pago");
 		btnPago.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnPago.setBounds(1282, 846, 169, 51);
+		btnPago.setBounds(1469, 846, 169, 51);
 		btnPago.setEnabled(false);
 		btnPago.setVisible(false);
 		add(btnPago);
+		
+		this.btnVoltar = new JButton("Voltar");
+		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnVoltar.setBounds(1188, 846, 169, 51);
+		btnVoltar.setEnabled(false);
+		btnVoltar.setVisible(false);
+		add(btnVoltar);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(979, 243, 783, 425);
@@ -204,6 +213,10 @@ public class MesasPanel extends JPanel {
 	
 	private void carregaInformacoesPagamento(String codigoMesa) {
 		try {
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			
 			this.codigoMesa.setEnabled(false);
 			this.opcaoDesejada.setEnabled(false);
 			this.valCodigoMesa.setEnabled(false);
@@ -214,10 +227,12 @@ public class MesasPanel extends JPanel {
 			
 			this.valorTotal.setVisible(true);
 			this.valValorTotal.setVisible(true);
-			this.valValorTotal.setText(Double.toString(this.principal.retornaTotalGastoMesa(codigoMesa)) + " R$");
+			this.valValorTotal.setText(d.format(this.principal.retornaTotalGastoMesa(codigoMesa)));
 			
 			this.btnPago.setEnabled(true);
 			this.btnPago.setVisible(true);
+			this.btnVoltar.setEnabled(true);
+			this.btnVoltar.setVisible(true);
 			
 			this.btnPago.addActionListener(new ActionListener() {
 				@Override
@@ -226,6 +241,19 @@ public class MesasPanel extends JPanel {
 						liberaMesa(codigoMesa);
 						reload();
 						JOptionPane.showMessageDialog(null, "Mesa liberada.", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					}
+					catch (Exception e) {
+						JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				}
+			});
+			
+			this.btnVoltar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						reload();
 					}
 					catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);

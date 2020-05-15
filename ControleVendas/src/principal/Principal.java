@@ -387,7 +387,33 @@ public class Principal {
 	/*
 	 * Funções relacionadas a vendas:
 	 */
-
+	
+	/*
+	 * Verificando se o valor de um desconto do tipo valor é maior que
+	 * o valor do produto.
+	 */
+	public boolean retornaDescontoMaiorQueValorProduto(String codigoProduto, int quantidadeProduto, 
+			String codigoDesconto) {
+		try {
+			String tipoDesconto = this.controleDescontos.retornaTipoDesconto(codigoDesconto);
+			if (!tipoDesconto.equals("Valor")) {
+				return false;
+			}
+			
+			Double valorDesconto = this.controleDescontos.retornaValorDesconto(codigoDesconto);
+			Double valorProduto = this.controleProdutos.retornaValorProduto(codigoProduto);
+			
+			if (valorDesconto <= (valorProduto*quantidadeProduto)) {
+				return false;
+			}
+			
+			return true;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	public int retornaNumeroDeVendasFaturamentoAtual() {
 		try {
 			int retorno = this.controleFaturamentos.retornaNumeroDeVendas(

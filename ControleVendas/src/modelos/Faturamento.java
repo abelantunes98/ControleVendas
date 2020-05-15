@@ -1,5 +1,6 @@
 package modelos;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,12 +55,15 @@ public class Faturamento implements Serializable{
 				throw new IllegalArgumentException("Venda não cadastrada.");
 			}
 			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			
 			String [] saida = new String[6];
 			Venda venda = this.vendas.get(key);
 			saida[0] = venda.getCodigoProduto();
 			saida[1] = venda.getNomeProduto();
 			saida[2] = Integer.toString(venda.getQuantProdutos());
-			saida[3] = Double.toString(venda.getValorVenda()) + " R$";
+			saida[3] = (d.format(venda.getValorVenda()));
 			saida[4] = venda.getCodigoDesconto();
 			saida[5] = venda.getCodigoFuncionario();
 			

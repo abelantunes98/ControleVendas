@@ -2,6 +2,7 @@ package controladores;
 
 import modelos.Produto;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import baseDados.BaseDados;
@@ -78,6 +79,10 @@ public class ControleProdutos {
 	public String [][] retornaDetalhesProdutos() {
 		
 		try {
+			// Formatando saída Double.
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			
 			String [][] retorno = new String [this.retornaNumeroProdutos()][4];
 			int indice = 0;
 			List<Produto> produtos = this.base.retornaProdutos();
@@ -86,7 +91,7 @@ public class ControleProdutos {
 				linha[0] = produto.getCodigoProduto();
 				linha[1] = produto.getNomeProduto();
 				linha[2] = produto.getDescricaoProduto();
-				linha[3] = Double.toString(produto.getPrecoProduto()) + " R$";
+				linha[3] = d.format(produto.getPrecoProduto());
 				retorno[indice++] = linha;
 			}
 			
