@@ -72,7 +72,7 @@ public class PrincipalPanel extends JPanel {
 		valNumeroDescontos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JButton btnLimparBase = new JButton("Limpar base");
-		btnLimparBase.setBounds(1307, 810, 210, 49);
+		btnLimparBase.setBounds(1306, 810, 210, 49);
 		btnLimparBase.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		setLayout(null);

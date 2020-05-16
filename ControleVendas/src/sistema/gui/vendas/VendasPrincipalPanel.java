@@ -36,7 +36,7 @@ public class VendasPrincipalPanel extends JPanel {
 		this.frame = frame;
 		
 		// Iniciando faturamento.
-		this.principal.iniciarFaturamento();
+		this.abrirFaturamento();
 		
 		setLayout(null);
 		
@@ -106,6 +106,34 @@ public class VendasPrincipalPanel extends JPanel {
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	/*
+	 * Se já tiver sido criado um faturamento no mesmo dia,
+	 * o sistema continua nele. Caso não tenha sido,
+	 * é exibida uma perguta para saber se deve continuar no faturamento
+	 * anterior ou criar um novo.
+	 */
+	private void abrirFaturamento() {	
+		try {	
+			boolean necessidadePergunta = this.principal.retornaNecessidadePerguntaCriarFaturamento();
+			
+			if (necessidadePergunta) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Deseja iniciar um novo faturamento?", 
+						"Atenção!", JOptionPane.YES_OPTION);
+				
+				if (resposta == JOptionPane.YES_OPTION) {
+					this.principal.iniciarFaturamento();
+				}
+			}
+			else {
+				this.principal.iniciarFaturamento();
+			}
+			
+		}
+		catch (Exception e) {
+			throw e;
 		}
 	}
 }

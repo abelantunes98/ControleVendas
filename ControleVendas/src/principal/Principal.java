@@ -69,6 +69,34 @@ public class Principal {
 		}
 
 	}
+	
+	public boolean retornaNecessidadePerguntaCriarFaturamento() {
+		try {
+			this.codigoFaturamentoAtual = this.controleFaturamentos.retornaNumeroFaturamentos();
+			if (this.codigoFaturamentoAtual == 0) {
+				return false;
+			}
+			else {
+				Date dataDia = new Date();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+				formato.setLenient(false);
+
+				String dataDiaFormatada = formato.format(dataDia);
+				String dataFaturamentoAnterior = this.controleFaturamentos
+						.retornaDataFaturamento(Integer.toString(this.codigoFaturamentoAtual - 1));
+
+				if (!dataDiaFormatada.equals(dataFaturamentoAnterior)) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 
 	public void adicionarFuncionario(String nome, String cpf, String telefone, String email, String codigo) {
 		try {

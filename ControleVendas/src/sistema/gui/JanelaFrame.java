@@ -95,17 +95,17 @@ public class JanelaFrame extends JFrame {
 		this.venderPanel = new VenderPanel(principal, this);
 		this.mesasPanel = new MesasPanel(principal, this);
 
-		this.tabbedPane.setComponentAt(5, this.vendasPrincipalPaner);
-		this.tabbedPane.setComponentAt(6, this.venderPanel);
-		this.tabbedPane.setComponentAt(7, this.mesasPanel);
+		this.tabbedPane.setComponentAt(0, this.vendasPrincipalPaner);
+		this.tabbedPane.setComponentAt(1, this.venderPanel);
+		this.tabbedPane.setComponentAt(2, this.mesasPanel);
 	}
 
 	public void reloadVendasMesas() {
 		this.vendasPrincipalPaner = new VendasPrincipalPanel(principal, this);	
 		this.mesasPanel = new MesasPanel(principal, this);
 
-		this.tabbedPane.setComponentAt(5, this.vendasPrincipalPaner);
-		this.tabbedPane.setComponentAt(7, this.mesasPanel);
+		this.tabbedPane.setComponentAt(0, this.vendasPrincipalPaner);
+		this.tabbedPane.setComponentAt(2, this.mesasPanel);
 	}
 
 	/*
