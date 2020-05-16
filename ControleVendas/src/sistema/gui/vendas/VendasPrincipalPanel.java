@@ -6,8 +6,13 @@ import principal.Principal;
 import sistema.gui.JanelaFrame;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import javax.swing.JButton;
 
 public class VendasPrincipalPanel extends JPanel {
 	
@@ -79,6 +84,28 @@ public class VendasPrincipalPanel extends JPanel {
 		valMesasOcupadas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valMesasOcupadas.setBounds(1488, 508, 127, 49);
 		add(valMesasOcupadas);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVoltar.setBounds(223, 822, 149, 49);
+		add(btnVoltar);
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				carregarPainelPrincipal();                       
+			}
+		});
 
+	}
+	
+	private void carregarPainelPrincipal() {
+		try {
+			this.frame.setTitulosPrincipal();
+			this.frame.reloadAllPrincipal();
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

@@ -32,64 +32,78 @@ public class PrincipalPanel extends JPanel {
 		
 		this.frame = frame;
 		this.principal = principal;
-		setLayout(null);
 		
-		JLabel titulo = new JLabel("Controle de Vendas");
+		JLabel titulo = new JLabel("Central CDV-AAN");
+		titulo.setBounds(655, 16, 612, 222);
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		titulo.setBounds(655, 16, 612, 222);
-		add(titulo);
 		
 		JLabel numeroFuncionarios = new JLabel("Funcionarios cadastrados:");
+		numeroFuncionarios.setBounds(301, 381, 432, 58);
 		numeroFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		numeroFuncionarios.setHorizontalAlignment(SwingConstants.LEFT);
-		numeroFuncionarios.setBounds(301, 381, 432, 58);
-		add(numeroFuncionarios);
 		
 		JLabel valNumeroFuncionarios = new JLabel(Integer.toString(principal.retornaNumeroFuncionarios()));
-		valNumeroFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valNumeroFuncionarios.setBounds(629, 390, 128, 40);
-		add(valNumeroFuncionarios);
+		valNumeroFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JLabel numeroProdutos = new JLabel("Produtos cadastrados:");
-		numeroProdutos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		numeroProdutos.setBounds(301, 460, 406, 52);
-		add(numeroProdutos);
+		numeroProdutos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JLabel valNumeroProdutos = new JLabel(Integer.toString(principal.retornaNumeroProdutos()));
-		valNumeroProdutos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valNumeroProdutos.setBounds(629, 466, 91, 40);
-		add(valNumeroProdutos);
+		valNumeroProdutos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JLabel numeroMesas = new JLabel("Mesas cadastradas:");
-		numeroMesas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		numeroMesas.setBounds(1188, 386, 250, 49);
-		add(numeroMesas);
+		numeroMesas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JLabel numeroDescontos = new JLabel("Descontos cadastrados:");
-		numeroDescontos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		numeroDescontos.setBounds(1188, 463, 277, 46);
-		add(numeroDescontos);
+		numeroDescontos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JLabel valNumeroMesas = new JLabel(Integer.toString(principal.retornaNumeroMesas()));
-		valNumeroMesas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valNumeroMesas.setBounds(1480, 390, 109, 49);
-		add(valNumeroMesas);
+		valNumeroMesas.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JLabel valNumeroDescontos = new JLabel(Integer.toString(principal.retornaNumeroDescontos()));
-		valNumeroDescontos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		valNumeroDescontos.setBounds(1480, 466, 109, 46);
-		add(valNumeroDescontos);
+		valNumeroDescontos.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
 		JButton btnLimparBase = new JButton("Limpar base");
+		btnLimparBase.setBounds(1307, 810, 210, 49);
 		btnLimparBase.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnLimparBase.setBounds(1379, 810, 210, 49);
+		
+		setLayout(null);
+		
+		add(titulo);
+		add(numeroFuncionarios);
+		add(valNumeroFuncionarios);
+		add(numeroProdutos);
+		add(valNumeroProdutos);
+		add(numeroMesas);
+		add(numeroDescontos);
+		add(valNumeroMesas);
+		add(valNumeroDescontos);
 		add(btnLimparBase);
+		
+		JButton btnCentralDeVendas = new JButton("Central de vendas");
+		btnCentralDeVendas.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCentralDeVendas.setBounds(301, 810, 210, 49);
+		add(btnCentralDeVendas);
 		
 		btnLimparBase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				limparBase();                       
+			}
+		});
+		
+		btnCentralDeVendas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				iniciaCentralDeVendas();                       
 			}
 		});
 	}
@@ -105,6 +119,15 @@ public class PrincipalPanel extends JPanel {
 				this.principal.limparBase();
 				this.frame.reloadAllPrincipal();
 			}
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void iniciaCentralDeVendas() {
+		try {
+			this.frame.criaAbasVendas();
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
