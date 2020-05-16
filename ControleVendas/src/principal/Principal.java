@@ -41,40 +41,49 @@ public class Principal {
 	 */
 	public void iniciarFaturamento() {
 
-		try {
-			this.codigoFaturamentoAtual = this.controleFaturamentos.retornaNumeroFaturamentos();
-			if (this.codigoFaturamentoAtual == 0) {
+		try {	//Função que verifica a necessidade.
+			if (this.retornaNecissidadeCriarNovoFaturamento()) {
 				this.controleFaturamentos.adicionarFaturamento(Integer.toString(codigoFaturamentoAtual));
 			}
 			else {
-				Date dataDia = new Date();
-				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-				formato.setLenient(false);
-
-				String dataDiaFormatada = formato.format(dataDia);
-				String dataFaturamentoAnterior = this.controleFaturamentos
-						.retornaDataFaturamento(Integer.toString(this.codigoFaturamentoAtual - 1));
-
-				if (dataDiaFormatada.equals(dataFaturamentoAnterior)) {
-					this.codigoFaturamentoAtual -= 1;
-				}
-
-				else {
-					this.controleFaturamentos.adicionarFaturamento(Integer.toString(codigoFaturamentoAtual));
-				}
+				this.codigoFaturamentoAtual -= 1;
 			}
 		}
+
 		catch (Exception e) {
 			throw e;
 		}
 
 	}
-	
+	/*
+	 * Retorna a necessidade de perguntar ao usuário antes de criar
+	 * um novo faturamento.
+	 */
 	public boolean retornaNecessidadePerguntaCriarFaturamento() {
 		try {
 			this.codigoFaturamentoAtual = this.controleFaturamentos.retornaNumeroFaturamentos();
 			if (this.codigoFaturamentoAtual == 0) {
 				return false;
+			}
+			else {
+				return this.retornaNecissidadeCriarNovoFaturamento();
+			}
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+
+	/*
+	 * Verifica se a base está vazia ou se já foi gerado um faturamento
+	 * no dia atual. Com isso, retorna a necessidade de iniciar
+	 * um novo faturamento.
+	 */
+	private boolean retornaNecissidadeCriarNovoFaturamento() {
+		try {
+			this.codigoFaturamentoAtual = this.controleFaturamentos.retornaNumeroFaturamentos();
+			if (this.codigoFaturamentoAtual == 0) {
+				return true;
 			}
 			else {
 				Date dataDia = new Date();
@@ -191,16 +200,16 @@ public class Principal {
 					valorProduto = ((valorProduto * quantProdutos) - ((valorProduto * quantProdutos) * (porcentagemDesconto / 100)));
 				}
 			}
-			
+
 			/*
 			 * Vou precisar desse valor para adicionar o id da venda na mesa.
 			 * E esse valor é gerado a partir do número de vendas do faturamento.
 			 */
 			int codigoVenda = this.controleFaturamentos.retornaNumeroDeVendas(Integer.toString(this.codigoFaturamentoAtual));
-			
+
 			this.controleFaturamentos.criaVenda(Integer.toString(this.codigoFaturamentoAtual), codigoFuncionario, 
 					codigoProduto, nomeProduto, codigoMesa, quantProdutos, valorProduto, codigoDesconto);
-			
+
 			/*
 			 * Se a venda for no caixa, não adiciona em nenhuma mesa.
 			 */
@@ -212,7 +221,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Funções relacionadas as mesas.
 	 */
@@ -224,7 +233,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public boolean retornaMesaDisponivel(String codigoMesa) {
 		try {
 			return this.controleMesas.retornaMesaDisponivel(codigoMesa);
@@ -233,7 +242,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public double retornaTotalGastoMesa(String codigoMesa) {
 		try {
 			return this.controleMesas.retornaTotalGastoMesa(codigoMesa);
@@ -242,9 +251,9 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public void ocuparMesa(String codigoMesa) {
-		
+
 		try {
 			if ( codigoMesa.equals("") ) {
 				throw new IllegalArgumentException("Campos passados vazios!");
@@ -255,7 +264,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public boolean retornaMesaExiste(String codigoMesa) {
 		try {
 			return this.controleMesas.mesaExiste(codigoMesa);
@@ -264,7 +273,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public void liberarMesa(String codigoMesa) {
 		try {
 			if ( codigoMesa.equals("") ) {
@@ -276,15 +285,15 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public String [][] retornaVendasDaMesa(String codigoMesa) {
-		
+
 		try {
 			List<Integer> idsVendas = this.controleMesas.retornaIdsVendasMesa(codigoMesa);
 			if (idsVendas.isEmpty()) {
 				throw new IllegalArgumentException("Não há vendas na mesa.");
 			}
-			
+
 			return this.controleFaturamentos.retornaDadosVendasPorListaDeIds(Integer.toString(this.codigoFaturamentoAtual), idsVendas);
 		}
 		catch (Exception e) {
@@ -292,7 +301,7 @@ public class Principal {
 		}
 
 	}
-	
+
 	/*
 	 * Olha a disponibilidade da mesa e gera uma String de saída para cada
 	 * mesa.
@@ -307,7 +316,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Funções relacionadas a catálogos.
 	 * 
@@ -320,7 +329,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	public String [][] retornaCatalogoDescontos() {
 		try {
 			return this.controleDescontos.retornaDetalhesDescontos();
@@ -329,7 +338,7 @@ public class Principal {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Retornos de números de entidades armazenadas.
 	 */
@@ -356,7 +365,7 @@ public class Principal {
 	public void setCodigoFaturamentoAtual(int codigoFaturamentoAtual) {
 		this.codigoFaturamentoAtual = codigoFaturamentoAtual;
 	}
-	
+
 	public String [][] retornaVetorToStringMesas() {
 
 		try {
@@ -427,7 +436,7 @@ public class Principal {
 	/*
 	 * Funções relacionadas a vendas:
 	 */
-	
+
 	/*
 	 * Verificando se o valor de um desconto do tipo valor é maior que
 	 * o valor do produto.
@@ -439,21 +448,21 @@ public class Principal {
 			if (!tipoDesconto.equals("Valor")) {
 				return false;
 			}
-			
+
 			Double valorDesconto = this.controleDescontos.retornaValorDesconto(codigoDesconto);
 			Double valorProduto = this.controleProdutos.retornaValorProduto(codigoProduto);
-			
+
 			if (valorDesconto <= (valorProduto*quantidadeProduto)) {
 				return false;
 			}
-			
+
 			return true;
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
-	
+
 	public int retornaNumeroDeVendasFaturamentoAtual() {
 		try {
 			int retorno = this.controleFaturamentos.retornaNumeroDeVendas(

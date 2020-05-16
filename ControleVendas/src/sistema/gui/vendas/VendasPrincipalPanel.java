@@ -42,7 +42,7 @@ public class VendasPrincipalPanel extends JPanel {
 		
 		JLabel titulo = new JLabel("Central de vendas");
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		titulo.setBounds(880, 96, 336, 132);
+		titulo.setBounds(811, 95, 336, 132);
 		add(titulo);
 		
 		JLabel numeroVendasDia = new JLabel("N\u00FAmero de vendas de hoje:");

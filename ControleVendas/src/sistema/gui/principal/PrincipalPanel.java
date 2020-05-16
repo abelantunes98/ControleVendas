@@ -33,8 +33,8 @@ public class PrincipalPanel extends JPanel {
 		this.frame = frame;
 		this.principal = principal;
 		
-		JLabel titulo = new JLabel("Central CDV-AAN");
-		titulo.setBounds(655, 16, 612, 222);
+		JLabel titulo = new JLabel("Controle CDV-AAN");
+		titulo.setBounds(640, 16, 612, 222);
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
