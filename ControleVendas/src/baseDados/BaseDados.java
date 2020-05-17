@@ -39,7 +39,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+					Empacotamento.gravarArquivoBinario(funcionarios, "C:/Users/abel.antunes.de.neto/Desktop/data/func.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -63,7 +63,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try  {
-					Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+					Empacotamento.gravarArquivoBinario(produtos, "C:/Users/abel.antunes.de.neto/Desktop/data/prod.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -87,7 +87,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+					Empacotamento.gravarArquivoBinario(descontos, "C:/Users/abel.antunes.de.neto/Desktop/data/desc.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -111,7 +111,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+					Empacotamento.gravarArquivoBinario(mesas, "C:/Users/abel.antunes.de.neto/Desktop/data/mesas.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -135,7 +135,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+					Empacotamento.gravarArquivoBinario(faturamentos, "C:/Users/abel.antunes.de.neto/Desktop/data/fatur.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -158,7 +158,7 @@ public class BaseDados implements Serializable {
 			
 			// Serializando.
 			try {
-				Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+				Empacotamento.gravarArquivoBinario(funcionarios, "C:/Users/abel.antunes.de.neto/Desktop/data/func.ser");
 			}
 			catch (Exception e) {
 				throw e;
@@ -176,7 +176,7 @@ public class BaseDados implements Serializable {
 			
 			// Serializando.
 			try  {
-				Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+				Empacotamento.gravarArquivoBinario(produtos, "C:/Users/abel.antunes.de.neto/Desktop/data/prod.ser");
 			}
 			catch (Exception e) {
 				throw e;
@@ -194,7 +194,7 @@ public class BaseDados implements Serializable {
 			
 			// Serializando.
 			try {
-				Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+				Empacotamento.gravarArquivoBinario(descontos, "C:/Users/abel.antunes.de.neto/Desktop/data/desc.ser");
 			}
 			catch (Exception e) {
 				throw e;
@@ -212,7 +212,7 @@ public class BaseDados implements Serializable {
 			
 			// Serializando.
 			try {
-				Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+				Empacotamento.gravarArquivoBinario(mesas, "C:/Users/abel.antunes.de.neto/Desktop/data/mesas.ser");
 			}
 			catch (Exception e) {
 				throw e;
@@ -230,7 +230,7 @@ public class BaseDados implements Serializable {
 			
 			// Serializando.
 			try {
-				Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+				Empacotamento.gravarArquivoBinario(faturamentos, "C:/Users/abel.antunes.de.neto/Desktop/data/fatur.ser");
 			}
 			catch (Exception e) {
 				throw e;
@@ -299,7 +299,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+					Empacotamento.gravarArquivoBinario(funcionarios, "C:/Users/abel.antunes.de.neto/Desktop/data/func.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -322,7 +322,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try  {
-					Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+					Empacotamento.gravarArquivoBinario(produtos, "C:/Users/abel.antunes.de.neto/Desktop/data/prod.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -345,7 +345,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+					Empacotamento.gravarArquivoBinario(descontos, "C:/Users/abel.antunes.de.neto/Desktop/data/desc.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -368,7 +368,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+					Empacotamento.gravarArquivoBinario(mesas, "C:/Users/abel.antunes.de.neto/Desktop/data/mesas.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -391,7 +391,7 @@ public class BaseDados implements Serializable {
 				
 				// Serializando.
 				try {
-					Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+					Empacotamento.gravarArquivoBinario(faturamentos, "C:/Users/abel.antunes.de.neto/Desktop/data/fatur.ser");
 				}
 				catch (Exception e) {
 					throw e;
@@ -502,7 +502,7 @@ public class BaseDados implements Serializable {
 		
 		// Serializando.
 		try {
-			Empacotamento.gravarArquivoBinario(funcionarios, "data/func.ser");
+			Empacotamento.gravarArquivoBinario(funcionarios, "C:/Users/abel.antunes.de.neto/Desktop/data/func.ser");
 		}
 		catch (Exception e) {
 			throw e;
@@ -514,7 +514,7 @@ public class BaseDados implements Serializable {
 		
 		// Serializando.
 		try  {
-			Empacotamento.gravarArquivoBinario(produtos, "data/prod.ser");
+			Empacotamento.gravarArquivoBinario(produtos, "C:/Users/abel.antunes.de.neto/Desktop/data/prod.ser");
 		}
 		catch (Exception e) {
 			throw e;
@@ -526,7 +526,7 @@ public class BaseDados implements Serializable {
 		
 		// Serializando.
 		try {
-			Empacotamento.gravarArquivoBinario(descontos, "data/desc.ser");
+			Empacotamento.gravarArquivoBinario(descontos, "C:/Users/abel.antunes.de.neto/Desktop/data/desc.ser");
 		}
 		catch (Exception e) {
 			throw e;
@@ -538,7 +538,7 @@ public class BaseDados implements Serializable {
 		
 		// Serializando.
 		try {
-			Empacotamento.gravarArquivoBinario(mesas, "data/mesas.ser");
+			Empacotamento.gravarArquivoBinario(mesas, "C:/Users/abel.antunes.de.neto/Desktop/data/mesas.ser");
 		}
 		catch (Exception e) {
 			throw e;
@@ -550,7 +550,7 @@ public class BaseDados implements Serializable {
 		
 		// Serializando.
 		try {
-			Empacotamento.gravarArquivoBinario(faturamentos, "data/fatur.ser");
+			Empacotamento.gravarArquivoBinario(faturamentos, "C:/Users/abel.antunes.de.neto/Desktop/data/fatur.ser");
 		}
 		catch (Exception e) {
 			throw e;
@@ -560,31 +560,31 @@ public class BaseDados implements Serializable {
 	private void carregarDados() {
 		
 		try {
-			funcionarios = (HashMap<String, Funcionario>) Empacotamento.lerArquivoBinario("data/func.ser");
+			funcionarios = (HashMap<String, Funcionario>) Empacotamento.lerArquivoBinario("C:/Users/abel.antunes.de.neto/Desktop/data/func.ser");
 		}
 		catch (Exception e) {
 			funcionarios = new HashMap<String, Funcionario>();
 		}		
 		try {
-			produtos = (HashMap<String, Produto>) Empacotamento.lerArquivoBinario("data/prod.ser");
+			produtos = (HashMap<String, Produto>) Empacotamento.lerArquivoBinario("C:/Users/abel.antunes.de.neto/Desktop/data/prod.ser");
 		}
 		catch (Exception e) {
 			produtos = new HashMap<String, Produto>();
 		}
 		try {
-			descontos = (HashMap<String, Desconto>) Empacotamento.lerArquivoBinario("data/desc.ser");
+			descontos = (HashMap<String, Desconto>) Empacotamento.lerArquivoBinario("C:/Users/abel.antunes.de.neto/Desktop/data/desc.ser");
 		}
 		catch (Exception e) {
 			descontos = new HashMap<String, Desconto>();
 		}
 		try {
-			mesas = (HashMap<String, Mesa>) Empacotamento.lerArquivoBinario("data/mesas.ser");
+			mesas = (HashMap<String, Mesa>) Empacotamento.lerArquivoBinario("C:/Users/abel.antunes.de.neto/Desktop/data/mesas.ser");
 		}
 		catch (Exception e) {
 			mesas = new HashMap<String, Mesa>();
 		}
 		try {
-			faturamentos = (HashMap<String, Faturamento>) Empacotamento.lerArquivoBinario("data/fatur.ser");
+			faturamentos = (HashMap<String, Faturamento>) Empacotamento.lerArquivoBinario("C:/Users/abel.antunes.de.neto/Desktop/data/fatur.ser");
 		}
 		catch (Exception e) {
 			faturamentos = new HashMap<String, Faturamento>();
