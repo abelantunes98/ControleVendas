@@ -17,6 +17,10 @@ public class Principal {
 	private ControleMesas controleMesas;
 	private ControleFuncionarios controleFuncionarios;
 	private ControleDescontos controleDescontos;
+	
+	// Variável para não exibir a pergunta sobre iniciar um novo faturamento
+	// Sempre que atualizar as vendas.
+	private boolean manterFaturamentoAnterior;
 
 	private BaseDados base;
 
@@ -27,6 +31,7 @@ public class Principal {
 		this.controleMesas = new ControleMesas(base);
 		this.controleFuncionarios = new ControleFuncionarios(base);
 		this.controleDescontos = new ControleDescontos(base);
+		this.manterFaturamentoAnterior = false;
 	}
 
 	/*
@@ -49,12 +54,26 @@ public class Principal {
 				this.codigoFaturamentoAtual -= 1;
 			}
 		}
-
 		catch (Exception e) {
 			throw e;
 		}
 
 	}
+	
+	/*
+	 * Para o caso em que o usuário deseje manter o faturamento do
+	 * dia anterior.
+	 */
+	public void manterFaturamentoAtual() {
+		try {
+			this.codigoFaturamentoAtual--;
+			this.manterFaturamentoAnterior = true;
+		}
+		catch (Exception e){
+			throw e;
+		}
+	}
+	
 	/*
 	 * Retorna a necessidade de perguntar ao usuário antes de criar
 	 * um novo faturamento.
@@ -484,4 +503,14 @@ public class Principal {
 			throw e;
 		}
 	}
+
+	public boolean getManterFaturamentoAnterior() {
+		return manterFaturamentoAnterior;
+	}
+
+	public void setManterFaturamentoAnterior(boolean manterFaturamentoAnterior) {
+		this.manterFaturamentoAnterior = manterFaturamentoAnterior;
+	}
+	
+	
 }

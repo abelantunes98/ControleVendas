@@ -116,21 +116,26 @@ public class VendasPrincipalPanel extends JPanel {
 	 * anterior ou criar um novo.
 	 */
 	private void abrirFaturamento() {	
-		try {	
-			boolean necessidadePergunta = this.principal.retornaNecessidadePerguntaCriarFaturamento();
-			
-			if (necessidadePergunta) {
-				int resposta = JOptionPane.showConfirmDialog(null, "Deseja iniciar um novo faturamento?", 
-						"Atenção!", JOptionPane.YES_OPTION);
+		try {
+			// Verificando se o usuário não já informou que deseja manter o faturamento anterior.
+			if (!this.principal.getManterFaturamentoAnterior()) {
+				boolean necessidadePergunta = this.principal.retornaNecessidadePerguntaCriarFaturamento();
 				
-				if (resposta == JOptionPane.YES_OPTION) {
+				if (necessidadePergunta) {
+					int resposta = JOptionPane.showConfirmDialog(null, "Deseja iniciar um novo faturamento?", 
+							"Atenção!", JOptionPane.YES_OPTION);
+					
+					if (resposta == JOptionPane.YES_OPTION) {
+						this.principal.iniciarFaturamento();
+					}
+					else {
+						this.principal.manterFaturamentoAtual();
+					}
+				}
+				else {
 					this.principal.iniciarFaturamento();
 				}
-			}
-			else {
-				this.principal.iniciarFaturamento();
-			}
-			
+			}	
 		}
 		catch (Exception e) {
 			throw e;
