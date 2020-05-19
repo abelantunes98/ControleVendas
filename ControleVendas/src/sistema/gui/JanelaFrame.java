@@ -71,7 +71,7 @@ public class JanelaFrame extends JFrame {
 		this.adicionarProdutoPanel = new AdicionarProdutoPanel(this.principal, this);
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
 		//this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
-		this.faturamentoFuncionarioPanel = new FaturamentoFuncionarioPanel();
+		this.faturamentoFuncionarioPanel = new FaturamentoFuncionarioPanel(this.principal);
 
 		iniciaContentPane();
 

@@ -1,6 +1,5 @@
 package utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,7 +11,9 @@ public class Util {
         java.util.Date data = null;
         try {
             data = formato.parse(data1);
-        } catch (ParseException e) {}
+        } catch (Exception e) {
+        	throw new IllegalArgumentException("Data informada errada.");
+        }
         return data;
     }
 }
