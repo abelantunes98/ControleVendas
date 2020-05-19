@@ -21,6 +21,9 @@ import sistema.gui.vendas.CatalogoDescontos;
 import sistema.gui.vendas.CatalogoProdutos;
 import sistema.gui.vendas.MesasPanel;
 
+// Imports Administrativo
+import sistema.gui.administrativo.FaturamentoFuncionarioPanel;
+
 import java.awt.Font;
 
 public class JanelaFrame extends JFrame {
@@ -46,6 +49,9 @@ public class JanelaFrame extends JFrame {
 	private MesasPanel mesasPanel;
 	private CatalogoProdutos catalogoProdutos;
 	private CatalogoDescontos catalogoDescontos;
+	
+	// Panels Administrativo
+	private FaturamentoFuncionarioPanel faturamentoFuncionarioPanel;
 
 	private JTabbedPane tabbedPane;
 
@@ -64,7 +70,8 @@ public class JanelaFrame extends JFrame {
 		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(this.principal, this);
 		this.adicionarProdutoPanel = new AdicionarProdutoPanel(this.principal, this);
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
-		this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
+		//this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
+		this.faturamentoFuncionarioPanel = new FaturamentoFuncionarioPanel();
 
 		iniciaContentPane();
 
@@ -146,7 +153,7 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.addTab("Cadastrar funcionário", this.adicionarFuncionarioPanel);
 		this.tabbedPane.addTab("Adicionar produto", this.adicionarProdutoPanel);
 		this.tabbedPane.addTab("Adicionar mesa", this.adicionarMesaPanel);
-		this.tabbedPane.addTab("Adicionar desconto", this.adicionarDescontoPanel);
+		this.tabbedPane.addTab("Adicionar desconto", this.faturamentoFuncionarioPanel);
 
 		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
