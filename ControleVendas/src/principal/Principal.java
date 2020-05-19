@@ -2,6 +2,7 @@ package principal;
 
 import controladores.*;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -224,9 +225,9 @@ public class Principal {
 			 * Vou precisar desse valor para adicionar o id da venda na mesa.
 			 * E esse valor é gerado a partir do número de vendas do faturamento.
 			 */
-			int codigoVenda = this.controleFaturamentos.retornaNumeroDeVendas(Integer.toString(this.codigoFaturamentoAtual));
+			int codigoVenda = this.controleFaturamentos.retornaNumeroDeVendas(Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1));
 
-			this.controleFaturamentos.criaVenda(Integer.toString(this.codigoFaturamentoAtual), codigoFuncionario, 
+			this.controleFaturamentos.criaVenda(Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1), codigoFuncionario, 
 					codigoProduto, nomeProduto, codigoMesa, quantProdutos, valorProduto, codigoDesconto);
 
 			/*
@@ -313,29 +314,7 @@ public class Principal {
 				throw new IllegalArgumentException("Não há vendas na mesa.");
 			}
 
-			return this.controleFaturamentos.retornaDadosVendasPorListaDeIds(Integer.toString(this.codigoFaturamentoAtual), idsVendas);
-		}
-		catch (Exception e) {
-			throw e;
-		}
-
-	}
-	
-	/*
-	 * Retorna detalhes das vendas de um funcionário em um determinado dia.
-	 */
-	public String [][] retornaVendasDeFuncionario(String codigoFuncionario, String dataFaturamento) {
-
-		try {
-			String codigoFaturamento;
-			if (dataFaturamento == null) {
-				codigoFaturamento = Integer.toString(this.codigoFaturamentoAtual);
-			}
-			else {
-				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
-			}
-			
-			return this.controleFaturamentos.retornaDadosVendasPorFuncionario(codigoFaturamento, codigoFuncionario);
+			return this.controleFaturamentos.retornaDadosVendasPorListaDeIds(Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1), idsVendas);
 		}
 		catch (Exception e) {
 			throw e;
@@ -379,7 +358,77 @@ public class Principal {
 			throw e;
 		}
 	}
+	
+	/*
+	 * Funções administrativas
+	 */
+	
+	/*
+	 * Retorna detalhes das vendas de um funcionário em um determinado dia.
+	 */
+	public String [][] retornaVendasDeFuncionario(String codigoFuncionario, String dataFaturamento) {
 
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			return this.controleFaturamentos.retornaDadosVendasPorFuncionario(codigoFaturamento, codigoFuncionario);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+
+	}
+	
+	public String retornaValorDeVendasDeFuncionario(String codigoFuncionario, String dataFaturamento) {
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			double retorno = this.controleFaturamentos.retornaValorFaturamentoPorFuncionario(codigoFaturamento, codigoFuncionario);
+			return d.format(retorno);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public String retornaPorcentagemDeVendasDeFuncionario(String codigoFuncionario, String dataFaturamento, double porcentagem) {
+		try {
+			if (porcentagem < 0) {
+				throw new IllegalArgumentException("Porcentagem inválida.");
+			}
+			
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			double retorno = this.controleFaturamentos.retornaPorcentagemFuncionario(codigoFaturamento, codigoFuncionario, porcentagem);
+			return d.format(retorno);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	/*
 	 * Retornos de números de entidades armazenadas.
 	 */
@@ -453,7 +502,7 @@ public class Principal {
 
 	public String [][] retornaVetorToStringVendasFaturamentoDia() {
 		try {
-			return retornaVetorToStringVendasFaturamento(Integer.toString(this.codigoFaturamentoAtual));
+			return retornaVetorToStringVendasFaturamento(Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1));
 		}
 		catch (Exception e) {
 			throw e;
@@ -507,7 +556,7 @@ public class Principal {
 	public int retornaNumeroDeVendasFaturamentoAtual() {
 		try {
 			int retorno = this.controleFaturamentos.retornaNumeroDeVendas(
-					Integer.toString(this.codigoFaturamentoAtual));
+					Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1));
 			return retorno;
 		}
 		catch (Exception e){
@@ -518,7 +567,7 @@ public class Principal {
 	public double retornaValorApuradoFaturamentoAtual() {
 		try {
 			double retorno = this.controleFaturamentos.retornaValorFaturamento(
-					Integer.toString(this.codigoFaturamentoAtual));
+					Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1));
 			return retorno;
 		}
 		catch (Exception e) {

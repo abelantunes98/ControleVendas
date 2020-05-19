@@ -117,7 +117,7 @@ public class ControleFaturamentos {
 			}
 			
 			else {
-				throw new IllegalArgumentException("Funcionario inexistente");
+				throw new IllegalArgumentException("Funcionario inexistente.");
 			}
 		}
 		catch(Exception e){
@@ -153,7 +153,7 @@ public class ControleFaturamentos {
 			}
 			
 			else {
-				throw new IllegalArgumentException("Funcionario inexistente");
+				throw new IllegalArgumentException("Funcionario inexistente.");
 			}
 		}
 		catch(Exception e){
@@ -193,7 +193,7 @@ public class ControleFaturamentos {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
 			
 			if (this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario) == 0) {
-				throw new IllegalArgumentException("Não há vendas do funcionário nesse faturamento");
+				throw new IllegalArgumentException("Não há vendas do funcionário nesse faturamento.");
 			}
 			String [][] saida = new String[this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario)][6];
 			
@@ -258,7 +258,7 @@ public class ControleFaturamentos {
 			int indice = 0;
 			int tamanhoSet = keys.size();
 			while (indice < tamanhoSet && retorno == null) {
-				String key = keys.get(indice);
+				String key = keys.get(indice++);
 				Faturamento faturamentoKey = base.retornaFaturamento(key);
 				String dataFaturamentoKey = faturamentoKey.getDataFaturamento();
 				Date dataFaturamentoKeyDate = Util.stringToDate(dataFaturamentoKey);
@@ -298,7 +298,7 @@ public class ControleFaturamentos {
 			int indice = 0;
 			int tamanhoSet = keys.size();
 			while (indice < tamanhoSet) {
-				String key = keys.get(indice);
+				String key = keys.get(indice++);
 				Faturamento faturamentoKey = base.retornaFaturamento(key);
 				String dataFaturamentoKey = faturamentoKey.getDataFaturamento();
 				Date dataFaturamentoKeyDate = Util.stringToDate(dataFaturamentoKey);

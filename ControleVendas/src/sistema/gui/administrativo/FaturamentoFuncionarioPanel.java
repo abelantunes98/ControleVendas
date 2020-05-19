@@ -201,6 +201,9 @@ public class FaturamentoFuncionarioPanel extends JPanel {
 		valPorcentagemFuncionario.setText("");
 		valValorTotal.setText("R$ 0");
 		valValorFuncionario.setText("R$ 0");
+		
+		tabelaVendasFuncionario = new JTable();
+		scrollPane.setViewportView(tabelaVendasFuncionario);
 	}
 	
 	private void buscar() {
@@ -212,7 +215,7 @@ public class FaturamentoFuncionarioPanel extends JPanel {
 			if (this.rdbtnFaturamentoAtual.isSelected()) {
 				dataFatur = null;
 			}
-			else if (!this.rdbtnFaturamentoAtual.isSelected()) {
+			else if (!this.rdbtnBuscarPorData.isSelected()) {
 				throw new IllegalArgumentException("Selecione o dia do faturamento.");
 			}
 			
@@ -220,11 +223,13 @@ public class FaturamentoFuncionarioPanel extends JPanel {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
 			
+			//Evitando mensagens repetidas.
 			carregaTabelaVendasFuncionario(codFuncionario, dataFatur);
+			this.valValorTotal.setText(this.principal.retornaValorDeVendasDeFuncionario(codFuncionario, dataFatur));
+			this.valValorFuncionario.setText(this.principal.retornaPorcentagemDeVendasDeFuncionario(codFuncionario, dataFatur, porcentagemFunc));
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-
 		}
 	}
 
@@ -245,7 +250,7 @@ public class FaturamentoFuncionarioPanel extends JPanel {
 			scrollPane.setViewportView(tabelaVendasFuncionario);
 		}
 		catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			throw e;
 		}
 	}
 
