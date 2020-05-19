@@ -1,5 +1,6 @@
 package controladores;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -174,6 +175,44 @@ public class ControleFaturamentos {
 			for (int id : lista) {
 				String [] detalhe = faturamento.retornaDetalhesVenda(id);
 				saida[indice++] = detalhe;
+			}
+			
+			return saida;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retorna detalhes das vendas de um funcionário em um determinado faturamento.
+	 */
+	public String [][] retornaDadosVendasPorFuncionario(String codigoFaturamento, String codigoFuncionario) {
+		
+		try {
+			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
+			
+			if (this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario) == 0) {
+				throw new IllegalArgumentException("Não há vendas do funcionário nesse faturamento");
+			}
+			String [][] saida = new String[this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario)][6];
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			List<Venda> vendas = faturamento.getListVendas();
+			int indice = 0;
+			for (Venda venda : vendas) {
+				if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {	
+					String [] detalhe = new String[6];
+					detalhe[0] = venda.getCodigoProduto();
+					detalhe[1] = venda.getNomeProduto();
+					detalhe[2] = Integer.toString(venda.getQuantProdutos());
+					detalhe[3] = (d.format(venda.getValorVenda()));
+					detalhe[4] = venda.getCodigoDesconto();
+					detalhe[5] = codigoFuncionario;
+		
+					saida[indice++] = detalhe;
+				}
 			}
 			
 			return saida;

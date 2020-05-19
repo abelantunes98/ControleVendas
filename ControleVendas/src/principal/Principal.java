@@ -320,7 +320,29 @@ public class Principal {
 		}
 
 	}
+	
+	/*
+	 * Retorna detalhes das vendas de um funcionário em um determinado dia.
+	 */
+	public String [][] retornaVendasDeFuncionario(String codigoFuncionario, String dataFaturamento) {
 
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.codigoFaturamentoAtual);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			return this.controleFaturamentos.retornaDadosVendasPorFuncionario(codigoFaturamento, codigoFuncionario);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+
+	}
+	
 	/*
 	 * Olha a disponibilidade da mesa e gera uma String de saída para cada
 	 * mesa.
