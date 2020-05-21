@@ -429,6 +429,49 @@ public class Principal {
 		}
 	}
 	
+	
+	/*
+	 * Retorna detalhes das vendas em uma Mesa em um determinado dia.
+	 */
+	public String [][] retornaVendasEmMesa(String codigoMesa, String dataFaturamento) {
+
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			return this.controleFaturamentos.retornaDadosVendasPorMesa(codigoFaturamento, codigoMesa);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+
+	}
+	
+	public String retornaValorDeVendasEmMesa(String codigoMesa, String dataFaturamento) {
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			double retorno = this.controleFaturamentos.retornaValorFaturamentoPorMesa(codigoFaturamento, codigoMesa);
+			return d.format(retorno);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	/*
 	 * Retornos de números de entidades armazenadas.
 	 */

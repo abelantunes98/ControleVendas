@@ -124,6 +124,31 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public double retornaValorFaturamentoPorMesa(String codigoFaturamento, String codigoFuncionario) {
+		
+		try {
+			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
+			if (base.existeFuncionario(codigoFuncionario)) {
+				double valorRetorno = 0;
+				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
+				for (Venda venda : vendasFaturamento) {
+					if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {
+						valorRetorno += venda.getValorVenda();
+					}
+				}
+				
+				return valorRetorno;
+			}
+			
+			else {
+				throw new IllegalArgumentException("Funcionario inexistente.");
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
+	}
 
 	public int retornaNumeroDeVendas(String codigoFaturamento) {
 		
