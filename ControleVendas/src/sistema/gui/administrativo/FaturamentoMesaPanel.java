@@ -191,7 +191,7 @@ public class FaturamentoMesaPanel extends JPanel {
 				throw new IllegalArgumentException("Selecione o dia do faturamento.");
 			}
 			
-			if ((dataFatur != null && dataFatur.equals(""))) {
+			if (codMesa.equals("") || (dataFatur != null && dataFatur.equals(""))) {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
 			

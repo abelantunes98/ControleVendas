@@ -23,6 +23,7 @@ import sistema.gui.vendas.MesasPanel;
 
 // Imports Administrativo
 import sistema.gui.administrativo.FaturamentoFuncionarioPanel;
+import sistema.gui.administrativo.FaturamentoMesaPanel;
 
 import java.awt.Font;
 
@@ -52,6 +53,7 @@ public class JanelaFrame extends JFrame {
 	
 	// Panels Administrativo
 	private FaturamentoFuncionarioPanel faturamentoFuncionarioPanel;
+	private FaturamentoMesaPanel faturamentoMesa;
 
 	private JTabbedPane tabbedPane;
 
@@ -72,6 +74,7 @@ public class JanelaFrame extends JFrame {
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
 		// Será alterado um dia
 		//this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
+		this.faturamentoMesa = new FaturamentoMesaPanel(this.principal);
 		this.faturamentoFuncionarioPanel = new FaturamentoFuncionarioPanel(this.principal);
 
 		iniciaContentPane();
@@ -154,7 +157,7 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.addTab("Cadastrar funcionário", this.adicionarFuncionarioPanel);
 		this.tabbedPane.addTab("Adicionar produto", this.adicionarProdutoPanel);
 		this.tabbedPane.addTab("Adicionar mesa", this.adicionarMesaPanel);
-		this.tabbedPane.addTab("Adicionar desconto", this.faturamentoFuncionarioPanel);
+		this.tabbedPane.addTab("Adicionar desconto", this.faturamentoMesa);
 
 		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}

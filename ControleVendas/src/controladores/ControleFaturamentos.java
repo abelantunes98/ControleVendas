@@ -125,15 +125,15 @@ public class ControleFaturamentos {
 		}
 	}
 	
-	public double retornaValorFaturamentoPorMesa(String codigoFaturamento, String codigoFuncionario) {
+	public double retornaValorFaturamentoPorMesa(String codigoFaturamento, String codigoMesa) {
 		
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
-			if (base.existeFuncionario(codigoFuncionario)) {
+			if (base.existeMesa(codigoMesa)) {
 				double valorRetorno = 0;
 				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
 				for (Venda venda : vendasFaturamento) {
-					if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {
+					if (venda.getCodigoMesa().equals(codigoMesa)) {
 						valorRetorno += venda.getValorVenda();
 					}
 				}
@@ -142,7 +142,7 @@ public class ControleFaturamentos {
 			}
 			
 			else {
-				throw new IllegalArgumentException("Funcionario inexistente.");
+				throw new IllegalArgumentException("Mesa inexistente.");
 			}
 		}
 		catch(Exception e){
@@ -186,6 +186,31 @@ public class ControleFaturamentos {
 		}
 	}
 	
+	public int retornaNumeroDeVendasPorMesa(String codigoFaturamento, String codigoMesa) {
+		
+		try {
+			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
+			if (base.existeMesa(codigoMesa)) {
+				int valorRetorno = 0;
+				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
+				for (Venda venda : vendasFaturamento) {
+					if (venda.getCodigoMesa().equals(codigoMesa)) {
+						valorRetorno++;
+					}
+				}
+				
+				return valorRetorno;
+			}
+			
+			else {
+				throw new IllegalArgumentException("Mesa inexistente.");
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
+	}
+	
 	/*
 	 * Trás os detalhes de cada venda que tenha seu id contido na lista passada.
 	 * Claro que é necessário a venda está presente no faturamento.
@@ -217,10 +242,11 @@ public class ControleFaturamentos {
 		try {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
 			
-			if (this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario) == 0) {
+			int numVendas = this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario);
+			if (numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas do funcionário nesse faturamento.");
 			}
-			String [][] saida = new String[this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario)][6];
+			String [][] saida = new String[numVendas][6];
 			
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
@@ -235,6 +261,45 @@ public class ControleFaturamentos {
 					detalhe[3] = (d.format(venda.getValorVenda()));
 					detalhe[4] = venda.getCodigoDesconto();
 					detalhe[5] = codigoFuncionario;
+		
+					saida[indice++] = detalhe;
+				}
+			}
+			
+			return saida;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retorna detalhes das vendas de um funcionário em um determinado faturamento.
+	 */
+	public String [][] retornaDadosVendasPorMesa(String codigoFaturamento, String codigoMesa) {
+		
+		try {
+			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
+			
+			int numVendas = this.retornaNumeroDeVendasPorMesa(codigoFaturamento, codigoMesa);
+			if ( numVendas == 0) {
+				throw new IllegalArgumentException("Não há vendas na mesa nesse faturamento.");
+			}
+			String [][] saida = new String[numVendas][6];
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			List<Venda> vendas = faturamento.getListVendas();
+			int indice = 0;
+			for (Venda venda : vendas) {
+				if (venda.getCodigoMesa().equals(codigoMesa)) {	
+					String [] detalhe = new String[6];
+					detalhe[0] = venda.getCodigoProduto();
+					detalhe[1] = venda.getNomeProduto();
+					detalhe[2] = Integer.toString(venda.getQuantProdutos());
+					detalhe[3] = (d.format(venda.getValorVenda()));
+					detalhe[4] = venda.getCodigoDesconto();
+					detalhe[5] = venda.getCodigoFuncionario();
 		
 					saida[indice++] = detalhe;
 				}
