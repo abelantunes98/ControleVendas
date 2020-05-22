@@ -164,7 +164,7 @@ public class JanelaFrame extends JFrame {
 	public void criaAbasVendas() {
 
 		/*
-		 * Criando Abas.
+		 * Criando Abas de vendas.
 		 */
 		this.vendasPrincipalPaner = new VendasPrincipalPanel(this.principal, this);
 		this.venderPanel = new VenderPanel(this.principal, this);
