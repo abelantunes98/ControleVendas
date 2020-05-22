@@ -149,6 +149,31 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public double retornaValorFaturamentoPorProduto(String codigoFaturamento, String codigoProduto) {
+		
+		try {
+			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
+			if (base.existeProduto(codigoProduto)) {
+				double valorRetorno = 0;
+				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
+				for (Venda venda : vendasFaturamento) {
+					if (venda.getCodigoProduto().equals(codigoProduto)) {
+						valorRetorno += venda.getValorVenda();
+					}
+				}
+				
+				return valorRetorno;
+			}
+			
+			else {
+				throw new IllegalArgumentException("Produto inexistente.");
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
+	}
 
 	public int retornaNumeroDeVendas(String codigoFaturamento) {
 		
@@ -204,6 +229,31 @@ public class ControleFaturamentos {
 			
 			else {
 				throw new IllegalArgumentException("Mesa inexistente.");
+			}
+		}
+		catch(Exception e){
+			throw e;
+		}
+	}
+	
+	public int retornaNumeroDeVendasPorProduto(String codigoFaturamento, String codigoProduto) {
+		
+		try {
+			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
+			if (base.existeProduto(codigoProduto)) {
+				int valorRetorno = 0;
+				List<Venda> vendasFaturamento = faturamentoPassado.getListVendas();
+				for (Venda venda : vendasFaturamento) {
+					if (venda.getCodigoProduto().equals(codigoProduto)) {
+						valorRetorno++;
+					}
+				}
+				
+				return valorRetorno;
+			}
+			
+			else {
+				throw new IllegalArgumentException("Produto inexistente.");
 			}
 		}
 		catch(Exception e){
@@ -274,7 +324,7 @@ public class ControleFaturamentos {
 	}
 	
 	/*
-	 * Retorna detalhes das vendas de um funcionário em um determinado faturamento.
+	 * Retorna detalhes das vendas em uma mesa em um determinado faturamento.
 	 */
 	public String [][] retornaDadosVendasPorMesa(String codigoFaturamento, String codigoMesa) {
 		
@@ -293,6 +343,45 @@ public class ControleFaturamentos {
 			int indice = 0;
 			for (Venda venda : vendas) {
 				if (venda.getCodigoMesa().equals(codigoMesa)) {	
+					String [] detalhe = new String[6];
+					detalhe[0] = venda.getCodigoProduto();
+					detalhe[1] = venda.getNomeProduto();
+					detalhe[2] = Integer.toString(venda.getQuantProdutos());
+					detalhe[3] = (d.format(venda.getValorVenda()));
+					detalhe[4] = venda.getCodigoDesconto();
+					detalhe[5] = venda.getCodigoFuncionario();
+		
+					saida[indice++] = detalhe;
+				}
+			}
+			
+			return saida;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retorna detalhes das vendas de um produto em um determinado faturamento.
+	 */
+	public String [][] retornaDadosVendasPorProduto(String codigoFaturamento, String codigoProduto) {
+		
+		try {
+			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
+			
+			int numVendas = this.retornaNumeroDeVendasPorProduto(codigoFaturamento, codigoProduto);
+			if ( numVendas == 0) {
+				throw new IllegalArgumentException("Não há vendas do produto nesse faturamento.");
+			}
+			String [][] saida = new String[numVendas][6];
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			List<Venda> vendas = faturamento.getListVendas();
+			int indice = 0;
+			for (Venda venda : vendas) {
+				if (venda.getCodigoProduto().equals(codigoProduto)) {	
 					String [] detalhe = new String[6];
 					detalhe[0] = venda.getCodigoProduto();
 					detalhe[1] = venda.getNomeProduto();

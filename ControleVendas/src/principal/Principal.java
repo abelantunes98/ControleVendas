@@ -471,6 +471,48 @@ public class Principal {
 			throw e;
 		}
 	}
+
+	/*
+	 * Retorna detalhes das vendas de um produto em um determinado dia.
+	 */
+	public String [][] retornaVendasDeProduto(String codigoProduto, String dataFaturamento) {
+
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			return this.controleFaturamentos.retornaDadosVendasPorProduto(codigoFaturamento, codigoProduto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+
+	}
+	
+	public String retornaValorDeVendasDeProduto(String codigoProduto, String dataFaturamento) {
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			double retorno = this.controleFaturamentos.retornaValorFaturamentoPorProduto(codigoFaturamento, codigoProduto);
+			return d.format(retorno);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 	
 	/*
 	 * Retornos de números de entidades armazenadas.

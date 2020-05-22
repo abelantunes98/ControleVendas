@@ -19,13 +19,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class FaturamentoMesaPanel extends JPanel {
+public class FaturamentoProdutoPanel extends JPanel {
 	/**
 	 * Serial
 	 */
 	private static final long serialVersionUID = 6438381988056465402L;
 
-	private JTextField valCodigoMesa;
+	private JTextField valCodigoProduto;
 	private JTextField valDataFaturamento;
 	private JLabel valValorTotal;
 	private final ButtonGroup DiaFaturamentoGroup = new ButtonGroup();
@@ -36,14 +36,14 @@ public class FaturamentoMesaPanel extends JPanel {
 	private JButton btnBuscar;
 	private JButton btnLimpar;
 
-	private JTable tabelaVendasMesa;
+	private JTable tabelaVendasProduto;
 
 	private Principal principal;
 
 	/**
 	 * Create the panel.
 	 */
-	public FaturamentoMesaPanel(Principal principal) {
+	public FaturamentoProdutoPanel(Principal principal) {
 
 		this.principal = principal;
 
@@ -54,16 +54,16 @@ public class FaturamentoMesaPanel extends JPanel {
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		add(titulo);
 
-		JLabel codigoMesa = new JLabel("C\u00F3digo da mesa:");
-		codigoMesa.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		codigoMesa.setBounds(108, 235, 266, 44);
-		add(codigoMesa);
+		JLabel codigoProduto = new JLabel("C\u00F3digo do produto:");
+		codigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		codigoProduto.setBounds(108, 235, 266, 44);
+		add(codigoProduto);
 
-		valCodigoMesa = new JTextField();
-		valCodigoMesa.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		valCodigoMesa.setBounds(461, 236, 146, 44);
-		add(valCodigoMesa);
-		valCodigoMesa.setColumns(10);
+		valCodigoProduto = new JTextField();
+		valCodigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		valCodigoProduto.setBounds(461, 236, 146, 44);
+		add(valCodigoProduto);
+		valCodigoProduto.setColumns(10);
 
 		JLabel dataFaturamento = new JLabel("Data do faturamento:");
 		dataFaturamento.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -120,7 +120,7 @@ public class FaturamentoMesaPanel extends JPanel {
 		scrollPane.setBounds(1022, 235, 713, 357);
 		add(scrollPane);
 
-		scrollPane.setViewportView(tabelaVendasMesa);
+		scrollPane.setViewportView(tabelaVendasProduto);
 
 		JLabel valorTotal = new JLabel("Valor total:");
 		valorTotal.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -171,17 +171,17 @@ public class FaturamentoMesaPanel extends JPanel {
 
 	private void limparCampos() {
 
-		valCodigoMesa.setText("");
+		valCodigoProduto.setText("");
 		valDataFaturamento.setText("");
 		valValorTotal.setText("R$ 0");
 		
-		tabelaVendasMesa = new JTable();
-		scrollPane.setViewportView(tabelaVendasMesa);
+		tabelaVendasProduto = new JTable();
+		scrollPane.setViewportView(tabelaVendasProduto);
 	}
 	
 	private void buscar() {
 		try {
-			String codMesa = this.valCodigoMesa.getText();
+			String codProduto = this.valCodigoProduto.getText();
 			String dataFatur = this.valDataFaturamento.getText();
 			
 			if (this.rdbtnFaturamentoAtual.isSelected()) {
@@ -191,13 +191,13 @@ public class FaturamentoMesaPanel extends JPanel {
 				throw new IllegalArgumentException("Selecione o dia do faturamento.");
 			}
 			
-			if (codMesa.equals("") || (dataFatur != null && dataFatur.equals(""))) {
+			if (codProduto.equals("") || (dataFatur != null && dataFatur.equals(""))) {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
 			
 			//Evitando mensagens repetidas.
-			carregaTabelaVendasMesa(codMesa, dataFatur);
-			this.valValorTotal.setText(this.principal.retornaValorDeVendasEmMesa(codMesa, dataFatur));
+			carregaTabelaVendasProduto(codProduto, dataFatur);
+			this.valValorTotal.setText(this.principal.retornaValorDeVendasDeProduto(codProduto, dataFatur));
 			
 		}
 		catch (Exception e) {
@@ -205,21 +205,21 @@ public class FaturamentoMesaPanel extends JPanel {
 		}
 	}
 
-	private void carregaTabelaVendasMesa(String codigoMesa, String dataFaturamento) {
+	private void carregaTabelaVendasProduto(String codigoProduto, String dataFaturamento) {
 
 		try {
 			String [] colunas = {"Código", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário"};
-			String [][] dados = this.principal.retornaVendasEmMesa(codigoMesa, dataFaturamento);
+			String [][] dados = this.principal.retornaVendasDeProduto(codigoProduto, dataFaturamento);
 
-			tabelaVendasMesa = new JTable(dados, colunas);
+			tabelaVendasProduto = new JTable(dados, colunas);
 
-			tabelaVendasMesa.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
-			tabelaVendasMesa.setEnabled(false); // Evitando edição não desejada.
-			tabelaVendasMesa.getColumnModel().getColumn(1).setPreferredWidth(250);
-			tabelaVendasMesa.setBackground(SystemColor.info); // Cor da linha.
-			tabelaVendasMesa.setRowHeight(30); // Aumentando altura das linhas.
+			tabelaVendasProduto.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tabelaVendasProduto.setEnabled(false); // Evitando edição não desejada.
+			tabelaVendasProduto.getColumnModel().getColumn(1).setPreferredWidth(250);
+			tabelaVendasProduto.setBackground(SystemColor.info); // Cor da linha.
+			tabelaVendasProduto.setRowHeight(30); // Aumentando altura das linhas.
 
-			scrollPane.setViewportView(tabelaVendasMesa);
+			scrollPane.setViewportView(tabelaVendasProduto);
 		}
 		catch (Exception e) {
 			throw e;
