@@ -117,7 +117,7 @@ public class FaturamentoProdutoPanel extends JPanel {
 		add(btnLimpar);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(1022, 235, 713, 357);
+		scrollPane.setBounds(995, 235, 755, 357);
 		add(scrollPane);
 
 		scrollPane.setViewportView(tabelaVendasProduto);
@@ -208,14 +208,16 @@ public class FaturamentoProdutoPanel extends JPanel {
 	private void carregaTabelaVendasProduto(String codigoProduto, String dataFaturamento) {
 
 		try {
-			String [] colunas = {"Código", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário"};
+			String [] colunas = {"ID", "Produto", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário", "Hora"};
 			String [][] dados = this.principal.retornaVendasDeProduto(codigoProduto, dataFaturamento);
 
 			tabelaVendasProduto = new JTable(dados, colunas);
 
 			tabelaVendasProduto.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
 			tabelaVendasProduto.setEnabled(false); // Evitando edição não desejada.
-			tabelaVendasProduto.getColumnModel().getColumn(1).setPreferredWidth(250);
+			tabelaVendasProduto.getColumnModel().getColumn(2).setPreferredWidth(200);
+			tabelaVendasProduto.getColumnModel().getColumn(4).setPreferredWidth(100);
+			tabelaVendasProduto.getColumnModel().getColumn(7).setPreferredWidth(100);
 			tabelaVendasProduto.setBackground(SystemColor.info); // Cor da linha.
 			tabelaVendasProduto.setRowHeight(30); // Aumentando altura das linhas.
 

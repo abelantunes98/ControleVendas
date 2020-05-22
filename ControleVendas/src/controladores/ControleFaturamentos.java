@@ -52,6 +52,7 @@ public class ControleFaturamentos {
 		try {
 			Faturamento faturamentoDia = base.retornaFaturamento(codigoFaturamento);
 			int key = faturamentoDia.getNewKey();
+			venda.setId(key);
 			faturamentoDia.adicionaVenda(venda, key);
 			
 			double novoApurado = faturamentoDia.getValorApurado();
@@ -296,7 +297,7 @@ public class ControleFaturamentos {
 			if (numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas do funcionário nesse faturamento.");
 			}
-			String [][] saida = new String[numVendas][6];
+			String [][] saida = new String[numVendas][8];
 			
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
@@ -304,13 +305,15 @@ public class ControleFaturamentos {
 			int indice = 0;
 			for (Venda venda : vendas) {
 				if (venda.getCodigoFuncionario().equals(codigoFuncionario)) {	
-					String [] detalhe = new String[6];
-					detalhe[0] = venda.getCodigoProduto();
-					detalhe[1] = venda.getNomeProduto();
-					detalhe[2] = Integer.toString(venda.getQuantProdutos());
-					detalhe[3] = (d.format(venda.getValorVenda()));
-					detalhe[4] = venda.getCodigoDesconto();
-					detalhe[5] = codigoFuncionario;
+					String [] detalhe = new String[8];
+					detalhe[0] = Integer.toString(venda.getId());
+					detalhe[1] = venda.getCodigoProduto();
+					detalhe[2] = venda.getNomeProduto();
+					detalhe[3] = Integer.toString(venda.getQuantProdutos());
+					detalhe[4] = (d.format(venda.getValorVenda()));
+					detalhe[5] = venda.getCodigoDesconto();
+					detalhe[6] = codigoFuncionario;
+					detalhe[7] = venda.getHoraVenda();
 		
 					saida[indice++] = detalhe;
 				}
@@ -335,7 +338,7 @@ public class ControleFaturamentos {
 			if ( numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas na mesa nesse faturamento.");
 			}
-			String [][] saida = new String[numVendas][6];
+			String [][] saida = new String[numVendas][8];
 			
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
@@ -343,13 +346,15 @@ public class ControleFaturamentos {
 			int indice = 0;
 			for (Venda venda : vendas) {
 				if (venda.getCodigoMesa().equals(codigoMesa)) {	
-					String [] detalhe = new String[6];
-					detalhe[0] = venda.getCodigoProduto();
-					detalhe[1] = venda.getNomeProduto();
-					detalhe[2] = Integer.toString(venda.getQuantProdutos());
-					detalhe[3] = (d.format(venda.getValorVenda()));
-					detalhe[4] = venda.getCodigoDesconto();
-					detalhe[5] = venda.getCodigoFuncionario();
+					String [] detalhe = new String[8];
+					detalhe[0] = Integer.toString(venda.getId());
+					detalhe[1] = venda.getCodigoProduto();
+					detalhe[2] = venda.getNomeProduto();
+					detalhe[3] = Integer.toString(venda.getQuantProdutos());
+					detalhe[4] = (d.format(venda.getValorVenda()));
+					detalhe[5] = venda.getCodigoDesconto();
+					detalhe[6] = venda.getCodigoFuncionario();
+					detalhe[7] = venda.getHoraVenda();
 		
 					saida[indice++] = detalhe;
 				}
@@ -374,7 +379,7 @@ public class ControleFaturamentos {
 			if ( numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas do produto nesse faturamento.");
 			}
-			String [][] saida = new String[numVendas][6];
+			String [][] saida = new String[numVendas][8];
 			
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
@@ -382,13 +387,15 @@ public class ControleFaturamentos {
 			int indice = 0;
 			for (Venda venda : vendas) {
 				if (venda.getCodigoProduto().equals(codigoProduto)) {	
-					String [] detalhe = new String[6];
-					detalhe[0] = venda.getCodigoProduto();
-					detalhe[1] = venda.getNomeProduto();
-					detalhe[2] = Integer.toString(venda.getQuantProdutos());
-					detalhe[3] = (d.format(venda.getValorVenda()));
-					detalhe[4] = venda.getCodigoDesconto();
-					detalhe[5] = venda.getCodigoFuncionario();
+					String [] detalhe = new String[8];
+					detalhe[0] = Integer.toString(venda.getId());
+					detalhe[1] = venda.getCodigoProduto();
+					detalhe[2] = venda.getNomeProduto();
+					detalhe[3] = Integer.toString(venda.getQuantProdutos());
+					detalhe[4] = (d.format(venda.getValorVenda()));
+					detalhe[5] = venda.getCodigoDesconto();
+					detalhe[6] = venda.getCodigoFuncionario();
+					detalhe[7] = venda.getHoraVenda();
 		
 					saida[indice++] = detalhe;
 				}

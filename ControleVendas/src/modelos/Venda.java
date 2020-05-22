@@ -3,6 +3,7 @@ package modelos;
 import java.util.Date;
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 public class Venda implements Serializable{
 	
@@ -15,15 +16,17 @@ public class Venda implements Serializable{
 	private String codigoMesa;
 	private String codigoDesconto;
 	private String nomeProduto;
+	private int id;
 	
 	private int quantProdutos;
 	
 	private double valorVenda;
 	
-	private Date dataVenda;
+	private String horaVenda;
 	
 	private String formato = "R$ #,##0.00";
 	private DecimalFormat d = new DecimalFormat(formato);
+	private SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm:ss");
 
 	
 	public Venda(String codigoFuncionario, String codigoProduto, String nomeProduto, int quantProdutos,
@@ -35,7 +38,18 @@ public class Venda implements Serializable{
 		this.codigoDesconto = "";
 		this.quantProdutos = quantProdutos;
 		this.valorVenda = valorVenda;
-		this.dataVenda = new Date();
+		Date data = new Date();
+		this.horaVenda = formatoHora.format(data);
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
@@ -107,13 +121,13 @@ public class Venda implements Serializable{
 	}
 
 
-	public Date getDataVenda() {
-		return dataVenda;
+	public String getHoraVenda() {
+		return horaVenda;
 	}
 
 
-	public void setDataVenda(Date dataVenda) {
-		this.dataVenda = dataVenda;
+	public void setHoraVenda(String dataVenda) {
+		this.horaVenda = dataVenda;
 	}
 
 

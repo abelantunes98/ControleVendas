@@ -132,7 +132,7 @@ public class FaturamentoFuncionarioPanel extends JPanel {
 		add(btnLimpar);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(1022, 235, 713, 357);
+		scrollPane.setBounds(984, 235, 766, 357);
 		add(scrollPane);
 
 		scrollPane.setViewportView(tabelaVendasFuncionario);
@@ -236,14 +236,16 @@ public class FaturamentoFuncionarioPanel extends JPanel {
 	private void carregaTabelaVendasFuncionario(String codigoFuncionario, String dataFaturamento) {
 
 		try {
-			String [] colunas = {"Código", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário"};
+			String [] colunas = {"ID", "Produto", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário", "Hora"};
 			String [][] dados = this.principal.retornaVendasDeFuncionario(codigoFuncionario, dataFaturamento);
 
 			tabelaVendasFuncionario = new JTable(dados, colunas);
 
 			tabelaVendasFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
 			tabelaVendasFuncionario.setEnabled(false); // Evitando edição não desejada.
-			tabelaVendasFuncionario.getColumnModel().getColumn(1).setPreferredWidth(250);
+			tabelaVendasFuncionario.getColumnModel().getColumn(2).setPreferredWidth(200);
+			tabelaVendasFuncionario.getColumnModel().getColumn(4).setPreferredWidth(100);
+			tabelaVendasFuncionario.getColumnModel().getColumn(7).setPreferredWidth(100);
 			tabelaVendasFuncionario.setBackground(SystemColor.info); // Cor da linha.
 			tabelaVendasFuncionario.setRowHeight(30); // Aumentando altura das linhas.
 
