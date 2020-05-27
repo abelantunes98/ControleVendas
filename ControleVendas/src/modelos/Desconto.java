@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Desconto implements Serializable {
 	
 	/**
-	 * Serial
+	 * Serial da classe.
 	 */
 	private static final long serialVersionUID = 396397961638702298L;
 	private String codigoDesconto;
