@@ -250,7 +250,7 @@ public class VenderPanel extends JPanel {
 			String codigoDesconto = valCodigoDesconto.getText();
 			
 			/*
-			 * Obrigando a escolher opção nos rádio buttons.
+			 * Obrigando a escolher opção nos rádio buttons...
 			 */
 			if (!rdbtnVendaMesa.isSelected() && !rdbtnVendaCaixa.isSelected()) {
 				throw new IllegalArgumentException("Escolha uma opção para tipo de venda.");

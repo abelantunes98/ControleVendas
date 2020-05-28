@@ -25,20 +25,23 @@ public class FaturamentoDataPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 6438381988056465402L;
 
-	private JTextField valCodigoProduto;
-	private JTextField valDataFaturamento;
+	private JTextField valDataFaturamento1;
+	private JTextField valDataFaturamento2;
 	private JLabel valValorTotal;
-	private final ButtonGroup DiaFaturamentoGroup = new ButtonGroup();
+	private final ButtonGroup diaFaturamentoGroup = new ButtonGroup();
 
 	private JScrollPane scrollPane;
 	private JRadioButton rdbtnFaturamentoAtual;
 	private JRadioButton rdbtnBuscarPorData;
 	private JButton btnBuscar;
 	private JButton btnLimpar;
+	private JRadioButton rdbtnIntervaloDatas;
+	private JRadioButton rdbtnUmaData;
 
 	private JTable tabelaVendasProduto;
 
 	private Principal principal;
+	private final ButtonGroup tipoBuscaGroup = new ButtonGroup();
 
 	/**
 	 * Create the panel.
@@ -49,57 +52,59 @@ public class FaturamentoDataPanel extends JPanel {
 
 		setLayout(null);
 
-		JLabel titulo = new JLabel("Faturamento de mesa");
+		JLabel titulo = new JLabel("Faturamento por data");
 		titulo.setBounds(754, 56, 369, 37);
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		add(titulo);
 
-		JLabel codigoProduto = new JLabel("C\u00F3digo do produto:");
-		codigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		codigoProduto.setBounds(108, 235, 266, 44);
-		add(codigoProduto);
-
-		valCodigoProduto = new JTextField();
-		valCodigoProduto.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		valCodigoProduto.setBounds(461, 236, 146, 44);
-		add(valCodigoProduto);
-		valCodigoProduto.setColumns(10);
-
-		JLabel dataFaturamento = new JLabel("Data do faturamento:");
-		dataFaturamento.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		dataFaturamento.setBounds(108, 314, 266, 44);
-		dataFaturamento.setVisible(false);
-		add(dataFaturamento);
+		JLabel dataFaturamento1 = new JLabel("Data do inicial:");
+		dataFaturamento1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		dataFaturamento1.setBounds(108, 235, 186, 44);
+		add(dataFaturamento1);
 
 		JLabel dataFaturamentoFormato = new JLabel("(dd/mm/aaaa)");
 		dataFaturamentoFormato.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		dataFaturamentoFormato.setBounds(146, 348, 156, 31);
-		dataFaturamentoFormato.setVisible(false);
+		dataFaturamentoFormato.setBounds(128, 267, 138, 31);
 		add(dataFaturamentoFormato);
 
-		valDataFaturamento = new JTextField();
-		valDataFaturamento.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		valDataFaturamento.setBounds(461, 315, 146, 44);
-		valDataFaturamento.setVisible(false);
-		valDataFaturamento.setEnabled(false);
-		add(valDataFaturamento);
-		valDataFaturamento.setColumns(10);
+		valDataFaturamento1 = new JTextField();
+		valDataFaturamento1.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		valDataFaturamento1.setBounds(370, 236, 146, 44);
+		valDataFaturamento1.setVisible(false);
+		valDataFaturamento1.setEnabled(false);
+		add(valDataFaturamento1);
+		valDataFaturamento1.setColumns(10);
 
-		JLabel diaDoFaturamento = new JLabel("Dia do faturamento:");
-		diaDoFaturamento.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		diaDoFaturamento.setBounds(108, 508, 246, 44);
-		add(diaDoFaturamento);
+		JLabel dataFaturamento2 = new JLabel("Data do final:");
+		dataFaturamento2.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		dataFaturamento2.setBounds(108, 383, 203, 44);
+		dataFaturamento2.setVisible(false);
+		add(dataFaturamento2);
+
+		JLabel dataFaturamentoFormato2 = new JLabel("(dd/mm/aaaa)");
+		dataFaturamentoFormato2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		dataFaturamentoFormato2.setBounds(118, 417, 138, 31);
+		dataFaturamentoFormato2.setVisible(false);
+		add(dataFaturamentoFormato2);
+
+		valDataFaturamento2 = new JTextField();
+		valDataFaturamento2.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		valDataFaturamento2.setBounds(370, 384, 146, 44);
+		valDataFaturamento2.setVisible(false);
+		valDataFaturamento2.setEnabled(false);
+		add(valDataFaturamento2);
+		valDataFaturamento2.setColumns(10);
 
 		rdbtnFaturamentoAtual = new JRadioButton("Faturamento atual");
-		DiaFaturamentoGroup.add(rdbtnFaturamentoAtual);
+		diaFaturamentoGroup.add(rdbtnFaturamentoAtual);
 		rdbtnFaturamentoAtual.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		rdbtnFaturamentoAtual.setBounds(219, 563, 203, 29);
+		rdbtnFaturamentoAtual.setBounds(128, 323, 203, 29);
 		add(rdbtnFaturamentoAtual);
 
 		rdbtnBuscarPorData = new JRadioButton("Buscar por data");
-		DiaFaturamentoGroup.add(rdbtnBuscarPorData);
+		diaFaturamentoGroup.add(rdbtnBuscarPorData);
 		rdbtnBuscarPorData.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		rdbtnBuscarPorData.setBounds(445, 563, 174, 29);
+		rdbtnBuscarPorData.setBounds(370, 323, 174, 29);
 		add(rdbtnBuscarPorData);
 
 		btnBuscar = new JButton("Buscar");
@@ -107,6 +112,7 @@ public class FaturamentoDataPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnBuscar.setBounds(286, 634, 166, 55);
 		add(btnBuscar);
@@ -132,24 +138,56 @@ public class FaturamentoDataPanel extends JPanel {
 		valValorTotal.setBounds(1464, 643, 197, 37);
 		add(valValorTotal);
 
+		JLabel tipoBusca = new JLabel("Tipo de busca:");
+		tipoBusca.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		tipoBusca.setBounds(128, 472, 166, 43);
+		add(tipoBusca);
+
+		rdbtnUmaData = new JRadioButton("Um dia");
+		tipoBuscaGroup.add(rdbtnUmaData);
+		rdbtnUmaData.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		rdbtnUmaData.setBounds(216, 527, 115, 29);
+		add(rdbtnUmaData);
+
+		rdbtnIntervaloDatas = new JRadioButton("Intervalo");
+		tipoBuscaGroup.add(rdbtnIntervaloDatas);
+		rdbtnIntervaloDatas.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		rdbtnIntervaloDatas.setBounds(370, 527, 122, 29);
+		add(rdbtnIntervaloDatas);			
 
 		rdbtnFaturamentoAtual.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				dataFaturamento.setVisible(false);
-				dataFaturamentoFormato.setVisible(false);
-				valDataFaturamento.setEnabled(false);
-				valDataFaturamento.setVisible(false);
+				valDataFaturamento1.setEnabled(false);
+				valDataFaturamento1.setVisible(false);
 			}
 		});
 
 		rdbtnBuscarPorData.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				dataFaturamento.setVisible(true);
-				dataFaturamentoFormato.setVisible(true);
-				valDataFaturamento.setEnabled(true);
-				valDataFaturamento.setVisible(true);
+				valDataFaturamento1.setEnabled(true);
+				valDataFaturamento1.setVisible(true);
+			}
+		});
+
+		rdbtnUmaData.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dataFaturamento2.setVisible(false);
+				dataFaturamentoFormato2.setVisible(false);
+				valDataFaturamento2.setEnabled(false);
+				valDataFaturamento2.setVisible(false);
+			}
+		});
+
+		rdbtnIntervaloDatas.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dataFaturamento2.setVisible(true);
+				dataFaturamentoFormato2.setVisible(true);
+				valDataFaturamento2.setEnabled(true);
+				valDataFaturamento2.setVisible(true);
 			}
 		});
 
@@ -159,7 +197,7 @@ public class FaturamentoDataPanel extends JPanel {
 				limparCampos();                       
 			}
 		});
-		
+
 		btnBuscar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -171,34 +209,34 @@ public class FaturamentoDataPanel extends JPanel {
 
 	private void limparCampos() {
 
-		valCodigoProduto.setText("");
-		valDataFaturamento.setText("");
+		valDataFaturamento1.setText("");
+		valDataFaturamento2.setText("");
 		valValorTotal.setText("R$ 0");
-		
+
 		tabelaVendasProduto = new JTable();
 		scrollPane.setViewportView(tabelaVendasProduto);
 	}
-	
+
 	private void buscar() {
 		try {
-			String codProduto = this.valCodigoProduto.getText();
-			String dataFatur = this.valDataFaturamento.getText();
-			
+			String codProduto = this.valDataFaturamento1.getText();
+			String dataFatur = this.valDataFaturamento2.getText();
+
 			if (this.rdbtnFaturamentoAtual.isSelected()) {
 				dataFatur = null;
 			}
 			else if (!this.rdbtnBuscarPorData.isSelected()) {
 				throw new IllegalArgumentException("Selecione o dia do faturamento.");
 			}
-			
+
 			if (codProduto.equals("") || (dataFatur != null && dataFatur.equals(""))) {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
-			
+
 			//Evitando mensagens repetidas.
 			carregaTabelaVendasProduto(codProduto, dataFatur);
 			this.valValorTotal.setText(this.principal.retornaValorDeVendasDeProduto(codProduto, dataFatur));
-			
+
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -225,5 +263,4 @@ public class FaturamentoDataPanel extends JPanel {
 			throw e;
 		}
 	}
-
 }

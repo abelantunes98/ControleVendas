@@ -20,7 +20,7 @@ import sistema.gui.vendas.VenderPanel;
 import sistema.gui.vendas.CatalogoDescontos;
 import sistema.gui.vendas.CatalogoProdutos;
 import sistema.gui.vendas.MesasPanel;
-
+import sistema.gui.administrativo.FaturamentoDataPanel;
 // Imports Administrativo
 import sistema.gui.administrativo.FaturamentoFuncionarioPanel;
 import sistema.gui.administrativo.FaturamentoMesaPanel;
@@ -56,6 +56,7 @@ public class JanelaFrame extends JFrame {
 	private FaturamentoFuncionarioPanel faturamentoFuncionario;
 	private FaturamentoMesaPanel faturamentoMesa;
 	private FaturamentoProdutoPanel faturamentoProduto;
+	private FaturamentoDataPanel faturamentoDataPanel;
 
 	private JTabbedPane tabbedPane;
 
@@ -74,7 +75,9 @@ public class JanelaFrame extends JFrame {
 		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(this.principal, this);
 		this.adicionarProdutoPanel = new AdicionarProdutoPanel(this.principal, this);
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
-		this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
+		//this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
+		
+		this.faturamentoDataPanel = new FaturamentoDataPanel(this.principal);
 
 		iniciaContentPane();
 
@@ -156,7 +159,7 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.addTab("Cadastrar funcionário", this.adicionarFuncionarioPanel);
 		this.tabbedPane.addTab("Adicionar produto", this.adicionarProdutoPanel);
 		this.tabbedPane.addTab("Adicionar mesa", this.adicionarMesaPanel);
-		this.tabbedPane.addTab("Adicionar desconto", this.adicionarDescontoPanel);
+		this.tabbedPane.addTab("Adicionar desconto", this.faturamentoDataPanel);
 
 		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
