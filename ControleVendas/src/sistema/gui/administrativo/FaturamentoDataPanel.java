@@ -57,7 +57,7 @@ public class FaturamentoDataPanel extends JPanel {
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		add(titulo);
 
-		JLabel dataFaturamento1 = new JLabel("Data do inicial:");
+		JLabel dataFaturamento1 = new JLabel("Data de in\u00EDcio:");
 		dataFaturamento1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		dataFaturamento1.setBounds(108, 235, 186, 44);
 		add(dataFaturamento1);
@@ -219,17 +219,24 @@ public class FaturamentoDataPanel extends JPanel {
 
 	private void buscar() {
 		try {
-			String codProduto = this.valDataFaturamento1.getText();
+			String dataFatur2 = this.valDataFaturamento1.getText();
 			String dataFatur = this.valDataFaturamento2.getText();
 
 			if (this.rdbtnFaturamentoAtual.isSelected()) {
 				dataFatur = null;
 			}
 			else if (!this.rdbtnBuscarPorData.isSelected()) {
-				throw new IllegalArgumentException("Selecione o dia do faturamento.");
+				throw new IllegalArgumentException("Selecione uma opção para data de inicio.");
+			}
+			
+			if (this.rdbtnUmaData.isSelected()) {
+				dataFatur2 = null;
+			}
+			else if (!this.rdbtnIntervaloDatas.isSelected()) {
+				throw new IllegalArgumentException("Selecione uma opção para tipo de busca.");
 			}
 
-			if (codProduto.equals("") || (dataFatur != null && dataFatur.equals(""))) {
+			if ((dataFatur != null && dataFatur.equals("")) || (dataFatur2 != null && dataFatur2.equals(""))) {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
 
