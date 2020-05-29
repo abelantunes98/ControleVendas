@@ -240,7 +240,7 @@ public class FaturamentoDataPanel extends JPanel {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
 
-			//Evitando mensagens repetidas.
+			//Evitando mensagens repetidas na tela.
 			carregaTabelaVendasProduto(codProduto, dataFatur);
 			this.valValorTotal.setText(this.principal.retornaValorDeVendasDeProduto(codProduto, dataFatur));
 
