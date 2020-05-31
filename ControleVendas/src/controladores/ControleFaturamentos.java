@@ -11,6 +11,10 @@ import modelos.Venda;
 import utils.Util;
 import utils.TuplaFaturamentoDataValor;
 
+/*
+ * Controle de Faturamentos.
+ */
+
 public class ControleFaturamentos {
 	
 	BaseDados base;
