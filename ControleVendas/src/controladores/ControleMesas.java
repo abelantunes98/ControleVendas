@@ -5,6 +5,10 @@ import java.util.List;
 import baseDados.BaseDados;
 import modelos.Mesa;
 
+/*
+ * Controlador de mesas.
+ */
+
 public class ControleMesas {
 	
 	
