@@ -6,7 +6,7 @@ import baseDados.BaseDados;
 import modelos.Mesa;
 
 /*
- * Controlador de mesas...
+ * Controlador de mesas.
  */
 
 public class ControleMesas {
