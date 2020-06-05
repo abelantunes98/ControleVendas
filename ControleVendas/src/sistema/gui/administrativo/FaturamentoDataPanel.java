@@ -123,7 +123,7 @@ public class FaturamentoDataPanel extends JPanel {
 		add(btnLimpar);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(1022, 235, 713, 357);
+		scrollPane.setBounds(989, 235, 761, 357);
 		add(scrollPane);
 
 		scrollPane.setViewportView(tabelaVendasProduto);
@@ -219,8 +219,8 @@ public class FaturamentoDataPanel extends JPanel {
 
 	private void buscar() {
 		try {
-			String dataFatur2 = this.valDataFaturamento1.getText();
-			String dataFatur = this.valDataFaturamento2.getText();
+			String dataFatur = this.valDataFaturamento1.getText();
+			String dataFatur2 = this.valDataFaturamento2.getText();
 
 			if (this.rdbtnFaturamentoAtual.isSelected()) {
 				dataFatur = null;
@@ -240,9 +240,11 @@ public class FaturamentoDataPanel extends JPanel {
 				throw new IllegalArgumentException("Campos passados vazios.");
 			}
 
-			//Evitando mensagens repetidas na tela.
-			carregaTabelaVendasProduto(codProduto, dataFatur);
-			this.valValorTotal.setText(this.principal.retornaValorDeVendasDeProduto(codProduto, dataFatur));
+			if (rdbtnUmaData.isSelected()) {
+				carregaTabelaUmFaturamento(dataFatur);
+			}
+			
+			//this.valValorTotal.setText(this.principal.retornaValorDeVendasDeProduto(codProduto, dataFatur));
 
 		}
 		catch (Exception e) {
@@ -250,17 +252,18 @@ public class FaturamentoDataPanel extends JPanel {
 		}
 	}
 
-	private void carregaTabelaVendasProduto(String codigoProduto, String dataFaturamento) {
+	private void carregaTabelaUmFaturamento(String dataFaturamento) {
 
 		try {
-			String [] colunas = {"Código", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário"};
-			String [][] dados = this.principal.retornaVendasDeProduto(codigoProduto, dataFaturamento);
+			String [] colunas = {"Código", "Nome", "Quantidade", "Valor", "Desconto", "Funcionário", "Hora"};
+			String [][] dados = this.principal.retornaDadosVendasDeUmFaturamento(dataFaturamento);
 
 			tabelaVendasProduto = new JTable(dados, colunas);
 
 			tabelaVendasProduto.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
 			tabelaVendasProduto.setEnabled(false); // Evitando edição não desejada.
-			tabelaVendasProduto.getColumnModel().getColumn(1).setPreferredWidth(250);
+			tabelaVendasProduto.getColumnModel().getColumn(1).setPreferredWidth(210);
+			tabelaVendasProduto.getColumnModel().getColumn(3).setPreferredWidth(100);
 			tabelaVendasProduto.setBackground(SystemColor.info); // Cor da linha.
 			tabelaVendasProduto.setRowHeight(30); // Aumentando altura das linhas.
 

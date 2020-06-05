@@ -16,7 +16,7 @@ import utils.TuplaFaturamentoDataValor;
  */
 
 public class ControleFaturamentos {
-	
+
 	BaseDados base;
 
 	public ControleFaturamentos(BaseDados base) {
@@ -35,9 +35,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public void removerFaturamento(String codigoFaturamento) {
-		
+
 		try {
 			base.removerFaturamento(codigoFaturamento);
 		}
@@ -45,31 +45,31 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Adiciona uma nova venda na lista de vendas do Faturamento em questao
 	 * e adiciona o valor da venda no valor do Faturamento.
 	 * Pega a chave da venda pelo método getNewKey da classe Faturamento.
 	 */
 	private void adicionarVenda(String codigoFaturamento, Venda venda) {
-		
+
 		try {
 			Faturamento faturamentoDia = base.retornaFaturamento(codigoFaturamento);
 			int key = faturamentoDia.getNewKey();
 			venda.setId(key);
 			faturamentoDia.adicionaVenda(venda, key);
-			
+
 			double novoApurado = faturamentoDia.getValorApurado();
 			novoApurado += venda.getValorVenda();
 			faturamentoDia.setValorApurado(novoApurado);
-			
+
 			base.alteraFaturamento(codigoFaturamento, faturamentoDia);
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Cria uma venda para adiciona-la.
 	 * O codigo da mesa é passado como null caso a venda seja
@@ -79,23 +79,23 @@ public class ControleFaturamentos {
 			String nomeProduto, String codigoMesa, int quantProdutos, double valorVenda, String codigoDesconto) {
 		try {
 			Venda venda = new Venda(codigoFuncionario, codigoProduto, nomeProduto, quantProdutos, valorVenda);
-			
+
 			if (codigoDesconto != null) {
 				venda.setCodigoDesconto(codigoDesconto);
 			}
 			if (codigoMesa != null) {
 				venda.setCodigoMesa(codigoMesa);
 			}
-			
+
 			this.adicionarVenda(codigoFaturamento, venda);
 		}
 		catch (Exception e) {
 			new IllegalArgumentException("Erro ao adicionar venda.");
 		}
 	}
-	
+
 	public double retornaValorFaturamento(String codigoFaturamento) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			return faturamentoPassado.getValorApurado();
@@ -104,9 +104,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public double retornaValorFaturamentoPorFuncionario(String codigoFaturamento, String codigoFuncionario) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeFuncionario(codigoFuncionario)) {
@@ -117,10 +117,10 @@ public class ControleFaturamentos {
 						valorRetorno += venda.getValorVenda();
 					}
 				}
-				
+
 				return valorRetorno;
 			}
-			
+
 			else {
 				throw new IllegalArgumentException("Funcionario inexistente.");
 			}
@@ -129,9 +129,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public double retornaValorFaturamentoPorMesa(String codigoFaturamento, String codigoMesa) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeMesa(codigoMesa)) {
@@ -142,10 +142,10 @@ public class ControleFaturamentos {
 						valorRetorno += venda.getValorVenda();
 					}
 				}
-				
+
 				return valorRetorno;
 			}
-			
+
 			else {
 				throw new IllegalArgumentException("Mesa inexistente.");
 			}
@@ -154,9 +154,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public double retornaValorFaturamentoPorProduto(String codigoFaturamento, String codigoProduto) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeProduto(codigoProduto)) {
@@ -167,10 +167,10 @@ public class ControleFaturamentos {
 						valorRetorno += venda.getValorVenda();
 					}
 				}
-				
+
 				return valorRetorno;
 			}
-			
+
 			else {
 				throw new IllegalArgumentException("Produto inexistente.");
 			}
@@ -181,7 +181,7 @@ public class ControleFaturamentos {
 	}
 
 	public int retornaNumeroDeVendas(String codigoFaturamento) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			return faturamentoPassado.getNewKey();
@@ -190,9 +190,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public int retornaNumeroDeVendasPorFuncionario(String codigoFaturamento, String codigoFuncionario) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeFuncionario(codigoFuncionario)) {
@@ -203,10 +203,10 @@ public class ControleFaturamentos {
 						valorRetorno++;
 					}
 				}
-				
+
 				return valorRetorno;
 			}
-			
+
 			else {
 				throw new IllegalArgumentException("Funcionario inexistente.");
 			}
@@ -215,9 +215,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public int retornaNumeroDeVendasPorMesa(String codigoFaturamento, String codigoMesa) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeMesa(codigoMesa)) {
@@ -228,10 +228,10 @@ public class ControleFaturamentos {
 						valorRetorno++;
 					}
 				}
-				
+
 				return valorRetorno;
 			}
-			
+
 			else {
 				throw new IllegalArgumentException("Mesa inexistente.");
 			}
@@ -240,9 +240,9 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public int retornaNumeroDeVendasPorProduto(String codigoFaturamento, String codigoProduto) {
-		
+
 		try {
 			Faturamento faturamentoPassado = base.retornaFaturamento(codigoFaturamento);
 			if (base.existeProduto(codigoProduto)) {
@@ -253,10 +253,10 @@ public class ControleFaturamentos {
 						valorRetorno++;
 					}
 				}
-				
+
 				return valorRetorno;
 			}
-			
+
 			else {
 				throw new IllegalArgumentException("Produto inexistente.");
 			}
@@ -265,44 +265,44 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Trás os detalhes de cada venda que tenha seu id contido na lista passada.
 	 * Claro que é necessário a venda está presente no faturamento.
 	 */
 	public String [][] retornaDadosVendasPorListaDeIds(String codigoFaturamento, List<Integer> lista) {
-		
+
 		try {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
 			String [][] saida = new String[lista.size()][6];
-			
+
 			int indice = 0;
 			for (int id : lista) {
 				String [] detalhe = faturamento.retornaDetalhesVenda(id);
 				saida[indice++] = detalhe;
 			}
-			
+
 			return saida;
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Retorna detalhes das vendas de um funcionário em um determinado faturamento.
 	 */
 	public String [][] retornaDadosVendasPorFuncionario(String codigoFaturamento, String codigoFuncionario) {
-		
+
 		try {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
-			
+
 			int numVendas = this.retornaNumeroDeVendasPorFuncionario(codigoFaturamento, codigoFuncionario);
 			if (numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas do funcionário nesse faturamento.");
 			}
 			String [][] saida = new String[numVendas][8];
-			
+
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
 			List<Venda> vendas = faturamento.getListVendas();
@@ -318,32 +318,32 @@ public class ControleFaturamentos {
 					detalhe[5] = venda.getCodigoDesconto();
 					detalhe[6] = codigoFuncionario;
 					detalhe[7] = venda.getHoraVenda();
-		
+
 					saida[indice++] = detalhe;
 				}
 			}
-			
+
 			return saida;
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Retorna detalhes das vendas em uma mesa em um determinado faturamento.
 	 */
 	public String [][] retornaDadosVendasPorMesa(String codigoFaturamento, String codigoMesa) {
-		
+
 		try {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
-			
+
 			int numVendas = this.retornaNumeroDeVendasPorMesa(codigoFaturamento, codigoMesa);
 			if ( numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas na mesa nesse faturamento.");
 			}
 			String [][] saida = new String[numVendas][8];
-			
+
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
 			List<Venda> vendas = faturamento.getListVendas();
@@ -359,32 +359,32 @@ public class ControleFaturamentos {
 					detalhe[5] = venda.getCodigoDesconto();
 					detalhe[6] = venda.getCodigoFuncionario();
 					detalhe[7] = venda.getHoraVenda();
-		
+
 					saida[indice++] = detalhe;
 				}
 			}
-			
+
 			return saida;
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Retorna detalhes das vendas de um produto em um determinado faturamento.
 	 */
 	public String [][] retornaDadosVendasPorProduto(String codigoFaturamento, String codigoProduto) {
-		
+
 		try {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
-			
+
 			int numVendas = this.retornaNumeroDeVendasPorProduto(codigoFaturamento, codigoProduto);
 			if ( numVendas == 0) {
 				throw new IllegalArgumentException("Não há vendas do produto nesse faturamento.");
 			}
 			String [][] saida = new String[numVendas][8];
-			
+
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
 			List<Venda> vendas = faturamento.getListVendas();
@@ -400,38 +400,78 @@ public class ControleFaturamentos {
 					detalhe[5] = venda.getCodigoDesconto();
 					detalhe[6] = venda.getCodigoFuncionario();
 					detalhe[7] = venda.getHoraVenda();
-		
+
 					saida[indice++] = detalhe;
 				}
 			}
-			
+
 			return saida;
 		}
 		catch (Exception e) {
 			throw e;
 		}
 	}
-	
+
+	/*
+	 * Retorna detalhes das vendas de um determinado faturamento.
+	 */
+	public String [][] retornaDadosVendasDeUmFaturamento(String codigoFaturamento) {
+
+		try {
+			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
+
+			int numVendas = this.retornaNumeroDeVendas(codigoFaturamento);
+			if ( numVendas == 0) {
+				throw new IllegalArgumentException("Não há vendas nesse faturamento.");
+			}
+			String [][] saida = new String[numVendas][8];
+
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			List<Venda> vendas = faturamento.getListVendas();
+			int indice = 0;
+			for (Venda venda : vendas) {	
+				String [] detalhe = new String[7];
+				detalhe[0] = venda.getCodigoProduto();
+				detalhe[1] = venda.getNomeProduto();
+				detalhe[2] = Integer.toString(venda.getQuantProdutos());
+				detalhe[3] = (d.format(venda.getValorVenda()));
+				detalhe[4] = venda.getCodigoDesconto();
+				detalhe[5] = venda.getCodigoFuncionario();
+				detalhe[6] = venda.getHoraVenda();
+
+				saida[indice++] = detalhe;
+
+			}
+
+			return saida;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+
+
 	/*
 	 * Calcula a porcentagem que o funcionario deve receber em cima de suas vendas.
 	 * Eh necessario passar a porcentagem adotada.
 	 */
 	public double retornaPorcentagemFuncionario(String codigoFaturamento, String codigoFuncionario, double porcentagem) {
-		
+
 		double valorRetorno = 0;
-		
+
 		try {
 			double valorTotal = this.retornaValorFaturamentoPorFuncionario(codigoFaturamento, codigoFuncionario);
 			valorRetorno = valorTotal * (porcentagem / 100);
-			
+
 			return valorRetorno; 
 		} 
 		catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
-	
+
 	/*
 	 * Retorna, caso exista, o código do faturamento na data passada.
 	 * Converte a data passada e a data armazenada em cada Faturamento
@@ -439,10 +479,10 @@ public class ControleFaturamentos {
 	 * 
 	 */
 	public String retornaCodigoFaturamentoPorData(String data) {
-		
+
 		try {
 			Date dataFormatada = Util.stringToDate(data);
-			
+
 			String retorno = null;
 			List<String> keys = base.retornaCodigosFaturamento();
 			int indice = 0;
@@ -452,12 +492,12 @@ public class ControleFaturamentos {
 				Faturamento faturamentoKey = base.retornaFaturamento(key);
 				String dataFaturamentoKey = faturamentoKey.getDataFaturamento();
 				Date dataFaturamentoKeyDate = Util.stringToDate(dataFaturamentoKey);
-				
+
 				if (dataFormatada.getTime() == dataFaturamentoKeyDate.getTime()) {
 					retorno = key;
 				}
 			}
-			
+
 			if (retorno != null) {
 				return retorno;
 			}
@@ -469,7 +509,7 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	/*
 	 * Recebe duas datas, uma inicial e uma final.
 	 * Retorna uma lista de tuplas que contém o código de faturamento,
@@ -477,11 +517,11 @@ public class ControleFaturamentos {
 	 * Isso para os faturamentos que foram criados entre as datas passadas.
 	 */
 	public List<TuplaFaturamentoDataValor> retornaFaturamentosPorIntervaloDatas(String dataInicio, String dataFinal) {
-		
+
 		try {
 			Date dataInicioFormatada = Util.stringToDate(dataInicio);
 			Date dataFinalFormatada = Util.stringToDate(dataFinal);
-			
+
 			double valorFaturamento;
 			List<TuplaFaturamentoDataValor> retorno = new ArrayList<TuplaFaturamentoDataValor>();
 			List<String> keys = base.retornaCodigosFaturamento();
@@ -492,17 +532,17 @@ public class ControleFaturamentos {
 				Faturamento faturamentoKey = base.retornaFaturamento(key);
 				String dataFaturamentoKey = faturamentoKey.getDataFaturamento();
 				Date dataFaturamentoKeyDate = Util.stringToDate(dataFaturamentoKey);
-				
+
 				if (dataFaturamentoKeyDate.getTime() >= dataInicioFormatada.getTime() 
 						&& dataFaturamentoKeyDate.getTime() <= dataFinalFormatada.getTime()) {
-					
+
 					valorFaturamento = faturamentoKey.getValorApurado();
-					
+
 					TuplaFaturamentoDataValor elementoTupla = new TuplaFaturamentoDataValor(key, dataFaturamentoKey, valorFaturamento);
 					retorno.add(elementoTupla);
 				}
 			}
-			
+
 			if (retorno.size() > 0) {
 				return retorno;
 			}
@@ -514,7 +554,7 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public void limparFaturamentos() {
 		try {
 			this.base.limparFaturamentos();
@@ -523,7 +563,7 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public int retornaNumeroFaturamentos() {
 		try {
 			return this.base.retornaNumeroFaturamentos();
@@ -532,7 +572,7 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public String retornaDataFaturamento(String codigoFaturamento) {
 		try {
 			Faturamento faturamento = this.base.retornaFaturamento(codigoFaturamento);
@@ -543,7 +583,7 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
-	
+
 	public String [][] retornaVetorToStringVendas(String codigoFaturamento) {
 
 		try {

@@ -514,6 +514,23 @@ public class Principal {
 		}
 	}
 	
+	public String [][] retornaDadosVendasDeUmFaturamento(String dataFaturamento) {
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			return this.controleFaturamentos.retornaDadosVendasDeUmFaturamento(codigoFaturamento);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
 	/*
 	 * Retornos de números de entidades armazenadas.
 	 */
