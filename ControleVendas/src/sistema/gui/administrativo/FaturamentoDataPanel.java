@@ -242,10 +242,9 @@ public class FaturamentoDataPanel extends JPanel {
 
 			if (rdbtnUmaData.isSelected()) {
 				carregaTabelaUmFaturamento(dataFatur);
+				this.valValorTotal.setText(this.principal.retornaValorFaturamento(dataFatur));
 			}
 			
-			//this.valValorTotal.setText(this.principal.retornaValorDeVendasDeProduto(codProduto, dataFatur));
-
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);

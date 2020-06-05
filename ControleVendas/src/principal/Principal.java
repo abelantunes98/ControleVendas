@@ -494,6 +494,9 @@ public class Principal {
 
 	}
 	
+	/*
+	 * Retorna o valor total das vendas de um produto em um determinado dia. 
+	 */
 	public String retornaValorDeVendasDeProduto(String codigoProduto, String dataFaturamento) {
 		try {
 			String codigoFaturamento;
@@ -514,6 +517,10 @@ public class Principal {
 		}
 	}
 	
+	/*
+	 * Retorna dados de vendas de um faturamento por sua data.
+	 */
+	
 	public String [][] retornaDadosVendasDeUmFaturamento(String dataFaturamento) {
 		try {
 			String codigoFaturamento;
@@ -525,6 +532,29 @@ public class Principal {
 			}
 			
 			return this.controleFaturamentos.retornaDadosVendasDeUmFaturamento(codigoFaturamento);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retorna o valor total das vendas em um determinado dia. 
+	 */
+	public String retornaValorFaturamento(String dataFaturamento) {
+		try {
+			String codigoFaturamento;
+			if (dataFaturamento == null) {
+				codigoFaturamento = Integer.toString(this.controleFaturamentos.retornaNumeroFaturamentos() - 1);
+			}
+			else {
+				codigoFaturamento = this.controleFaturamentos.retornaCodigoFaturamentoPorData(dataFaturamento);
+			}
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			double retorno = this.controleFaturamentos.retornaValorFaturamento(codigoFaturamento);
+			return d.format(retorno);
 		}
 		catch (Exception e) {
 			throw e;
