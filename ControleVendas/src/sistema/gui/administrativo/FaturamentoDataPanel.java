@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class FaturamentoDataPanel extends JPanel {
+	
 	/**
 	 * Serial
 	 */
