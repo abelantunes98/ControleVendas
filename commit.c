@@ -1,3 +1,3 @@
-//Commit de terca
+//Commit de quarta
 //':wq
 //.
