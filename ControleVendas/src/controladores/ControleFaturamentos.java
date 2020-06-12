@@ -179,6 +179,24 @@ public class ControleFaturamentos {
 			throw e;
 		}
 	}
+	
+	public double retornaValorIntervaloFaturamentos(String dataInicio, String dataFinal) {
+
+		try {
+			
+			List<TuplaFaturamentoDataValor> faturamentosIntervalo = this.retornaFaturamentosPorIntervaloDatas(dataInicio, dataFinal);
+			double retorno = 0;
+			
+			for (TuplaFaturamentoDataValor tupla : faturamentosIntervalo) {
+				retorno += tupla.getValorFaturamento();
+			}
+			
+			return retorno;
+		}
+		catch(Exception e){
+			throw e;
+		}
+	}
 
 	public int retornaNumeroDeVendas(String codigoFaturamento) {
 
@@ -440,6 +458,41 @@ public class ControleFaturamentos {
 				detalhe[5] = venda.getCodigoFuncionario();
 				detalhe[6] = venda.getHoraVenda();
 
+				saida[indice++] = detalhe;
+
+			}
+
+			return saida;
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retorna detalhes das vendas de um determinado intervalo de faturamentos.
+	 */
+	public String [][] retornaDadosVendasDeUmIntervaloDeFaturamentos(String dataInicio, String dataFinal) {
+
+		try {
+			
+			List<TuplaFaturamentoDataValor> faturamentosDatas = this.retornaFaturamentosPorIntervaloDatas(dataInicio, dataFinal);
+			
+			int numVendas = faturamentosDatas.size();
+			if ( numVendas == 0) {
+				throw new IllegalArgumentException("Não há faturamentos nesse intervalo.");
+			}
+			String [][] saida = new String[numVendas][3];
+
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			int indice = 0;
+			for (TuplaFaturamentoDataValor tupla : faturamentosDatas) {	
+				String [] detalhe = new String[3];
+				detalhe[0] = tupla.getCodigoFaturamento();
+				detalhe[1] = d.format(tupla.getValorFaturamento());
+				detalhe[2] = tupla.getDataFaturamento();
+		
 				saida[indice++] = detalhe;
 
 			}

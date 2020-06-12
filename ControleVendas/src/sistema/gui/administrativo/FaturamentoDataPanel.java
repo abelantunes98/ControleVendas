@@ -20,7 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class FaturamentoDataPanel extends JPanel {
-	
+
 	/**
 	 * Serial
 	 */
@@ -223,13 +223,16 @@ public class FaturamentoDataPanel extends JPanel {
 			String dataFatur = this.valDataFaturamento1.getText();
 			String dataFatur2 = this.valDataFaturamento2.getText();
 
-			if (this.rdbtnFaturamentoAtual.isSelected()) {
+			if (this.rdbtnFaturamentoAtual.isSelected() && !this.rdbtnIntervaloDatas.isSelected()) {
 				dataFatur = null;
+			}
+			else if (this.rdbtnFaturamentoAtual.isSelected()) {
+				throw new IllegalArgumentException("Para buscar por intervalo, são necessárias 2 datas.\nSelecione Buscar por data.");
 			}
 			else if (!this.rdbtnBuscarPorData.isSelected()) {
 				throw new IllegalArgumentException("Selecione uma opção para data de inicio.");
 			}
-			
+
 			if (this.rdbtnUmaData.isSelected()) {
 				dataFatur2 = null;
 			}
@@ -245,7 +248,11 @@ public class FaturamentoDataPanel extends JPanel {
 				carregaTabelaUmFaturamento(dataFatur);
 				this.valValorTotal.setText(this.principal.retornaValorFaturamento(dataFatur));
 			}
-			
+			else if (rdbtnIntervaloDatas.isSelected()) {
+				carregaTabelaIntervaloFaturamentos(dataFatur, dataFatur2);
+				this.valValorTotal.setText(this.principal.retornaValorIntervaloFaturamentos(dataFatur, dataFatur2));
+			}
+
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -264,6 +271,26 @@ public class FaturamentoDataPanel extends JPanel {
 			tabelaVendasProduto.setEnabled(false); // Evitando edição não desejada.
 			tabelaVendasProduto.getColumnModel().getColumn(1).setPreferredWidth(210);
 			tabelaVendasProduto.getColumnModel().getColumn(3).setPreferredWidth(100);
+			tabelaVendasProduto.setBackground(SystemColor.info); // Cor da linha.
+			tabelaVendasProduto.setRowHeight(30); // Aumentando altura das linhas.
+
+			scrollPane.setViewportView(tabelaVendasProduto);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+
+	private void carregaTabelaIntervaloFaturamentos(String dataInicio, String dataFinal) {
+
+		try {
+			String [] colunas = {"Código", "Valor", "Data"};
+			String [][] dados = this.principal.retornaDadosVendasDeUmIntervaloDeFaturamentos(dataInicio, dataFinal);
+
+			tabelaVendasProduto = new JTable(dados, colunas);
+
+			tabelaVendasProduto.setFont(new Font("Tahoma", Font.PLAIN, 20)); // Tamanho e tipo de letra.
+			tabelaVendasProduto.setEnabled(false); // Evitando edição não desejada.
 			tabelaVendasProduto.setBackground(SystemColor.info); // Cor da linha.
 			tabelaVendasProduto.setRowHeight(30); // Aumentando altura das linhas.
 

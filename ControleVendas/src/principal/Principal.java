@@ -385,6 +385,7 @@ public class Principal {
 
 	}
 	
+	
 	public String retornaValorDeVendasDeFuncionario(String codigoFuncionario, String dataFaturamento) {
 		try {
 			String codigoFaturamento;
@@ -404,6 +405,7 @@ public class Principal {
 			throw e;
 		}
 	}
+	
 	
 	public String retornaPorcentagemDeVendasDeFuncionario(String codigoFuncionario, String dataFaturamento, double porcentagem) {
 		try {
@@ -554,6 +556,34 @@ public class Principal {
 			String formato = "R$ #,##0.00";
 			DecimalFormat d = new DecimalFormat(formato);
 			double retorno = this.controleFaturamentos.retornaValorFaturamento(codigoFaturamento);
+			return d.format(retorno);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Função que retorna dados de faturamentos em um intervalo de datas.
+	 */
+	public String [][] retornaDadosVendasDeUmIntervaloDeFaturamentos(String dataInicio, String dataFinal) {
+		try {
+			return this.controleFaturamentos.retornaDadosVendasDeUmIntervaloDeFaturamentos(dataInicio, dataFinal);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	/*
+	 * Retorna o valor somado de faturamentos em um intervalo de datas.
+	 */
+	public String retornaValorIntervaloFaturamentos(String dataInicio, String dataFinal) {
+		try {
+			
+			String formato = "R$ #,##0.00";
+			DecimalFormat d = new DecimalFormat(formato);
+			double retorno = this.controleFaturamentos.retornaValorIntervaloFaturamentos(dataInicio, dataFinal);
 			return d.format(retorno);
 		}
 		catch (Exception e) {
