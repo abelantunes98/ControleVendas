@@ -20,11 +20,13 @@ import sistema.gui.vendas.VenderPanel;
 import sistema.gui.vendas.CatalogoDescontos;
 import sistema.gui.vendas.CatalogoProdutos;
 import sistema.gui.vendas.MesasPanel;
-import sistema.gui.administrativo.FaturamentoDataPanel;
+
 // Imports Administrativo
 import sistema.gui.administrativo.FaturamentoFuncionarioPanel;
 import sistema.gui.administrativo.FaturamentoMesaPanel;
 import sistema.gui.administrativo.FaturamentoProdutoPanel;
+import sistema.gui.administrativo.FaturamentoDataPanel;
+import sistema.gui.administrativo.RemoverDadosPanel;
 
 import java.awt.Font;
 
@@ -57,6 +59,7 @@ public class JanelaFrame extends JFrame {
 	private FaturamentoMesaPanel faturamentoMesa;
 	private FaturamentoProdutoPanel faturamentoProduto;
 	private FaturamentoDataPanel faturamentoDataPanel;
+	private RemoverDadosPanel removerDadosPanel;
 
 	private JTabbedPane tabbedPane;
 
@@ -75,10 +78,8 @@ public class JanelaFrame extends JFrame {
 		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(this.principal, this);
 		this.adicionarProdutoPanel = new AdicionarProdutoPanel(this.principal, this);
 		this.adicionarMesaPanel = new AdicionarMesaPanel(this.principal, this);
-		//this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
+		this.adicionarDescontoPanel = new AdicionarDescontoPanel(this.principal, this);
 		
-		this.faturamentoDataPanel = new FaturamentoDataPanel(this.principal);
-
 		iniciaContentPane();
 
 		criaAbasPrincipal();
@@ -186,6 +187,31 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.setComponentAt(2, this.mesasPanel);
 		this.tabbedPane.setComponentAt(3, this.catalogoProdutos);
 		this.tabbedPane.setComponentAt(4, this.catalogoDescontos);
+	}
+	
+	
+	public void criaAbasAdministrativo() {
+
+		/*
+		 * Criando as Abas Administrativas.
+		 */
+		this.removerDadosPanel = new RemoverDadosPanel(this);
+		this.faturamentoDataPanel = new FaturamentoDataPanel(principal);
+		this.faturamentoFuncionario = new FaturamentoFuncionarioPanel(principal);
+		this.faturamentoMesa = new FaturamentoMesaPanel(principal);
+		this.faturamentoProduto = new FaturamentoProdutoPanel(principal);
+
+		this.tabbedPane.setTitleAt(0, "Remover dados");
+		this.tabbedPane.setTitleAt(1, "Faturamento por data");
+		this.tabbedPane.setTitleAt(2, "Faturamento por funcionário");
+		this.tabbedPane.setTitleAt(3, "Faturamento por mesa");
+		this.tabbedPane.setTitleAt(4, "Faturamento por produto");
+
+		this.tabbedPane.setComponentAt(0, this.removerDadosPanel);
+		this.tabbedPane.setComponentAt(1, this.faturamentoDataPanel);
+		this.tabbedPane.setComponentAt(2, this.faturamentoFuncionario);
+		this.tabbedPane.setComponentAt(3, this.faturamentoMesa);
+		this.tabbedPane.setComponentAt(4, this.faturamentoProduto);
 	}
 
 }

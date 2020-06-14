@@ -75,6 +75,14 @@ public class PrincipalPanel extends JPanel {
 		btnLimparBase.setBounds(1306, 810, 210, 49);
 		btnLimparBase.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
+		JButton btnCentralDeVendas = new JButton("Central de vendas");
+		btnCentralDeVendas.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCentralDeVendas.setBounds(301, 810, 210, 49);
+		
+		JButton btnCentralAdministrativo = new JButton("Administrativo");
+		btnCentralAdministrativo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCentralAdministrativo.setBounds(800, 810, 210, 49);
+
 		setLayout(null);
 		
 		add(titulo);
@@ -87,12 +95,9 @@ public class PrincipalPanel extends JPanel {
 		add(valNumeroMesas);
 		add(valNumeroDescontos);
 		add(btnLimparBase);
-		
-		JButton btnCentralDeVendas = new JButton("Central de vendas");
-		btnCentralDeVendas.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnCentralDeVendas.setBounds(301, 810, 210, 49);
 		add(btnCentralDeVendas);
-		
+		add(btnCentralAdministrativo);
+			
 		btnLimparBase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -104,6 +109,13 @@ public class PrincipalPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				iniciaCentralDeVendas();                       
+			}
+		});
+		
+		btnCentralAdministrativo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				iniciaCentralAdministrativo();                       
 			}
 		});
 	}
@@ -128,6 +140,15 @@ public class PrincipalPanel extends JPanel {
 	private void iniciaCentralDeVendas() {
 		try {
 			this.frame.criaAbasVendas();
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void iniciaCentralAdministrativo() {
+		try {
+			this.frame.criaAbasAdministrativo();
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
