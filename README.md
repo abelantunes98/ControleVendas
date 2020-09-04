@@ -10,4 +10,4 @@ determinado funcionário, calcular o número de vendas de um determinado produto
 uma mesa escolhida.
 
 Caso queiram usa-lo, basta gerar um .jar e adicionar novas funcionalidades a fim de adequar
-aos seus negócios.
+aos seus negócios...
