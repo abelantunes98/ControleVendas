@@ -1,7 +1,7 @@
 # ControleVendas
 
 Projeto feito em Java para administração de estabelecimentos.
-voltado principalmente para restaurantes.
+Voltado principalmente para restaurantes.
 
 Ainda está em desenvolvimento, mas já conta com as funções de 
 adicionar produtos, mesas, funcionários e descontos.
