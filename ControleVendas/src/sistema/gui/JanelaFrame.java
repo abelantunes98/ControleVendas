@@ -1,6 +1,7 @@
 package sistema.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,6 +30,8 @@ import sistema.gui.administrativo.FaturamentoDataPanel;
 import sistema.gui.administrativo.RemoverDadosPanel;
 
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.GridLayout;
 
 public class JanelaFrame extends JFrame {
 
@@ -69,10 +72,13 @@ public class JanelaFrame extends JFrame {
 	public JanelaFrame() {
 
 		this.principal = new Principal();
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+	    Dimension d = tk.getScreenSize();
 
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, d.width, d.height);
 
 		this.principalPanel = new PrincipalPanel(this.principal, this);
 		this.adicionarFuncionarioPanel = new AdicionarFuncionarioPanel(this.principal, this);
@@ -93,7 +99,6 @@ public class JanelaFrame extends JFrame {
 		 */
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 	}
 
@@ -153,6 +158,7 @@ public class JanelaFrame extends JFrame {
 		 * Adicionando abas.
 		 */
 		iniciaContentPane();
+		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		this.tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
@@ -162,7 +168,7 @@ public class JanelaFrame extends JFrame {
 		this.tabbedPane.addTab("Adicionar mesa", this.adicionarMesaPanel);
 		this.tabbedPane.addTab("Adicionar desconto", this.faturamentoDataPanel);
 
-		this.contentPane.add(tabbedPane, BorderLayout.CENTER);
+		this.contentPane.add(tabbedPane);
 	}
 
 	public void criaAbasVendas() {
